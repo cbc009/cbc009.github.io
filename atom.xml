@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[CHENBAOCHENG.COM]]></title>
+  
+  <link href="/atom.xml" rel="self"/>
+  <link href="http://www.chenbaocheng.com/"/>
+  <updated>2015-01-09T08:37:11.783Z</updated>
+  <id>http://www.chenbaocheng.com/</id>
+  
+  <author>
+    <name><![CDATA[CBC]]></name>
+    
+  </author>
+  
+  <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[本站迁移到HEXO]]></title>
+    <link href="http://www.chenbaocheng.com/2015/01/09/%E6%9C%AC%E7%AB%99%E8%BF%81%E7%A7%BB%E5%88%B0HEXO/"/>
+    <id>http://www.chenbaocheng.com/2015/01/09/本站迁移到HEXO/</id>
+    <published>2015-01-09T07:20:45.000Z</published>
+    <updated>2015-01-09T07:20:45.000Z</updated>
+    <content type="html"><![CDATA[]]></content>
+    <summary type="html">
+    <![CDATA[]]>
+    </summary>
+    
+  </entry>
+  
+</feed>
