@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.chenbaocheng.com/"/>
-  <updated>2015-01-10T13:24:27.798Z</updated>
+  <updated>2015-02-12T14:55:20.686Z</updated>
   <id>http://www.chenbaocheng.com/</id>
   
   <author>
@@ -13,6 +13,33 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Go语言学习 - 配置开发环境(IntelliJ IDEA 14 For Mac OS 10.10)]]></title>
+    <link href="http://www.chenbaocheng.com/2015/01/23/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0-%E9%85%8D%E7%BD%AE%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83-IntelliJ-IDEA-14-For-Mac-OS-10-10/"/>
+    <id>http://www.chenbaocheng.com/2015/01/23/Go语言学习-配置开发环境-IntelliJ-IDEA-14-For-Mac-OS-10-10/</id>
+    <published>2015-01-23T05:11:31.000Z</published>
+    <updated>2015-01-23T06:37:15.000Z</updated>
+    <content type="html"><![CDATA[<p><strong>1、安装 Go-Lang</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ brew install go</div><div class="line">$ go version</div></pre></td></tr></table></figure>
+
+<p><br><strong>2、配置环境变量</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ vim ~/.zshrc</div><div class="line"><span class="keyword">export</span> GOROOT=/usr/local/opt/go/libexec</div><div class="line"><span class="keyword">export</span> GOPATH=<span class="variable">$HOME</span>/.go</div></pre></td></tr></table></figure>
+
+<p><br><strong>3、Intellij IDEA 安装 go-lang-idea-plugin</strong></p>
+<ul>
+<li>IntelliJ IDEA -&gt; Preferences -&gt; Plugins -&gt; Browse Repositories</li>
+<li>搜索golang，点击 “Install plugin”</li>
+<li>安装完重启</li>
+</ul>
+<p><strong>go-lang-idea-plugin会提示配置GOROOT,GOPATH。。。搜了各种资料，需要这样配置一下：</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">vim .zshrc</div><div class="line">launchctl setenv GOROOT /usr/local/opt/go/libexec</div><div class="line">launchctl setenv GOBIN /usr/local/opt/go/libexec/bin</div><div class="line">launchctl setenv GOPATH /ROOT/www/go</div></pre></td></tr></table></figure>]]></content>
+    <summary type="html">
+    <![CDATA[<p><strong>1、安装 Go-Lang</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="li]]>
+    </summary>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[本站由sourceforge迁移到github]]></title>
