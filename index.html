@@ -46,6 +46,60 @@
     <div id="main">
       
   
+    <article id="post-删除文件夹下的所有-svn目录" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2015/02/22/删除文件夹下的所有-svn目录/" class="article-date">
+  <time datetime="2015-02-22T13:25:11.000Z" itemprop="datePublished">2月 22 2015</time>
+</a>
+		</span>
+		<!-- <span class="meta-elements author">CBC</span> -->
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 itemprop="name" class="entry-title">
+      <a class="article-title" href="/2015/02/22/删除文件夹下的所有-svn目录/">MAC OS批量删除文件－删除文件夹下的所有.svn目录</a>
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find . -name <span class="string">".svn"</span> | xargs rm -fr</div></pre></td></tr></table></figure>
+
+<p><br>或者</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find . -type d -name <span class="string">".svn"</span>|xargs rm -rf</div></pre></td></tr></table></figure>
+
+<p>xargs它的作用是将参数列表转换成小块分段传递给其他命令，以避免参数列表过长的问题</p>
+<p>或者</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find . -name <span class="string">".svn"</span> -exec rm -fr <span class="string">'{}'</span> +</div></pre></td></tr></table></figure>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+			</span>
+			<span class="tags">
+				
+			</span>
+		</div>
+	</footer>
+	
+</article>
+
+
+	<hr class="article-devider">
+
+
+
+  
     <article id="post-Go语言学习-配置开发环境-IntelliJ-IDEA-14-For-Mac-OS-10-10" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">
