@@ -8,7 +8,7 @@
   <meta name="description" content="1find . -name '.svn' | xargs rm -fr
 
 或者
-1find . -type d -name '.svn'|xargs rm -rf
+1find . -type d -name '.svn' | xargs rm -rf
 
 xargs它的作用是将参数列表转换成小块分段传递给其他命令，以避免参数列表过长的问题
 或者
@@ -20,7 +20,7 @@ xargs它的作用是将参数列表转换成小块分段传递给其他命令，
 <meta property="og:description" content="1find . -name '.svn' | xargs rm -fr
 
 或者
-1find . -type d -name '.svn'|xargs rm -rf
+1find . -type d -name '.svn' | xargs rm -rf
 
 xargs它的作用是将参数列表转换成小块分段传递给其他命令，以避免参数列表过长的问题
 或者
@@ -30,7 +30,7 @@ xargs它的作用是将参数列表转换成小块分段传递给其他命令，
 <meta name="twitter:description" content="1find . -name '.svn' | xargs rm -fr
 
 或者
-1find . -type d -name '.svn'|xargs rm -rf
+1find . -type d -name '.svn' | xargs rm -rf
 
 xargs它的作用是将参数列表转换成小块分段传递给其他命令，以避免参数列表过长的问题
 或者
@@ -92,11 +92,12 @@ xargs它的作用是将参数列表转换成小块分段传递给其他命令，
     	<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find . -name <span class="string">".svn"</span> | xargs rm -fr</div></pre></td></tr></table></figure>
 
 <p><br>或者</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find . -type d -name <span class="string">".svn"</span>|xargs rm -rf</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find . -type d -name <span class="string">".svn"</span> | xargs rm -rf</div></pre></td></tr></table></figure>
 
 <p>xargs它的作用是将参数列表转换成小块分段传递给其他命令，以避免参数列表过长的问题</p>
 <p>或者</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find . -name <span class="string">".svn"</span> -exec rm -fr <span class="string">'{}'</span> +</div></pre></td></tr></table></figure>
+
 
     
 	</div>
@@ -113,6 +114,15 @@ xargs它的作用是将参数列表转换成小块分段传递给其他命令，
 	
     
 <nav id="article-nav">
+  
+    <a href="/2015/02/22/50道Java线程面试题/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          50道Java线程面试题
+        
+      </div>
+    </a>
   
   
     <a href="/2015/01/23/Go语言学习-配置开发环境-IntelliJ-IDEA-14-For-Mac-OS-10-10/" id="article-nav-older" class="article-nav-link-wrap">
