@@ -951,6 +951,9 @@ pre .deletion {
 #page-nav .next {
   min-width: 5em;
 }
+table th {
+  min-width: 200px;
+}
 .mb-search {
   display: none;
 }

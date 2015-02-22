@@ -3,6 +3,66 @@
 
     
   <url>
+    <loc>http://www.chenbaocheng.com/2015/02/23/Mac-OS%E7%AE%A1%E7%90%86%E5%A4%9A%E4%B8%AAJDK%E7%89%88%E6%9C%AC/</loc>
+    <lastmod>2015-02-22T21:01:19.000Z</lastmod>
+    <data>
+        <display>
+        <title>Mac OS管理多个JDK版本</title>
+        <pubTime>2015-02-22T18:36:02.000Z</pubTime>
+        
+         <content><![CDATA[<p>作为一个Java程序员，同一台工作机上可能会安装多个Java版本，工作时可能是用1.6版本，而工作之余1.7或1.8版本用于学习一下，版本间的手动切换也是麻烦事儿。有次同事问在Mac下是如何管理多个版本的JDK， 当时没有答案，直到偶然见发现jEnv。jEnv的安装、使用都很简单。</p>
+<h5 id="什么是jEnv?">什么是jEnv?</h5>
+<pre><code><span class="title">jEnv</span> 是一个帮助你管理 <span class="variable">$JAVA_HOME</span> 环境变量的命令行工具。
+</code></pre><h5 id="安装">安装</h5>
+<pre><code><span class="title">brew</span> install jenv
+ echo <span class="string">'export PATH="<span class="variable">$HOME</span>/.jenv/bin:<span class="variable">$PATH</span>"'</span> &gt;&gt; ~/.zshrc
+ echo <span class="string">'eval "$(jenv init -)"'</span> &gt;&gt; ~/.zshrc
+</code></pre><a id="more"></a>
+
+<h5 id="配置">配置</h5>
+<pre><code>jenv <span class="keyword">add</span> /System/<span class="keyword">Library</span>/Java/JavaVirtualMachines/<span class="number">1.6</span>.<span class="number">0</span>.jdk/Contents/Home/
+ jenv <span class="keyword">add</span> /<span class="keyword">Library</span>/Java/JavaVirtualMachines/jdk1.<span class="number">7.0</span>_60.jdk/Contents/Home/
+ jenv <span class="keyword">add</span> /<span class="keyword">Library</span>/Java/JavaVirtualMachines/jdk1.<span class="number">8.0</span>_05.jdk/Contents/Home/
+ jenv enable-plugin export
+</code></pre><h5 id="使用">使用</h5>
+<pre><code><span class="comment">'显示全部版本</span>
+ jenv versions 
+
+ <span class="comment">' 设置默认版本</span>
+ jenv <span class="keyword">global</span> oracle64-<span class="number">1.6</span><span class="number">.0</span><span class="number">.65</span>
+
+ <span class="comment">' 设置目录对应的JDK版本。在目录下创建.java-version文件记录版本号</span>
+ jenv local <span class="number">1.8</span>
+
+ <span class="comment">' 撤销上一步操作</span>
+ jenv local --unset
+</code></pre><h5 id="插件">插件</h5>
+<pre><code>jenv plugins
+
+ ant
+ <span class="keyword">export</span>
+ golo
+ gradle
+ grails
+ groovy
+ lein
+ maven
+ sbt
+ scala
+ springboot
+</code></pre>]]></content>
+         
+         
+           
+             
+              <breadCrumb title="java" url="http://www.chenbaocheng.com/categories/java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.chenbaocheng.com/2015/01/09/%E7%94%A8Hexo%E5%86%99%E5%8D%9A%E5%AE%A2%20---%20Hexo%E7%9A%84%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8/</loc>
     <lastmod>2015-02-22T18:27:22.000Z</lastmod>
     <data>
