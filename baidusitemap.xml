@@ -3,6 +3,108 @@
 
     
   <url>
+    <loc>http://www.chenbaocheng.com/2015/04/02/oh-my-zsh%E6%9B%BF%E4%BB%A3%E5%93%81prezto/</loc>
+    <lastmod>2015-04-02T07:58:59.000Z</lastmod>
+    <data>
+        <display>
+        <title>oh-my-zsh替代品prezto</title>
+        <pubTime>2015-04-02T07:46:44.000Z</pubTime>
+        
+         <content><![CDATA[<p>每次启动terminal都很慢，实在无法忍受oh-my-zsh的龟速，发现一个替代品prezto，建议使用，oh-my-zsh 有的功能他都有了，最重要的是启动速度快！</p>
+<p>废话不多说，prezto项目地址：<a href="https://github.com/sorin-ionescu/prezto" target="_blank" rel="external">https://github.com/sorin-ionescu/prezto</a></p>
+<h6 id="安装：">安装：</h6>
+<p>1、启动zsh</p>
+<pre><code>zsh
+</code></pre><p><br>2、克隆项目到本地</p>
+<pre><code><span class="title">git</span> clone --recursive <span class="url">https://github.com/sorin-ionescu/prezto.git</span> <span class="string">"<span class="variable">${ZDOTDIR:-$HOME}</span>/.zprezto"</span>
+</code></pre><a id="more"></a>
+
+<p><br>3、创建Zsh配置文件</p>
+<pre><code>setopt EXTENDED_GLOB
+ <span class="keyword">for</span> rcfile <span class="keyword">in</span> <span class="string">"<span class="variable">${ZDOTDIR:-$HOME}</span>"</span>/.zprezto/runcoms/^README.md(.N); <span class="keyword">do</span>
+   ln <span class="operator">-s</span> <span class="string">"<span class="variable">$rcfile</span>"</span> <span class="string">"<span class="variable">${ZDOTDIR:-$HOME}</span>/.<span class="variable">${rcfile:t}</span>"</span>
+ <span class="keyword">done</span>
+</code></pre><p><br>4、设置 Zsh 为默认shell</p>
+<pre><code>chsh <span class="operator">-s</span> /bin/zsh
+</code></pre><p><br>5、新开窗口体验~~~</p>
+<h6 id="关于更新"><br>关于更新</h6>
+<pre><code><span class="keyword">cd</span>  ~/.zprezto
+git pull &amp;&amp; git submodule <span class="keyword">update</span> --init --recursive
+</code></pre>]]></content>
+         
+         
+           
+             
+              <breadCrumb title="效率" url="http://www.chenbaocheng.com/categories/%E6%95%88%E7%8E%87/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.chenbaocheng.com/2015/02/26/MacOS%E7%BD%91%E7%BB%9C%E8%AF%8A%E6%96%AD%E5%91%BD%E4%BB%A4/</loc>
+    <lastmod>2015-02-27T02:51:51.000Z</lastmod>
+    <data>
+        <display>
+        <title>MacOS网络诊断命令</title>
+        <pubTime>2015-02-26T06:54:18.000Z</pubTime>
+        
+         <content><![CDATA[<h3 id="ifconfig">ifconfig</h3>
+<p>显示网络接口(interface)信息。如接口名称，接口类型，接口的IP地址，硬件的MAC地址等。</p>
+<pre><code><span class="preprocessor">#查看活动网卡信息，仅限活动网卡</span>
+ifconfig
+
+<span class="preprocessor">#查看所有网卡信息，包括活动、非活动网卡</span>
+ifconfig -a
+
+<span class="preprocessor">#查看某个网卡的信息</span>
+ifconfig eth0
+
+<span class="preprocessor">#配置某个网卡的ip地址 格式：ifconfig  ethx IP/MASK</span>
+ifconfig eth0 <span class="number">192.168</span><span class="number">.1</span><span class="number">.20</span>/<span class="number">16</span>
+</code></pre><h3 id="路由">路由</h3>
+<pre><code><span class="preprocessor">#显示路由表</span>
+netstat -nr
+
+<span class="preprocessor">#追踪到达IP目的地的全程路由</span>
+traceroute nis.nsf.net
+</code></pre><h3 id="网络监听_-_tcpdump">网络监听 - tcpdump</h3>
+<pre><code><span class="built_in">sudo</span> tcpdump -i en0
+
+监听en0接口的所有通信
+
+<span class="built_in">sudo</span> tcpdump -A -i en0 
+
+用ASCII显示en0接口的通信内容
+<span class="built_in">sudo</span> tcpdump -i en0 <span class="string">'port 8080'</span>
+
+显示en0接口的<span class="number">8080</span>端口的通信
+
+<span class="built_in">sudo</span> tcpdump -i eth1 src <span class="number">192.168</span>.<span class="number">1.200</span>
+
+显示eth1接口，来自<span class="number">192.168</span>.<span class="number">1.200</span>的通信
+
+<span class="built_in">sudo</span> tcpdump -i eth1 dst <span class="number">192.168</span>.<span class="number">1.101</span> and port <span class="number">80</span>
+
+显示eth1接口<span class="number">80</span>端口，目的地为<span class="number">192.168</span>.<span class="number">1.101</span>的通信
+
+<span class="built_in">sudo</span> tcpdump -w record.pcap -i lo0
+
+将lo0接口的通信存入文件record.pcap
+</code></pre>]]></content>
+         
+         
+           
+             
+              <breadCrumb title="java" url="http://www.chenbaocheng.com/categories/java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.chenbaocheng.com/2015/02/23/Mac-OS%E7%AE%A1%E7%90%86%E5%A4%9A%E4%B8%AAJDK%E7%89%88%E6%9C%AC/</loc>
     <lastmod>2015-02-22T21:01:19.000Z</lastmod>
     <data>
