@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.chenbaocheng.com/"/>
-  <updated>2015-04-02T10:49:07.562Z</updated>
+  <updated>2015-04-02T10:49:39.064Z</updated>
   <id>http://www.chenbaocheng.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://www.chenbaocheng.com/2015/04/02/oh-my-zsh%E6%9B%BF%E4%BB%A3%E5%93%81prezto/"/>
     <id>http://www.chenbaocheng.com/2015/04/02/oh-my-zsh替代品prezto/</id>
     <published>2015-04-02T07:46:44.000Z</published>
-    <updated>2015-04-02T10:42:59.000Z</updated>
+    <updated>2015-04-02T10:49:32.000Z</updated>
     <content type="html"><![CDATA[<p>每次启动terminal都很慢，实在无法忍受oh-my-zsh的龟速，发现一个替代品prezto，建议使用，oh-my-zsh 有的功能他都有了，最重要的是启动速度快！</p>
 <p>废话不多说，prezto项目地址：<a href="https://github.com/sorin-ionescu/prezto" target="_blank" rel="external">https://github.com/sorin-ionescu/prezto</a></p>
 <h6 id="安装：">安装：</h6>
@@ -56,7 +56,7 @@ zstyle <span class="string">':prezto:load'</span> pmodule \
     <span class="string">'spectrum'</span> \
     <span class="string">'utility'</span> \
     <span class="string">'completion'</span> \
-    &lt;<span class="keyword">i</span> style=<span class="string">"color:red;"</span>&gt;<span class="string">'history'</span> \&lt;/<span class="keyword">i</span>&gt;
+    <span class="string">'history'</span> \
     <span class="string">'history-substring-search'</span> \
     <span class="string">'prompt'</span>
 </code></pre>]]></content>
