@@ -4,7 +4,7 @@
     
   <url>
     <loc>http://www.chenbaocheng.com/2015/04/02/oh-my-zsh%E6%9B%BF%E4%BB%A3%E5%93%81prezto/</loc>
-    <lastmod>2015-04-02T07:58:59.000Z</lastmod>
+    <lastmod>2015-04-02T10:42:59.000Z</lastmod>
     <data>
         <display>
         <title>oh-my-zsh替代品prezto</title>
@@ -30,6 +30,25 @@
 <h6 id="关于更新"><br>关于更新</h6>
 <pre><code><span class="keyword">cd</span>  ~/.zprezto
 git pull &amp;&amp; git submodule <span class="keyword">update</span> --init --recursive
+</code></pre><h6 id="oh-my-zsh的_z_命令替代品_fasd"><br>oh-my-zsh的 z 命令替代品 fasd</h6>
+<pre><code>brew install fasd
+
+<span class="keyword">vim</span> ~/.zshrc
+<span class="built_in">eval</span> <span class="string">"$(fasd --init auto)"</span>
+
+<span class="keyword">vim</span>  ~/.zpreztorc
+zstyle <span class="string">':prezto:load'</span> pmodule \
+    <span class="string">'environment'</span> \
+    <span class="string">'terminal'</span> \
+    <span class="string">'editor'</span> \
+    <span class="string">'history'</span> \
+    <span class="string">'directory'</span> \
+    <span class="string">'spectrum'</span> \
+    <span class="string">'utility'</span> \
+    <span class="string">'completion'</span> \
+    &lt;<span class="keyword">i</span> style=<span class="string">"color:red;"</span>&gt;<span class="string">'history'</span> \&lt;/<span class="keyword">i</span>&gt;
+    <span class="string">'history-substring-search'</span> \
+    <span class="string">'prompt'</span>
 </code></pre>]]></content>
          
          
