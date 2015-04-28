@@ -4,15 +4,17 @@
     
   <url>
     <loc>http://www.chenbaocheng.com/2015/04/23/Java-Unsupported-major-minor-version-51-0/</loc>
-    <lastmod>2015-04-28T03:46:20.000Z</lastmod>
+    <lastmod>2015-04-28T03:53:43.000Z</lastmod>
     <data>
         <display>
-        <title>Java : Unsupported major.minor version 51.0</title>
+        <title>Java : Unsupported major.minor version 51.0解决方法</title>
         <pubTime>2015-04-23T06:44:35.000Z</pubTime>
         
          <content><![CDATA[<p>在使用 intellij idea  插件 QAPlug - FindBugs 时报错：</p>
 <p>======Cannot Load Project======<br>Cannot load project:<br>com.intellij.ide.plugins.PluginMananger:$StartupAboortedException:<br>com.intellij.diagnostic.PluginException:<br>com/soldevelo/findbugs/FindBugsComponent:Unsupported major.minor version 51.0[Plugin:QAPlug - FindBugs][Plugin:QAPlug - FindBugs]</p>
 <p>经过一番搜索，找到如下 JDK 版本对应关系 ：<br>J2SE 8 = 52 (0x34 hex)<br>J2SE 7 = 51 (0x33 hex)<br>J2SE 6.0 = 50 (0x32 hex)<br>J2SE 5.0 = 49 (0x31 hex)<br>JDK 1.4 = 48 (0x30 hex)<br>JDK 1.3 = 47 (0x2F hex)<br>JDK 1.2 = 46 (0x2E hex)<br>JDK 1.1 = 45 (0x2D hex)</p>
+<a id="more"></a>
+
 <p>51.0是对应JDK1.7, 看一下当前的 java 版本什么呢？<br>$ java -version<br>java version “1.7.0_79”<br>Java(TM) SE Runtime Environment (build 1.7.0_79-b15)<br>Java HotSpot(TM) 64-Bit Server VM (build 24.79-b02, mixed mode)</p>
 <p>看起来JDK没问题。</p>
 <p>那会不会是 intellij 默认用1.6启动的呢？<br>$ vim /Applications/IntelliJ\ IDEA\ 14.app/Contents/Info.plist</p>
