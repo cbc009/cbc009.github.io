@@ -47,6 +47,73 @@
     <div id="main">
       
   
+    <article id="post-Docker学习-二" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2015/04/30/Docker学习-二/" class="article-date">
+  <time datetime="2015-04-30T07:50:46.000Z" itemprop="datePublished">4月 30 2015</time>
+</a>
+		</span>
+		<!-- <span class="meta-elements author">CBC</span> -->
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 itemprop="name" class="entry-title">
+      <a class="article-title" href="/2015/04/30/Docker学习-二/">Docker学习(二) 安装与配置</a>
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+			<h4 id="Docker_的安装与配置">Docker 的安装与配置</h4>
+<p>Docker 支持 CentOS 6 及后续版本。</p>
+<h4 id="CentOS_6_下安装Docker服务">CentOS 6 下安装Docker服务</h4>
+<pre><code><span class="preprocessor">#禁用SELINUX</span>
+vim /etc/selinux/config
+SELINUX=disabled
+
+<span class="preprocessor">#配置Fedora EPEL 源</span>
+rpm -ivh http:<span class="comment">//dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm</span>
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-<span class="number">6</span>
+yum -y install yum-priorities
+</code></pre><p>
+			
+				<p class="article-more-link">
+					<br/>
+					<a href="/2015/04/30/Docker学习-二/#more">阅读全文 &gt;&gt;</a>
+				</p>
+      
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/docker/">docker</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+			</span>
+		</div>
+	</footer>
+	
+</article>
+
+
+	<hr class="article-devider">
+
+
+
+  
     <article id="post-Docker学习-一" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">
@@ -64,7 +131,7 @@
 		
   
     <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2015/04/30/Docker学习-一/">Docker学习(一)</a>
+      <a class="article-title" href="/2015/04/30/Docker学习-一/">Docker学习(一) Docker基础</a>
     </h1>
   
 
