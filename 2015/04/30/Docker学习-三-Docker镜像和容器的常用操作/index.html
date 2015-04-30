@@ -126,21 +126,6 @@ ca98201350dd0c30bc4f37992b22d70594ae0fabe1992457776e5cc5b113c9e7
 <span class="preprocessor"># -i 让容器的标准输入保持打开</span>
 <span class="preprocessor"># -d 让容器在后台以守护进程（Daemonized）形式运行</span>
 <span class="preprocessor"># /bin/bash 启动一个bash终端，允许用户进行交互    </span>
-</code></pre><h4 id="外部访问容器，对容器网络端口映射">外部访问容器，对容器网络端口映射</h4>
-<pre><code>cbc ~ # docker run -itdP mimosa/tengine /bin/bash
-ca98201350dd0c30bc4f37992b22d70594ae0fabe1992457776e5cc5b113c9e7
-
-<span class="preprocessor"># -P Docker会随机映射一个49000~49900的端口到内部容器开放的网络端口</span>
-<span class="preprocessor"># -p 参数小写的p可以手动指定要映射的端口。一个指定端口只可以绑定一个容器，也可以指定端口类型。支持的格式有：ip:hostPort:containerPort[/protocol] | ip::containerPort[/protocol] | hostPort:containerPort[/protocol]</span>
-<span class="preprocessor"># /bin/bash 启动一个bash终端，允许用户进行交互</span>
-
-<span class="preprocessor"># 用 docker ps -l查看最后一个被创建的容器，访问49154端口可以看到 tengine 的欢迎页。</span>
-<span class="preprocessor"># 现在我可以通过工作电脑访问容器的物理机：http://192.168.11.185:49154/</span>
-cbc ~ # docker ps -l
-CONTAINER<span class="constant"> ID </span>      <span class="constant"> IMAGE </span>                 <span class="constant"> COMMAND </span>           <span class="constant"> CREATED </span>           <span class="constant"> STATUS </span>            <span class="constant"> PORTS </span>                                          NAMES
-<span class="number">1</span>dd4e24df270        mimosa/tengine:latest   <span class="string">"nginx"</span>             <span class="number">7</span> minutes ago       Up <span class="number">7</span> minutes        <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">49153</span>-&gt;<span class="number">443</span>/tcp, <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">49154</span>-&gt;<span class="number">80</span>/tcp   naughty_hypatia
-</code></pre><h4 id="查看网络端口映射情况">查看网络端口映射情况</h4>
-<pre><code>docker <span class="keyword">port</span> <span class="number">1</span>dd4e24df270 <span class="number">80</span>
 </code></pre><h4 id="导出镜像到本地文件">导出镜像到本地文件</h4>
 <pre><code><span class="title">cbc</span> <span class="regexp">~ #</span> docker save -o tengine.tar mimosa/tengine
 </code></pre><h4 id="从本地文件导入镜像">从本地文件导入镜像</h4>
@@ -189,6 +174,21 @@ docker import <span class="built_in">URL</span> REPOSITORY
 cbc ~ <span class="comment"># docker images</span>
 REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
 cbc009/tengine      latest              <span class="number">67e225223716</span>        <span class="number">2</span> minutes ago       <span class="number">593.5</span> MB
+</code></pre><h4 id="外部访问容器，对容器网络端口映射">外部访问容器，对容器网络端口映射</h4>
+<pre><code>cbc ~ # docker run -itdP mimosa/tengine /bin/bash
+ca98201350dd0c30bc4f37992b22d70594ae0fabe1992457776e5cc5b113c9e7
+
+<span class="preprocessor"># -P Docker会随机映射一个49000~49900的端口到内部容器开放的网络端口</span>
+<span class="preprocessor"># -p 参数小写的p可以手动指定要映射的端口。一个指定端口只可以绑定一个容器，也可以指定端口类型。支持的格式有：ip:hostPort:containerPort[/protocol] | ip::containerPort[/protocol] | hostPort:containerPort[/protocol]</span>
+<span class="preprocessor"># /bin/bash 启动一个bash终端，允许用户进行交互</span>
+
+<span class="preprocessor"># 用 docker ps -l查看最后一个被创建的容器，访问49154端口可以看到 tengine 的欢迎页。</span>
+<span class="preprocessor"># 现在我可以通过工作电脑访问容器的物理机：http://192.168.11.185:49154/</span>
+cbc ~ # docker ps -l
+CONTAINER<span class="constant"> ID </span>      <span class="constant"> IMAGE </span>                 <span class="constant"> COMMAND </span>           <span class="constant"> CREATED </span>           <span class="constant"> STATUS </span>            <span class="constant"> PORTS </span>                                          NAMES
+<span class="number">1</span>dd4e24df270        mimosa/tengine:latest   <span class="string">"nginx"</span>             <span class="number">7</span> minutes ago       Up <span class="number">7</span> minutes        <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">49153</span>-&gt;<span class="number">443</span>/tcp, <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">49154</span>-&gt;<span class="number">80</span>/tcp   naughty_hypatia
+</code></pre><h4 id="查看网络端口映射情况">查看网络端口映射情况</h4>
+<pre><code>docker <span class="keyword">port</span> <span class="number">1</span>dd4e24df270 <span class="number">80</span>
 </code></pre><p>至此镜像和容器的基本操作学习完了~</p>
 
     
