@@ -47,6 +47,66 @@
     <div id="main">
       
   
+    <article id="post-Linux开机获取IP发送到指定邮箱" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2015/04/30/Linux开机获取IP发送到指定邮箱/" class="article-date">
+  <time datetime="2015-04-30T05:20:19.000Z" itemprop="datePublished">4月 30 2015</time>
+</a>
+		</span>
+		<!-- <span class="meta-elements author">CBC</span> -->
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 itemprop="name" class="entry-title">
+      <a class="article-title" href="/2015/04/30/Linux开机获取IP发送到指定邮箱/">Linux开机获取IP发送到指定邮箱</a>
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<p>之所以有这样的需求，是因为平日主力是用自己的笔记本，公司给配的台式机（主机、显示器）扔工位下面，装了 Centos 玩儿，公司是DHCP 分配IP，每次重启开机都得到台式机登录一下，才能获取最新IP，有点小麻烦，重启后给自己邮箱发个邮件，这样省事儿，看看邮件里的IP，远程 SSH 登录就可以了~</p>
+<p>我的台式机系统是 CENTOS，邮箱是163的，安装配置如下:</p>
+<p>1、安装mailx</p>
+<p>yum install mailx</p>
+<p>2、修改配置文件</p>
+<p>vim  /etc/mail.rc</p>
+<p>添加如下内容：<br>set from=xxxxxx@163.com smtp=smtp.163.com smtp-auth-user={username} smtp-auth-password={password} smtp-auth=login</p>
+<p>3、配置开机发邮件</p>
+<p>vim /etc/rc.local</p>
+<p>ifconfig | mail -s “重启开机邮件 - 最新 IP” xxxx@xxxx.com</p>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/系统维护/">系统维护</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+			</span>
+		</div>
+	</footer>
+	
+</article>
+
+
+	<hr class="article-devider">
+
+
+
+  
     <article id="post-在-github-开源了一个spring-boot-jpa-DEMO" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">
