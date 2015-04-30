@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Docker学习(三) Docker镜像和容器的常用操作 | CHENBAOCHENG.COM</title>
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="列出镜像
+cbc ~ # docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+centos              7                   fd44297e2ddb        8 days ago">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker学习(三) Docker镜像和容器的常用操作">
+<meta property="og:url" content="http://www.chenbaocheng.com/2015/04/30/Docker学习-三-Docker镜像和容器的常用操作/">
+<meta property="og:site_name" content="CHENBAOCHENG.COM">
+<meta property="og:description" content="列出镜像
+cbc ~ # docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+centos              7                   fd44297e2ddb        8 days ago">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Docker学习(三) Docker镜像和容器的常用操作">
+<meta name="twitter:description" content="列出镜像
+cbc ~ # docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+centos              7                   fd44297e2ddb        8 days ago">
+
+  
+    <link rel="alternative" href="/atom.xml" title="CHENBAOCHENG.COM" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  <!--[if lt IE 9]>  <script src="/js/html5.js" type="text/javascript"></script>
+ <![endif]-->
+  
+</head>
+<body>
+  <div id="container">
+    <div class="mobile-nav-panel">
+	<i class="icon-reorder icon-large"></i>
+</div>
+<header id="header">
+	<nav class="nav">
+		<ul>
+			<li><a href="/">首页</a></li><li><a href="/archives">文章</a></li><li><a href="/categories">分类</a></li><li><a href="/about">关于</a></li>
+			<li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
+			<li><a target="_blank" href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
+		</ul>
+	</nav>
+	<div id="search-form-wrap">
+		<form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="submit" value="&#xF002;" class="search-form-submit"><input type="hidden" name="q" value="site:http://www.chenbaocheng.com"></form>
+	</div>
+</header>
+    <div id="main">
+      <article id="post-Docker学习-三-Docker镜像和容器的常用操作" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2015/04/30/Docker学习-三-Docker镜像和容器的常用操作/" class="article-date">
+  <time datetime="2015-04-30T08:06:29.000Z" itemprop="datePublished">4月 30 2015</time>
+</a>
+		</span>
+		<!-- <span class="meta-elements author">CBC</span> -->
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 class="article-title entry-title" itemprop="name">
+      Docker学习(三) Docker镜像和容器的常用操作
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<h5 id="列出镜像">列出镜像</h5>
+<pre><code>cbc ~ # docker images
+REPOSITORY         <span class="constant"> TAG </span>               <span class="constant"> IMAGE </span>ID           <span class="constant"> CREATED </span>           <span class="constant"> VIRTUAL </span>SIZE
+centos              <span class="number">7</span>                   fd44297e2ddb        <span class="number">8</span> days ago          <span class="number">229.6</span> MB
+centos              centos7             fd44297e2ddb        <span class="number">8</span> days ago          <span class="number">229.6</span> MB
+centos              latest              fd44297e2ddb        <span class="number">8</span> days ago          <span class="number">229.6</span> MB
+&lt;none&gt;              &lt;none&gt;              ae0c2d0bdc10        <span class="number">5</span> months ago        <span class="number">224</span> MB
+
+<span class="preprocessor">#REPOSITORY 镜像来源仓库</span>
+<span class="preprocessor">#TAG 镜像标记</span>
+<span class="preprocessor">#IMAGE ID 镜像唯一 ID</span>
+<span class="preprocessor">#CREATED 镜像创建时间</span>
+<span class="preprocessor">#VIRTUAL SIZE 镜像大小</span>
+</code></pre><h5 id="查找镜像">查找镜像</h5>
+<pre><code>这里我们是找一个名为tengine的镜像，tengine是淘宝版的nginx
+
+cbc ~ <span class="comment"># docker search tengine</span>
+NAME                           DESCRIPTION   STARS     OFFICIAL   AUTOMATED
+mimosa/tengine                               <span class="number">1</span>                    [OK]
+netengine/renderer-nginx                     <span class="number">1</span>                    [OK]
+utgard/tengine                               <span class="number">0</span>                    [OK]
+sugamele/tengine               Tengine       <span class="number">0</span>
+vpanton/docker-tengine-dyups                 <span class="number">0</span>                    [OK]
+hyperboloide/tengine                         <span class="number">0</span>
+guilhem30/updatengine                        <span class="number">0</span>                    [OK]
+</code></pre><a id="more"></a>
+
+<h5 id="获取镜像">获取镜像</h5>
+<pre><code>cbc ~ <span class="comment"># docker pull mimosa/tengine</span>
+<span class="constant">Pulling</span> repository mimosa/tengine
+<span class="symbol">f614dc8befa6:</span> <span class="constant">Pulling</span> dependent layers
+<span class="number">511136</span><span class="symbol">ea3c5a:</span> <span class="constant">Download</span> complete
+<span class="number">5</span><span class="symbol">e66087f3ffe:</span> <span class="constant">Downloading</span> <span class="number">17.96</span> <span class="constant">MB</span>
+
+<span class="comment"># 下载过程中，会输出获取镜像的每一层信息。</span>
+<span class="comment"># 你可以按照下面的格式从指定注册服务器的仓库下载相应标记的镜像：</span>
+docker pull 注册服务器地址[<span class="symbol">:</span>端口号]/仓库名<span class="symbol">:TAG</span>名称
+</code></pre><h4 id="删除镜像">删除镜像</h4>
+<pre><code>docker rmi ae0c2d0bdc10
+<span class="preprocessor"># 移除镜像前，先移除依赖该镜像的容器</span>
+</code></pre><h4 id="使用镜像创建一个容器">使用镜像创建一个容器</h4>
+<pre><code>cbc ~ # docker run -itd mimosa/tengine /bin/bash
+ca98201350dd0c30bc4f37992b22d70594ae0fabe1992457776e5cc5b113c9e7
+
+<span class="preprocessor"># -t 让docker分配一个伪终端(pseudo-tty)并绑定到容器的标准输入</span>
+<span class="preprocessor"># -i 让容器的标准输入保持打开</span>
+<span class="preprocessor"># -d 让容器在后台以守护进程（Daemonized）形式运行</span>
+<span class="preprocessor"># /bin/bash 启动一个bash终端，允许用户进行交互</span>
+</code></pre><h4 id="导出镜像到本地文件">导出镜像到本地文件</h4>
+<pre><code><span class="title">cbc</span> <span class="regexp">~ #</span> docker save -o tengine.tar mimosa/tengine
+</code></pre><h4 id="从本地文件导入镜像">从本地文件导入镜像</h4>
+<pre><code>docker <span class="built_in">load</span> <span class="comment">--input tengine.tar</span>
+或者
+docker <span class="built_in">load</span> &lt; tengine.tar
+</code></pre><h4 id="查看容器状态">查看容器状态</h4>
+<pre><code>cbc ~ <span class="comment"># docker ps -a</span>
+CONTAINER ID        IMAGE                   COMMAND             CREATED             STATUS                      PORTS               NAMES
+ca98201350dd        mimosa/tengine:latest   <span class="string">"/bin/bash"</span>         <span class="number">19</span> minutes ago      Up <span class="number">9</span> minutes                <span class="number">443</span>/tcp, <span class="number">80</span>/tcp     grave_albattani
+b02c528c3cad        centos:<span class="number">7</span>                <span class="string">"/bin/bash"</span>         <span class="number">2</span> hours ago         Exited (<span class="number">127</span>) <span class="number">2</span> hours ago                        furious_einstein
+cf769788d09e        centos:<span class="number">7</span>                <span class="string">"/bin/bash"</span>         <span class="number">2</span> hours ago         Exited (-<span class="number">1</span>) <span class="number">2</span> hours ago                         agitated_mclean
+f706bbb258a1        ae0c2d0bdc10            <span class="string">"/bin/bash"</span>         <span class="number">3</span> hours ago         Exited (<span class="number">130</span>) <span class="number">3</span> hours ago                        goofy_yonath
+<span class="number">574871</span>d84dc2        ae0c2d0bdc10            <span class="string">"/bin/bash"</span>         <span class="number">5</span> months ago        Exited (<span class="number">127</span>) <span class="number">5</span> months ago                       cocky_wilson
+<span class="number">47381902</span><span class="built_in">cd</span>50        ae0c2d0bdc10            <span class="string">"/bin/bash"</span>         <span class="number">5</span> months ago        Exited (<span class="number">0</span>) <span class="number">5</span> months ago                         mad_feynman
+ee19f69f978c        ae0c2d0bdc10            <span class="string">"/bin/bash"</span>         <span class="number">5</span> months ago        Exited (<span class="number">0</span>) <span class="number">5</span> months ago                         high_bohr
+a7e4a6d0c994        ae0c2d0bdc10            <span class="string">"/usr/bin/"</span>         <span class="number">5</span> months ago                                                        drunk_pike
+ad418b05441f        ae0c2d0bdc10            <span class="string">"/bin/bash"</span>         <span class="number">5</span> months ago                                                        sick_colden
+dffb9f3f6677        ae0c2d0bdc10            <span class="string">"/bin/bash"</span>         <span class="number">5</span> months ago        Exited (<span class="number">0</span>) <span class="number">5</span> months ago                         determined_shockley
+e9297baee616        ae0c2d0bdc10            <span class="string">"/bin/bash"</span>         <span class="number">5</span> months ago        Exited (<span class="number">0</span>) <span class="number">5</span> months ago                         thirsty_pare
+</code></pre><h4 id="停止容器">停止容器</h4>
+<pre><code><span class="title">cbc</span> <span class="regexp">~ #</span> docker stop ca98201350dd 
+</code></pre><h4 id="重启容器">重启容器</h4>
+<pre><code><span class="title">cbc</span> <span class="regexp">~ #</span> docker restart ca98201350dd
+ca98201350dd
+</code></pre><h4 id="从终止状态启动一个容器">从终止状态启动一个容器</h4>
+<pre><code><span class="title">cbc</span> <span class="regexp">~ #</span> docker start ca98201350dd
+ca98201350dd 
+</code></pre><h4 id="进入一个运行状态的容器">进入一个运行状态的容器</h4>
+<pre><code>cbc ~ <span class="comment"># docker attach ca98201350dd</span>
+[ root<span class="variable">@ca98201350dd</span><span class="symbol">:/etc/nginx</span> ]$
+</code></pre><h4 id="删除容器">删除容器</h4>
+<pre><code><span class="title">cbc</span> <span class="regexp">~ #</span> docker rm 4d72d9a0066d
+4d72d9a0066d 
+</code></pre><h4 id="导出容器">导出容器</h4>
+<pre><code><span class="input"><span class="prompt">docker export ca98201350dd &gt;</span> tengine.dock.tar</span>
+</code></pre><h4 id="导入容器快照">导入容器快照</h4>
+<pre><code>cbc ~ <span class="comment"># cat tengine.dock.tar | docker import - cbc009/tengine</span>
+<span class="number">67e225223716</span>ff791c78bcc546695e530a37358e0c86b72a7a5bff2fbfbb6228
+
+或从<span class="built_in">URL</span>导入
+
+docker import <span class="built_in">URL</span> REPOSITORY
+
+查看一下结果：
+cbc ~ <span class="comment"># docker images</span>
+REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+cbc009/tengine      latest              <span class="number">67e225223716</span>        <span class="number">2</span> minutes ago       <span class="number">593.5</span> MB
+</code></pre><p>至此镜像和容器的基本操作学习完了~</p>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/docker/">docker</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+			</span>
+		</div>
+	</footer>
+	
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/04/30/Docker学习-二-安装与配置/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          Docker学习(二) 安装与配置
+        
+      </div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+    </div>
+    <div class="mb-search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:www.chenbaocheng.com">
+  </form>
+</div>
+<footer id="footer">
+	<h1 class="footer-blog-title">
+		<a href="/">CHENBAOCHENG.COM</a>
+	</h1>
+	<span class="copyright">
+		&copy; 2015 CBC<br>
+		Modify from <a href="http://sanographix.github.io/tumblr/apollo/" target="_blank">Apollo</a> theme, designed by <a href="http://www.sanographix.net/" target="_blank">SANOGRAPHIX.NET</a><br>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+	</span>
+</footer>
+    
+
+<script src="/js/jquery.min.js" type="text/javascript"></script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

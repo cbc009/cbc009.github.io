@@ -47,11 +47,11 @@
     <div id="main">
       
   
-    <article id="post-Docker学习-二" class="post">
+    <article id="post-Docker学习-三-Docker镜像和容器的常用操作" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">
-			<a href="/2015/04/30/Docker学习-二/" class="article-date">
-  <time datetime="2015-04-30T07:50:46.000Z" itemprop="datePublished">4月 30 2015</time>
+			<a href="/2015/04/30/Docker学习-三-Docker镜像和容器的常用操作/" class="article-date">
+  <time datetime="2015-04-30T08:06:29.000Z" itemprop="datePublished">4月 30 2015</time>
 </a>
 		</span>
 		<!-- <span class="meta-elements author">CBC</span> -->
@@ -64,29 +64,43 @@
 		
   
     <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2015/04/30/Docker学习-二/">Docker学习(二) 安装与配置</a>
+      <a class="article-title" href="/2015/04/30/Docker学习-三-Docker镜像和容器的常用操作/">Docker学习(三) Docker镜像和容器的常用操作</a>
     </h1>
   
 
 	</header>
 	<div class="entry-content">
 		
-			<h4 id="Docker_的安装与配置">Docker 的安装与配置</h4>
-<p>Docker 支持 CentOS 6 及后续版本。</p>
-<h4 id="CentOS_6_下安装Docker服务">CentOS 6 下安装Docker服务</h4>
-<pre><code><span class="preprocessor">#禁用SELINUX</span>
-vim /etc/selinux/config
-SELINUX=disabled
+			<h5 id="列出镜像">列出镜像</h5>
+<pre><code>cbc ~ # docker images
+REPOSITORY         <span class="constant"> TAG </span>               <span class="constant"> IMAGE </span>ID           <span class="constant"> CREATED </span>           <span class="constant"> VIRTUAL </span>SIZE
+centos              <span class="number">7</span>                   fd44297e2ddb        <span class="number">8</span> days ago          <span class="number">229.6</span> MB
+centos              centos7             fd44297e2ddb        <span class="number">8</span> days ago          <span class="number">229.6</span> MB
+centos              latest              fd44297e2ddb        <span class="number">8</span> days ago          <span class="number">229.6</span> MB
+&lt;none&gt;              &lt;none&gt;              ae0c2d0bdc10        <span class="number">5</span> months ago        <span class="number">224</span> MB
 
-<span class="preprocessor">#配置Fedora EPEL 源</span>
-rpm -ivh http:<span class="comment">//dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm</span>
-rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-<span class="number">6</span>
-yum -y install yum-priorities
-</code></pre><p>
+<span class="preprocessor">#REPOSITORY 镜像来源仓库</span>
+<span class="preprocessor">#TAG 镜像标记</span>
+<span class="preprocessor">#IMAGE ID 镜像唯一 ID</span>
+<span class="preprocessor">#CREATED 镜像创建时间</span>
+<span class="preprocessor">#VIRTUAL SIZE 镜像大小</span>
+</code></pre><h5 id="查找镜像">查找镜像</h5>
+<pre><code>这里我们是找一个名为tengine的镜像，tengine是淘宝版的nginx
+
+cbc ~ <span class="comment"># docker search tengine</span>
+NAME                           DESCRIPTION   STARS     OFFICIAL   AUTOMATED
+mimosa/tengine                               <span class="number">1</span>                    [OK]
+netengine/renderer-nginx                     <span class="number">1</span>                    [OK]
+utgard/tengine                               <span class="number">0</span>                    [OK]
+sugamele/tengine               Tengine       <span class="number">0</span>
+vpanton/docker-tengine-dyups                 <span class="number">0</span>                    [OK]
+hyperboloide/tengine                         <span class="number">0</span>
+guilhem30/updatengine                        <span class="number">0</span>                    [OK]
+</code></pre>
 			
 				<p class="article-more-link">
 					<br/>
-					<a href="/2015/04/30/Docker学习-二/#more">阅读全文 &gt;&gt;</a>
+					<a href="/2015/04/30/Docker学习-三-Docker镜像和容器的常用操作/#more">阅读全文 &gt;&gt;</a>
 				</p>
       
     
@@ -114,10 +128,77 @@ yum -y install yum-priorities
 
 
   
-    <article id="post-Docker学习-一" class="post">
+    <article id="post-Docker学习-二-安装与配置" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">
-			<a href="/2015/04/30/Docker学习-一/" class="article-date">
+			<a href="/2015/04/30/Docker学习-二-安装与配置/" class="article-date">
+  <time datetime="2015-04-30T07:50:46.000Z" itemprop="datePublished">4月 30 2015</time>
+</a>
+		</span>
+		<!-- <span class="meta-elements author">CBC</span> -->
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 itemprop="name" class="entry-title">
+      <a class="article-title" href="/2015/04/30/Docker学习-二-安装与配置/">Docker学习(二) 安装与配置</a>
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+			<h4 id="Docker_的安装与配置">Docker 的安装与配置</h4>
+<p>Docker 支持 CentOS 6 及后续版本。</p>
+<h4 id="CentOS_6_下安装Docker服务">CentOS 6 下安装Docker服务</h4>
+<pre><code><span class="preprocessor">#禁用SELINUX</span>
+vim /etc/selinux/config
+SELINUX=disabled
+
+<span class="preprocessor">#配置Fedora EPEL 源</span>
+rpm -ivh http:<span class="comment">//dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm</span>
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-<span class="number">6</span>
+yum -y install yum-priorities
+</code></pre><p>
+			
+				<p class="article-more-link">
+					<br/>
+					<a href="/2015/04/30/Docker学习-二-安装与配置/#more">阅读全文 &gt;&gt;</a>
+				</p>
+      
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/docker/">docker</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+			</span>
+		</div>
+	</footer>
+	
+</article>
+
+
+	<hr class="article-devider">
+
+
+
+  
+    <article id="post-Docker学习-一-Docker基础" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2015/04/30/Docker学习-一-Docker基础/" class="article-date">
   <time datetime="2015-04-30T07:28:12.000Z" itemprop="datePublished">4月 30 2015</time>
 </a>
 		</span>
@@ -131,7 +212,7 @@ yum -y install yum-priorities
 		
   
     <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2015/04/30/Docker学习-一/">Docker学习(一) Docker基础</a>
+      <a class="article-title" href="/2015/04/30/Docker学习-一-Docker基础/">Docker学习(一) Docker基础</a>
     </h1>
   
 
@@ -147,7 +228,7 @@ yum -y install yum-priorities
 			
 				<p class="article-more-link">
 					<br/>
-					<a href="/2015/04/30/Docker学习-一/#more">阅读全文 &gt;&gt;</a>
+					<a href="/2015/04/30/Docker学习-一-Docker基础/#more">阅读全文 &gt;&gt;</a>
 				</p>
       
     
@@ -610,65 +691,6 @@ traceroute nis.nsf.net
 				
   <div class="article-category">
     <a class="article-category-link" href="/categories/java/">java</a>
-  </div>
-
-			</span>
-			<span class="tags">
-				
-			</span>
-		</div>
-	</footer>
-	
-</article>
-
-
-	<hr class="article-devider">
-
-
-
-  
-    <article id="post-删除文件夹下的所有-svn目录" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2015/02/22/删除文件夹下的所有-svn目录/" class="article-date">
-  <time datetime="2015-02-22T13:25:11.000Z" itemprop="datePublished">2月 22 2015</time>
-</a>
-		</span>
-		<!-- <span class="meta-elements author">CBC</span> -->
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
-  
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2015/02/22/删除文件夹下的所有-svn目录/">MAC OS批量删除文件－删除文件夹下的所有.svn目录</a>
-    </h1>
-  
-
-	</header>
-	<div class="entry-content">
-		
-    	<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find . -name <span class="string">".svn"</span> | xargs rm -fr</div></pre></td></tr></table></figure>
-
-<p><br>或者</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find . -type d -name <span class="string">".svn"</span> | xargs rm -rf</div></pre></td></tr></table></figure>
-
-<p>xargs它的作用是将参数列表转换成小块分段传递给其他命令，以避免参数列表过长的问题</p>
-<p>或者</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find . -name <span class="string">".svn"</span> -exec rm -fr <span class="string">'{}'</span> +</div></pre></td></tr></table></figure>
-
-
-    
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/os/">os</a>
   </div>
 
 			</span>
