@@ -4,7 +4,7 @@
     
   <url>
     <loc>http://www.chenbaocheng.com/2015/04/30/Docker%E5%AD%A6%E4%B9%A0-%E4%B8%89-Docker%E9%95%9C%E5%83%8F%E5%92%8C%E5%AE%B9%E5%99%A8%E7%9A%84%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/</loc>
-    <lastmod>2015-04-30T09:34:32.000Z</lastmod>
+    <lastmod>2015-04-30T09:37:36.000Z</lastmod>
     <data>
         <display>
         <title>Docker学习(三) Docker镜像和容器的常用操作</title>
@@ -23,7 +23,9 @@ centos              latest              fd44297e2ddb        <span class="number"
 <span class="preprocessor">#IMAGE ID 镜像唯一 ID</span>
 <span class="preprocessor">#CREATED 镜像创建时间</span>
 <span class="preprocessor">#VIRTUAL SIZE 镜像大小</span>
-</code></pre><h5 id="查找镜像">查找镜像</h5>
+</code></pre><a id="more"></a>
+
+<h5 id="查找镜像">查找镜像</h5>
 <pre><code>这里我们是找一个名为tengine的镜像，tengine是淘宝版的nginx
 
 cbc ~ <span class="comment"># docker search tengine</span>
@@ -35,9 +37,7 @@ sugamele/tengine               Tengine       <span class="number">0</span>
 vpanton/docker-tengine-dyups                 <span class="number">0</span>                    [OK]
 hyperboloide/tengine                         <span class="number">0</span>
 guilhem30/updatengine                        <span class="number">0</span>                    [OK]
-</code></pre><a id="more"></a>
-
-<h5 id="获取镜像">获取镜像</h5>
+</code></pre><h5 id="获取镜像">获取镜像</h5>
 <pre><code>cbc ~ <span class="comment"># docker pull mimosa/tengine</span>
 <span class="constant">Pulling</span> repository mimosa/tengine
 <span class="symbol">f614dc8befa6:</span> <span class="constant">Pulling</span> dependent layers
