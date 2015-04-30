@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.chenbaocheng.com/"/>
-  <updated>2015-04-30T05:29:17.693Z</updated>
+  <updated>2015-04-30T05:30:23.152Z</updated>
   <id>http://www.chenbaocheng.com/</id>
   
   <author>
@@ -19,12 +19,11 @@
     <link href="http://www.chenbaocheng.com/2015/04/30/Linux%E5%BC%80%E6%9C%BA%E8%8E%B7%E5%8F%96IP%E5%8F%91%E9%80%81%E5%88%B0%E6%8C%87%E5%AE%9A%E9%82%AE%E7%AE%B1/"/>
     <id>http://www.chenbaocheng.com/2015/04/30/Linux开机获取IP发送到指定邮箱/</id>
     <published>2015-04-30T05:20:19.000Z</published>
-    <updated>2015-04-30T05:29:08.000Z</updated>
+    <updated>2015-04-30T05:30:19.000Z</updated>
     <content type="html"><![CDATA[<p>之所以有这样的需求，是因为平日主力是用自己的笔记本，公司给配的台式机（主机、显示器）扔工位下面，装了 Centos 玩儿，公司是DHCP 分配IP，每次重启开机都得到台式机登录一下，才能获取最新IP，有点小麻烦，重启后给自己邮箱发个邮件，这样省事儿，看看邮件里的IP，远程 SSH 登录就可以了~</p>
 <p>我的台式机系统是 CENTOS，邮箱是163的，安装配置如下:</p>
 <p>1、安装mailx</p>
-<p>yum install mailx</p>
-<p>2、修改配置文件</p>
+<p>yum install mailx<br><a id="more"></a><br>2、修改配置文件</p>
 <p>vim  /etc/mail.rc</p>
 <p>添加如下内容：<br>set from=xxxxxx@163.com smtp=smtp.163.com smtp-auth-user={username} smtp-auth-password={password} smtp-auth=login</p>
 <p>3、配置开机发邮件</p>
@@ -32,7 +31,11 @@
 <p>ifconfig | mail -s “重启开机邮件 - 最新 IP” xxxx@xxxx.com</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>之所以有这样的需求，是因为平日主力是用自己的笔记本，公司给配的台式机（主机、显示器）扔工位下面，装了 Centos 玩儿，公司是DHCP 分配IP，每次重启开机都得到台式机登录一下，才能获取最新IP，有点小麻烦，重启后给自己邮箱发个邮件，这样省事儿，看看邮件里的IP，远程 ]]>
+    <![CDATA[<p>之所以有这样的需求，是因为平日主力是用自己的笔记本，公司给配的台式机（主机、显示器）扔工位下面，装了 Centos 玩儿，公司是DHCP 分配IP，每次重启开机都得到台式机登录一下，才能获取最新IP，有点小麻烦，重启后给自己邮箱发个邮件，这样省事儿，看看邮件里的IP，远程 SSH 登录就可以了~</p>
+<p>我的台式机系统是 CENTOS，邮箱是163的，安装配置如下:</p>
+<p>1、安装mailx</p>
+<p>yum install mailx<br>]]>
+    
     </summary>
     
       <category term="系统维护" scheme="http://www.chenbaocheng.com/categories/%E7%B3%BB%E7%BB%9F%E7%BB%B4%E6%8A%A4/"/>
