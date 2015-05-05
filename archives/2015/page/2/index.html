@@ -47,6 +47,68 @@
     <div id="main">
       
   
+    <article id="post-50道Java线程面试题" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2015/02/22/50道Java线程面试题/" class="article-date">
+  <time datetime="2015-02-22T14:16:07.000Z" itemprop="datePublished">2月 22 2015</time>
+</a>
+		</span>
+		<!-- <span class="meta-elements author">CBC</span> -->
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 itemprop="name" class="entry-title">
+      <a class="article-title" href="/2015/02/22/50道Java线程面试题/">50道Java线程面试题</a>
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+			<h5 id="1)_什么是线程？">1) 什么是线程？</h5>
+<p>线程是操作系统能够进行运算调度的最小单位，它被包含在进程之中，是进程中的实际运作单位。程序员可以通过它进行多处理器编程，你可以使用多线程对运算密集型任务提速。比如，如果一个线程完成一个任务要100毫秒，那么用十个线程完成改任务只需10毫秒。Java在语言层面对多线程提供了卓越的支持，它也是一个很好的卖点。<a href="http://java67.blogspot.com/2014/01/10-points-about-thread-and-javalangthread-in-java.html" target="_blank" rel="external">了解更多详细信息</a>。</p>
+<h5 id="2)_线程和进程有什么区别？">2) 线程和进程有什么区别？</h5>
+<p>线程是进程的子集，一个进程可以有很多线程，每条线程并行执行不同的任务。不同的进程使用不同的内存空间，而所有的线程共享一片相同的内存空间。别把它和栈内存搞混，每个线程都拥有单独的栈内存用来存储本地数据。<a href="http://java67.blogspot.com/2012/12/what-is-difference-between-thread-vs-process-java.html" target="_blank" rel="external">更多详细信息</a>。</p>
+<h5 id="3)_如何在Java中实现线程？">3) 如何在Java中实现线程？</h5>
+<p>在语言层面有两种方式。java.lang.Thread 类的实例就是一个线程但是它需要调用java.lang.Runnable接口来执行，由于线程类本身就是调用的Runnable接口所以你可以继承java.lang.Thread 类或者直接调用Runnable接口来重写run()方法实现线程。<a href="http://javarevisited.blogspot.sg/2011/02/how-to-implement-thread-in-java.html" target="_blank" rel="external">更多详细信息</a>.</p>
+
+			
+				<p class="article-more-link">
+					<br/>
+					<a href="/2015/02/22/50道Java线程面试题/#more">阅读全文 &gt;&gt;</a>
+				</p>
+      
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java/">java</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+			</span>
+		</div>
+	</footer>
+	
+</article>
+
+
+	<hr class="article-devider">
+
+
+
+  
     <article id="post-删除文件夹下的所有-svn目录" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">

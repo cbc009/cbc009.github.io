@@ -47,6 +47,73 @@
     <div id="main">
       
   
+    <article id="post-Docker学习-四-Dockerfile" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2015/05/05/Docker学习-四-Dockerfile/" class="article-date">
+  <time datetime="2015-05-05T07:37:57.000Z" itemprop="datePublished">5月 5 2015</time>
+</a>
+		</span>
+		<!-- <span class="meta-elements author">CBC</span> -->
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 itemprop="name" class="entry-title">
+      <a class="article-title" href="/2015/05/05/Docker学习-四-Dockerfile/">Docker学习(四) Dockerfile</a>
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+			<p>Dockerfile 由一系列Dockerfile指令构成，用于创建一个自定义image, 可以通过Dockerfile来描述构建镜像的步骤，并自动构建一个容器。Dockerfile指令忽略大小写，但是建议使用大写。</p>
+<p>Dockerfile 命令格式：<br>    INSTRUCTION arguments</p>
+<h5 id="MAINTAINER命令">MAINTAINER命令</h5>
+<pre><code><span class="comment">#用于指定维护者的姓名和联系方式</span>
+<span class="title">MAINTAINER</span> cbc, cbc<span class="variable">@chenbaocheng</span>.com
+</code></pre><h5 id="FROM命令">FROM命令</h5>
+<pre><code><span class="comment"># 设置基于哪个image创建新的image，所以 FROM 应是 Dockerfile 里的第一条指令。如果没有指定tag, 默认tag是latest。</span>
+
+<span class="constant">FROM</span> &lt;image&gt;
+或
+<span class="constant">FROM</span> &lt;image&gt;<span class="symbol">:&lt;tag&gt;</span>
+</code></pre><p>
+			
+				<p class="article-more-link">
+					<br/>
+					<a href="/2015/05/05/Docker学习-四-Dockerfile/#more">阅读全文 &gt;&gt;</a>
+				</p>
+      
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/docker/">docker</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+			</span>
+		</div>
+	</footer>
+	
+</article>
+
+
+	<hr class="article-devider">
+
+
+
+  
     <article id="post-Docker学习-三-Docker镜像和容器的常用操作" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">

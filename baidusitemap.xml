@@ -3,6 +3,93 @@
 
     
   <url>
+    <loc>http://www.chenbaocheng.com/2015/05/05/Docker%E5%AD%A6%E4%B9%A0-%E5%9B%9B-Dockerfile/</loc>
+    <lastmod>2015-05-05T08:47:33.000Z</lastmod>
+    <data>
+        <display>
+        <title>Docker学习(四) Dockerfile</title>
+        <pubTime>2015-05-05T07:37:57.000Z</pubTime>
+        
+         <content><![CDATA[<p>Dockerfile 由一系列Dockerfile指令构成，用于创建一个自定义image, 可以通过Dockerfile来描述构建镜像的步骤，并自动构建一个容器。Dockerfile指令忽略大小写，但是建议使用大写。</p>
+<p>Dockerfile 命令格式：<br>    INSTRUCTION arguments</p>
+<h5 id="MAINTAINER命令">MAINTAINER命令</h5>
+<pre><code><span class="comment">#用于指定维护者的姓名和联系方式</span>
+<span class="title">MAINTAINER</span> cbc, cbc<span class="variable">@chenbaocheng</span>.com
+</code></pre><h5 id="FROM命令">FROM命令</h5>
+<pre><code><span class="comment"># 设置基于哪个image创建新的image，所以 FROM 应是 Dockerfile 里的第一条指令。如果没有指定tag, 默认tag是latest。</span>
+
+<span class="constant">FROM</span> &lt;image&gt;
+或
+<span class="constant">FROM</span> &lt;image&gt;<span class="symbol">:&lt;tag&gt;</span>
+</code></pre><p><a id="more"></a></p>
+<h5 id="RUN命令">RUN命令</h5>
+<pre><code><span class="comment"># RUN命令会在上面FROM指定的镜像里执行任何命令，然后提交(commit)结果。RUN是在building image时会运行的指令, 在Dockerfile中可以写多条RUN指令.</span>
+
+RUN &lt;command&gt; (the command is run <span class="keyword">in</span> a shell - `/bin/sh -c`)
+或
+RUN [<span class="string">"executable"</span>, <span class="string">"param1"</span>, <span class="string">"param2"</span> <span class="keyword">...</span> ]  (exec form)
+
+<span class="comment">#RUN命令等价于:</span>
+docker run image command
+docker commit container_id
+</code></pre><h5 id="ENTRYPOINT命令">ENTRYPOINT命令</h5>
+<pre><code><span class="comment">#容器启动时执行的命令，如果写多条, 只有最后一条生效。</span>
+
+ENTRYPOINT [<span class="string">"cmd"</span>, <span class="string">"param1"</span>, <span class="string">"param2"</span><span class="keyword">...</span>]
+或
+ENTRYPOINT cmd param1 param2 <span class="keyword">...</span>
+
+<span class="comment">#举个例子</span>
+cbc ~ <span class="comment"># cat Dockerfile</span>
+FROM tomcat
+ENTRYPOINT echo <span class="string">"Hello world!"</span>
+
+cbc ~ <span class="comment"># docker run 62fda5e450d5</span>
+Hello world!
+</code></pre><h5 id="CMD命令">CMD命令</h5>
+<pre><code><span class="comment">#容器启动时执行的命令，如果写多条, 只有最后一条生效。</span>
+CMD [<span class="string">"executable"</span>,<span class="string">"param1"</span>,<span class="string">"param2"</span>] (like <span class="operator">an</span> exec, preferred form)
+或
+CMD [<span class="string">"param1"</span>,<span class="string">"param2"</span>] (<span class="keyword">as</span> default parameters <span class="built_in">to</span> ENTRYPOINT)
+或
+CMD <span class="command"><span class="keyword">command</span> <span class="title">param1</span> <span class="title">param2</span> (<span class="title">as</span> <span class="title">a</span> <span class="title">shell</span>)</span>
+</code></pre><h6 id="#CMD和ENTRYPOINT是在运行container时会运行的指令,_都只能写一条,_如果写多条,_只有最后一条生效。CMD在运行时会被command覆盖,_ENTRYPOINT不会被运行时的command覆盖,_如需要覆盖ENTRYPOINT使用参数—entrypoint=。CMD和ENTRYPOINT一般用于制作具备后台服务的image,_例如apache,_mysql等-_在使用这种image启动container时,_自动启动相关服务-下面的示例_psql_会覆盖_Dockerfile_里的_CMD">#CMD和ENTRYPOINT是在运行container时会运行的指令, 都只能写一条, 如果写多条, 只有最后一条生效。CMD在运行时会被command覆盖, ENTRYPOINT不会被运行时的command覆盖, 如需要覆盖ENTRYPOINT使用参数—entrypoint=。CMD和ENTRYPOINT一般用于制作具备后台服务的image, 例如apache, mysql等. 在使用这种image启动container时, 自动启动相关服务.下面的示例 psql 会覆盖 Dockerfile 里的 CMD</h6>
+<pre><code>docker run postgre<span class="variable">s:9</span>.<span class="number">3.5</span> psql 
+</code></pre><h5 id="USER命令">USER命令</h5>
+<pre><code><span class="preprocessor">#指定 ENTRYPOINT 执行命令时的运行用户,下面的例子是指开机启动 NGINX 时用 www 用户身份启动。</span>
+
+ENTRYPOINT [<span class="string">"nginx"</span>]
+USER www
+</code></pre><h5 id="EXPOSE命令">EXPOSE命令</h5>
+<pre><code><span class="comment">#设置镜像运行时对外暴露的端口</span>
+EXPOSE &lt;port&gt; [&lt;port&gt;<span class="keyword">...</span>]
+</code></pre><h5 id="ENV命令">ENV命令</h5>
+<pre><code><span class="input"><span class="prompt">#设置环境变量，设置后，后续的RUN命令都可以使用该环境变量
+ENV &lt;key&gt;</span> &lt;value&gt;</span>
+</code></pre><h5 id="ADD命令">ADD命令</h5>
+<pre><code><span class="input"><span class="prompt">#从src复制文件到容器的dest路径。src可以是文件、目录或一个远程url。
+ADD &lt;src&gt;</span> &lt;dest&gt;</span>
+</code></pre><h5 id="VOLUME命令">VOLUME命令</h5>
+<pre><code><span class="preprocessor">#创建一个挂载点用于共享目录</span>
+VOLUME [<span class="string">"&lt;mountpoint&gt;"</span>]
+</code></pre><h5 id="WORKDIR命令">WORKDIR命令</h5>
+<pre><code><span class="preprocessor">#为RUN, CMD, ENTRYPOINT命令设置当前工作路径</span>
+WORKDIR /path/to/workdir
+</code></pre><h5 id="ONBUILD命令">ONBUILD命令</h5>
+<pre><code><span class="preprocessor">#ONBUILD 指定的命令在构建镜像时并不执行，而是在它的子镜像中执行</span>
+</code></pre>]]></content>
+         
+         
+           
+             
+              <breadCrumb title="docker" url="http://www.chenbaocheng.com/categories/docker/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.chenbaocheng.com/2015/04/30/Docker%E5%AD%A6%E4%B9%A0-%E4%B8%89-Docker%E9%95%9C%E5%83%8F%E5%92%8C%E5%AE%B9%E5%99%A8%E7%9A%84%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/</loc>
     <lastmod>2015-04-30T10:07:26.000Z</lastmod>
     <data>
