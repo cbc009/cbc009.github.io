@@ -3,6 +3,34 @@
 
     
   <url>
+    <loc>http://www.chenbaocheng.com/2015/06/15/Mac-OS-X%E4%B8%8B%E4%BD%BF%E7%94%A8-Charles-%E8%BF%9B%E8%A1%8C%E6%8A%93%E5%8C%85/</loc>
+    <lastmod>2015-06-15T07:40:25.000Z</lastmod>
+    <data>
+        <display>
+        <title>Mac OS X下使用 Charles 进行抓包</title>
+        <pubTime>2015-06-15T07:14:12.000Z</pubTime>
+        
+         <content><![CDATA[<p>Charles 是一个网络抓包工具，可以在电脑起一个代理，手机配置代理 IP 后，就可以用 Charles 看到手机的网络请求了。</p>
+<h4 id="1、下载">1、下载</h4>
+<p><a href="http://www.charlesproxy.com/" target="_blank" rel="external">http://www.charlesproxy.com/</a></p>
+<h4 id="2、启动_Charles，支持正版，如需破解请自行搜索">2、启动 Charles，支持正版，如需破解请自行搜索</h4>
+<h4 id="3、手机设置代理,_以_iPhone_为例">3、手机设置代理, 以 iPhone 为例</h4>
+<p>设置-无线局域网-选择已连接的局域网-HTTP代理-手动，服务器：你电脑的 IP，端口：8888</p>
+<p>第一次用手机请求网络时，Charles会提示是否允许接入，选择Allow就可以了。</p>
+<p>如果是 HTTPS 抓包，需要安装证书，证书地址：<a href="http://www.charlesproxy.com/ssl.zip" target="_blank" rel="external">http://www.charlesproxy.com/ssl.zip</a></p>
+]]></content>
+         
+         
+           
+             
+              <breadCrumb title="java" url="http://www.chenbaocheng.com/categories/java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.chenbaocheng.com/2015/04/29/%E5%9C%A8-github-%E5%8F%91%E4%B8%80%E4%B8%AAspring-boot-jpa-DEMO/</loc>
     <lastmod>2015-05-19T08:02:06.000Z</lastmod>
     <data>

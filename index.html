@@ -47,6 +47,64 @@
     <div id="main">
       
   
+    <article id="post-Mac-OS-X下使用-Charles-进行抓包" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2015/06/15/Mac-OS-X下使用-Charles-进行抓包/" class="article-date">
+  <time datetime="2015-06-15T07:14:12.000Z" itemprop="datePublished">6月 15 2015</time>
+</a>
+		</span>
+		<!-- <span class="meta-elements author">CBC</span> -->
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 itemprop="name" class="entry-title">
+      <a class="article-title" href="/2015/06/15/Mac-OS-X下使用-Charles-进行抓包/">Mac OS X下使用 Charles 进行抓包</a>
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<p>Charles 是一个网络抓包工具，可以在电脑起一个代理，手机配置代理 IP 后，就可以用 Charles 看到手机的网络请求了。</p>
+<h4 id="1、下载">1、下载</h4>
+<p><a href="http://www.charlesproxy.com/" target="_blank" rel="external">http://www.charlesproxy.com/</a></p>
+<h4 id="2、启动_Charles，支持正版，如需破解请自行搜索">2、启动 Charles，支持正版，如需破解请自行搜索</h4>
+<h4 id="3、手机设置代理,_以_iPhone_为例">3、手机设置代理, 以 iPhone 为例</h4>
+<p>设置-无线局域网-选择已连接的局域网-HTTP代理-手动，服务器：你电脑的 IP，端口：8888</p>
+<p>第一次用手机请求网络时，Charles会提示是否允许接入，选择Allow就可以了。</p>
+<p>如果是 HTTPS 抓包，需要安装证书，证书地址：<a href="http://www.charlesproxy.com/ssl.zip" target="_blank" rel="external">http://www.charlesproxy.com/ssl.zip</a></p>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java/">java</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+			</span>
+		</div>
+	</footer>
+	
+</article>
+
+
+	<hr class="article-devider">
+
+
+
+  
     <article id="post-MacOS环境使用wireshark抓包" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">
@@ -597,98 +655,6 @@ yum -y install yum-priorities
 				
   <div class="article-category">
     <a class="article-category-link" href="/categories/效率/">效率</a>
-  </div>
-
-			</span>
-			<span class="tags">
-				
-			</span>
-		</div>
-	</footer>
-	
-</article>
-
-
-	<hr class="article-devider">
-
-
-
-  
-    <article id="post-MacOS网络诊断命令" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2015/02/26/MacOS网络诊断命令/" class="article-date">
-  <time datetime="2015-02-26T06:54:18.000Z" itemprop="datePublished">2月 26 2015</time>
-</a>
-		</span>
-		<!-- <span class="meta-elements author">CBC</span> -->
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
-  
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2015/02/26/MacOS网络诊断命令/">MacOS网络诊断命令</a>
-    </h1>
-  
-
-	</header>
-	<div class="entry-content">
-		
-    	<h3 id="ifconfig">ifconfig</h3>
-<p>显示网络接口(interface)信息。如接口名称，接口类型，接口的IP地址，硬件的MAC地址等。</p>
-<pre><code><span class="preprocessor">#查看活动网卡信息，仅限活动网卡</span>
-ifconfig
-
-<span class="preprocessor">#查看所有网卡信息，包括活动、非活动网卡</span>
-ifconfig -a
-
-<span class="preprocessor">#查看某个网卡的信息</span>
-ifconfig eth0
-
-<span class="preprocessor">#配置某个网卡的ip地址 格式：ifconfig  ethx IP/MASK</span>
-ifconfig eth0 <span class="number">192.168</span><span class="number">.1</span><span class="number">.20</span>/<span class="number">16</span>
-</code></pre><h3 id="路由">路由</h3>
-<pre><code><span class="preprocessor">#显示路由表</span>
-netstat -nr
-
-<span class="preprocessor">#追踪到达IP目的地的全程路由</span>
-traceroute nis.nsf.net
-</code></pre><h3 id="网络监听_-_tcpdump">网络监听 - tcpdump</h3>
-<pre><code><span class="built_in">sudo</span> tcpdump -i en0
-
-监听en0接口的所有通信
-
-<span class="built_in">sudo</span> tcpdump -A -i en0 
-
-用ASCII显示en0接口的通信内容
-<span class="built_in">sudo</span> tcpdump -i en0 <span class="string">'port 8080'</span>
-
-显示en0接口的<span class="number">8080</span>端口的通信
-
-<span class="built_in">sudo</span> tcpdump -i eth1 src <span class="number">192.168</span>.<span class="number">1.200</span>
-
-显示eth1接口，来自<span class="number">192.168</span>.<span class="number">1.200</span>的通信
-
-<span class="built_in">sudo</span> tcpdump -i eth1 dst <span class="number">192.168</span>.<span class="number">1.101</span> and port <span class="number">80</span>
-
-显示eth1接口<span class="number">80</span>端口，目的地为<span class="number">192.168</span>.<span class="number">1.101</span>的通信
-
-<span class="built_in">sudo</span> tcpdump -w record.pcap -i lo0
-
-将lo0接口的通信存入文件record.pcap
-</code></pre>
-    
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/系统维护/">系统维护</a>
   </div>
 
 			</span>
