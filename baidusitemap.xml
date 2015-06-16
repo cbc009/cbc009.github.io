@@ -4,7 +4,7 @@
     
   <url>
     <loc>http://www.chenbaocheng.com/2015/06/16/RabbitMQ%E5%9F%BA%E6%9C%AC%E5%BA%94%E7%94%A8/</loc>
-    <lastmod>2015-06-16T09:32:36.000Z</lastmod>
+    <lastmod>2015-06-16T09:47:34.000Z</lastmod>
     <data>
         <display>
         <title>RabbitMQ基本应用</title>
@@ -12,7 +12,7 @@
         
          <content><![CDATA[<h4 id="基本概念">基本概念</h4>
 <p>RabbitMQ是流行的开源消息队列系统，用erlang语言开发。RabbitMQ是AMQP（高级消息队列协议）的标准实现。</p>
-<img src="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/902397dda144ad3467b19c3bd1a20cf431ad857b.png">]]></content>
+<img src="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/n2gyg2.png">]]></content>
          
          
            
