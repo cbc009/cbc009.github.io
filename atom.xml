@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.chenbaocheng.com/"/>
-  <updated>2015-06-15T08:11:10.563Z</updated>
+  <updated>2015-06-16T09:20:25.860Z</updated>
   <id>http://www.chenbaocheng.com/</id>
   
   <author>
@@ -13,6 +13,25 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[RabbitMQ基本应用]]></title>
+    <link href="http://www.chenbaocheng.com/2015/06/16/RabbitMQ%E5%9F%BA%E6%9C%AC%E5%BA%94%E7%94%A8/"/>
+    <id>http://www.chenbaocheng.com/2015/06/16/RabbitMQ基本应用/</id>
+    <published>2015-06-16T08:05:42.000Z</published>
+    <updated>2015-06-16T09:19:00.000Z</updated>
+    <content type="html"><![CDATA[<h4 id="基本概念">基本概念</h4>
+<p>RabbitMQ是流行的开源消息队列系统，用erlang语言开发。RabbitMQ是AMQP（高级消息队列协议）的标准实现。</p>
+<img src="/images/902397dda144ad3467b19c3bd1a20cf431ad857b.png">]]></content>
+    <summary type="html">
+    <![CDATA[<h4 id="基本概念">基本概念</h4>
+<p>RabbitMQ是流行的开源消息队列系统，用erlang语言开发。RabbitMQ是AMQP（高级消息队列协议）的标准实现。</p>
+<img src="/images/902397dda144ad3467b19c3bd1a2]]>
+    </summary>
+    
+      <category term="java" scheme="http://www.chenbaocheng.com/categories/java/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[JVM性能监控工具]]></title>
