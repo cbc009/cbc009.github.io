@@ -5,19 +5,16 @@
   
   <title>RabbitMQ基本应用 | CHENBAOCHENG.COM</title>
   <meta name="viewport" content="width=device-width">
-  <meta name="description" content="基本概念
-RabbitMQ是流行的开源消息队列系统，用erlang语言开发。RabbitMQ是AMQP（高级消息队列协议）的标准实现。">
+  <meta name="description" content="RabbitMQ是流行的开源消息队列系统，用erlang语言开发。RabbitMQ是AMQP（高级消息队列协议）的标准实现。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RabbitMQ基本应用">
 <meta property="og:url" content="http://www.chenbaocheng.com/2015/06/16/RabbitMQ基本应用/">
 <meta property="og:site_name" content="CHENBAOCHENG.COM">
-<meta property="og:description" content="基本概念
-RabbitMQ是流行的开源消息队列系统，用erlang语言开发。RabbitMQ是AMQP（高级消息队列协议）的标准实现。">
+<meta property="og:description" content="RabbitMQ是流行的开源消息队列系统，用erlang语言开发。RabbitMQ是AMQP（高级消息队列协议）的标准实现。">
 <meta property="og:image" content="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/n2gyg2.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RabbitMQ基本应用">
-<meta name="twitter:description" content="基本概念
-RabbitMQ是流行的开源消息队列系统，用erlang语言开发。RabbitMQ是AMQP（高级消息队列协议）的标准实现。">
+<meta name="twitter:description" content="RabbitMQ是流行的开源消息队列系统，用erlang语言开发。RabbitMQ是AMQP（高级消息队列协议）的标准实现。">
 
   
     <link rel="alternative" href="/atom.xml" title="CHENBAOCHENG.COM" type="application/atom+xml">
@@ -73,9 +70,205 @@ RabbitMQ是流行的开源消息队列系统，用erlang语言开发。RabbitMQ�
 	</header>
 	<div class="entry-content">
 		
-    	<h4 id="基本概念">基本概念</h4>
-<p>RabbitMQ是流行的开源消息队列系统，用erlang语言开发。RabbitMQ是AMQP（高级消息队列协议）的标准实现。</p>
-<img src="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/n2gyg2.png">
+    	<p>RabbitMQ是流行的开源消息队列系统，用erlang语言开发。RabbitMQ是AMQP（高级消息队列协议）的标准实现。</p>
+<p><img src="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/n2gyg2.png"><br><a id="more"></a></p>
+<h4 id="基本概念">基本概念</h4>
+<table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Broker</td>
+<td>消息队列服务器的实体</td>
+</tr>
+<tr>
+<td>Exchange</td>
+<td>消息交换机，它指定消息按什么规则，路由到哪个队列。如果没有队列绑定在exchange上面，那么发送到exchange上面的消息会丢失，一个exchange可以绑定多个队列，一个队列也可以被多个exchange绑定。声明一个已经存在的exchange，只是赋予不同的类型，则会出现创建错误，客户端需要删除已经存在的exchange，然后重新创建新类型的exchange。 exchange的属性，如果启用持久性，则exchange在服务重启前都有效，如果启用自动删除，则exchange在其绑定的queue都被删除后会自动删除掉自身。<br><strong>常用类型的exchange</strong>：<br><strong>direct</strong>：转发消息到routingkey指定的队列，完全根据key进行投递的叫做Direct交换机，例如，绑定时设置了routing key为”abc”，那么客户端提交的消息，只有设置了key为”abc”的才会投递到队列。<br><strong>topic</strong>：按照规则转发消息，对key进行模式匹配后进行投递的叫做Topic交换机，符号”#”匹配一个或多个词，符号”<em>”匹配正好一个词。例如”abc.#”匹配”abc.def.ghi”，”abc.</em>”只匹配”abc.def”。<br><strong>fanout</strong>：转发消息到所有绑定的队列，它采取广播模式，一个消息进来时，投递到与该交换机绑定的所有队列。</td>
+</tr>
+<tr>
+<td>Queue</td>
+<td>消息队列载体，每个消息都会被投入到一个或多个队列。</td>
+</tr>
+<tr>
+<td>Binding</td>
+<td>绑定，它的作用就是把exchange和queue按照路由规则绑定起来。</td>
+</tr>
+<tr>
+<td>Routing Key</td>
+<td>路由关键字，exchange根据这个关键字进行消息投递。</td>
+</tr>
+<tr>
+<td>vhost</td>
+<td>虚拟主机，一个broker里可以开设多个vhost，用作不同用户的权限分离。</td>
+</tr>
+<tr>
+<td>producer</td>
+<td>消息生产者，就是投递消息的程序。</td>
+</tr>
+<tr>
+<td>consumer</td>
+<td>消息消费者，就是接受消息的程序。</td>
+</tr>
+<tr>
+<td>channel</td>
+<td>消息通道，在客户端的每个连接里，可建立多个channel，每个channel代表一个会话任务。</td>
+</tr>
+</tbody>
+</table>
+<h4 id="客户端消息投递流程">客户端消息投递流程</h4>
+<ol>
+<li>连接到消息队列服务器，打开一个channel</li>
+<li>声明一个exchange，并设置相关属性</li>
+<li>声明一个queue，并设置相关属性</li>
+<li>使用routing key，在exchange和queue之间建立好绑定关系</li>
+<li>投递消息到exchange,exchange接收到消息后，根据消息的key和已经设置的binding，进行消息路由，将消息投递到一个或多个队列里</li>
+</ol>
+<h4 id="rabbitmqctl">rabbitmqctl</h4>
+<pre><code>rabbitmqctl [-<span class="keyword">n</span> &lt;node&gt;] [-<span class="keyword">q</span>] &lt;<span class="keyword">command</span>&gt; [&lt;<span class="keyword">command</span> <span class="keyword">options</span>&gt;] 
+-<span class="keyword">n</span> node 默认node名称是<span class="string">"rabbit@server"</span>，如果你的主机明是<span class="string">'server.example.com'</span>，那么node名称是<span class="string">'rabbit@server'</span>。
+-<span class="keyword">q</span> 安静输出模式，信息会被禁止输出
+</code></pre><h4 id="[_command_]">[ command ]</h4>
+<p><strong>基本的管理功能</strong></p>
+<pre><code>stop [&lt;pid_file&gt;]
+<span class="preprocessor">#停止在erlang node上运行的rabbitmq，会使rabbitmq停止</span>
+
+stop_app 
+<span class="preprocessor">#停止erlang node上的rabbitmq的应用，但是erlang node还是会继续运行</span>
+
+start_app
+<span class="preprocessor">#启动erlan node上的rabbitmq的应用</span>
+
+wait &lt;pid_file&gt;
+<span class="preprocessor">#等待rabbitmq服务启动</span>
+
+reset
+<span class="preprocessor">#初始化node状态，会从集群中删除该节点，从管理数据库中删除所有数据，例如vhosts等等。在初始化之前rabbitmq的应用必须先停止</span>
+
+force_reset
+<span class="preprocessor">#无条件的初始化node状态</span>
+
+rotate_logs &lt;suffix&gt;
+<span class="preprocessor">#轮转日志文</span>
+</code></pre><p><strong>cluster管理</strong></p>
+<pre><code>join_cluster &lt;clusternode&gt; [--ram]  
+<span class="preprocessor">#clusternode表示node名称，--ram表示node以ram node加入集群中。默认node以disc node加入集群，在一个node加入cluster之前，必须先停止该node的rabbitmq应用，即先执行stop_app。</span>
+
+cluster_status  
+<span class="preprocessor">#显示cluster中的所有node</span>
+
+change_cluster_node_type disc | ram  
+<span class="preprocessor">#改变一个cluster中node的模式，该节点在转换前必须先停止，不能把一个集群中唯一的disk node转化为ram node</span>
+
+forget_cluster_node [--offline]  
+<span class="preprocessor">#远程移除cluster中的一个node，前提是该node必须处于offline状态，如果是online状态，则需要加--offline参数。</span>
+
+update_cluster_nodes clusternode   
+
+sync_queue queue  
+<span class="preprocessor">#同步镜像队列</span>
+
+cancel_sync_queue queue    
+</code></pre><p><strong>用户管理</strong></p>
+<pre><code>add_user <span class="variable">&lt;username&gt;</span> <span class="variable">&lt;password&gt;</span>  
+<span class="comment">#在rabbitmq的内部数据库添加用户</span>
+
+delete_user <span class="variable">&lt;username&gt;</span>  
+<span class="comment">#删除一个用户</span>
+
+change_password <span class="variable">&lt;username&gt;</span> <span class="variable">&lt;newpassword&gt;</span>  
+<span class="comment">#改变用户密码  \\改变web管理登陆密码</span>
+
+clear_password <span class="variable">&lt;username&gt;</span> 
+<span class="comment">#清除用户密码，禁止用户登录</span>
+
+set_user_tags <span class="variable">&lt;username&gt;</span> <span class="variable">&lt;tag&gt;</span> ...
+<span class="comment">#设置用户tags</span>
+
+list_users  
+<span class="comment">#列出用户</span>
+
+add_vhost <span class="variable">&lt;vhostpath&gt;</span>  
+<span class="comment">#创建一个vhosts</span>
+
+delete_vhost <span class="variable">&lt;vhostpath&gt;</span>  
+<span class="comment">#删除一个vhosts</span>
+
+list_vhosts [<span class="variable">&lt;vhostinfoitem&gt;</span> ...]  
+<span class="comment">#列出vhosts</span>
+
+set_permissions [-p <span class="variable">&lt;vhostpath&gt;</span>] <span class="variable">&lt;user&gt;</span> <span class="variable">&lt;conf&gt;</span> <span class="variable">&lt;write&gt;</span> <span class="variable">&lt;read&gt;</span>  
+<span class="comment">#针对一个vhosts 给用户赋予相关权限</span>
+
+clear_permissions [-p <span class="variable">&lt;vhostpath&gt;</span>] <span class="variable">&lt;username&gt;</span>  
+<span class="comment">#清除一个用户对vhosts的权限</span>
+
+list_permissions [-p <span class="variable">&lt;vhostpath&gt;</span>]   
+<span class="comment">#列出哪些用户可以访问该vhosts</span>
+
+list_user_permissions <span class="variable">&lt;username&gt;</span>  
+<span class="comment">#列出该用户的访问权限</span>
+
+set_parameter [-p <span class="variable">&lt;vhostpath&gt;</span>] <span class="variable">&lt;component_name&gt;</span> <span class="variable">&lt;name&gt;</span> <span class="variable">&lt;value&gt;</span>
+<span class="comment">#</span>
+
+clear_parameter [-p <span class="variable">&lt;vhostpath&gt;</span>] <span class="variable">&lt;component_name&gt;</span> <span class="variable">&lt;key&gt;</span>
+<span class="comment">#</span>
+
+list_parameters [-p <span class="variable">&lt;vhostpath&gt;</span>]
+<span class="comment">#</span>
+</code></pre><p><strong>policy管理，策略用来控制和修改queues和exchange在集群中的行为，策略可以应用到vhost</strong></p>
+<pre><code>set_policy [-p <span class="variable">&lt;vhostpath&gt;</span>] [--priority <span class="variable">&lt;priority&gt;</span>] [--apply-to <span class="variable">&lt;apply-to&gt;</span>]  
+<span class="variable">&lt;name&gt;</span> <span class="variable">&lt;pattern&gt;</span> <span class="variable">&lt;definition&gt;</span>    
+<span class="comment">#name 策略名称，pattern  正则表达式，用来匹配资源，符合的就会应用设置的策略，apply-to 表示策略应用到什么类型的地方，一般有queues、exchange和all，默认是all。priority 是个整数优先级，definition 是json格式设置的策略。</span>
+
+clear_policy [-p <span class="variable">&lt;vhostpath&gt;</span>] <span class="variable">&lt;name&gt;</span>  
+<span class="comment">#清除一个策略</span>
+
+list_policies [-p <span class="variable">&lt;vhostpath&gt;</span>]  
+<span class="comment">#列出已有的策略</span>
+</code></pre><p><strong>queues &amp;&amp; exchange状态信息</strong></p>
+<pre><code>list_queues [-p &lt;vhostpath&gt;] [&lt;queueinfoitem&gt; <span class="keyword">...</span>]  
+<span class="comment">#返回queue的信息，如果省略了-p参数，则默认显示的是"/"vhosts的信息。</span>
+
+list_exchanges [-p &lt;vhostpath&gt;] [&lt;exchangeinfoitem&gt; <span class="keyword">...</span>]  
+<span class="comment">#返回exchange的信息。</span>
+
+list_bindings [-p &lt;vhostpath&gt;] [&lt;bindinginfoitem&gt; <span class="keyword">...</span>] 
+<span class="comment">#返回绑定信息。</span>
+
+list_connections [&lt;connectioninfoitem&gt; <span class="keyword">...</span>]  
+<span class="comment">#返回链接信息。</span>
+
+list_channels [&lt;channelinfoitem&gt; <span class="keyword">...</span>]  
+<span class="comment">#返回目前所有的channels。</span>
+
+list_consumers [-p &lt;vhostpath&gt;]  
+<span class="comment">#返回consumers，</span>
+
+status  
+<span class="comment">#显示broker的状态</span>
+
+environment  
+<span class="comment">#显示环境参数的信息</span>
+
+report  
+<span class="comment">#返回一个服务状态report，</span>
+
+eval &lt;expr&gt;
+</code></pre><h4 id="rabbitmq-plugins_插件的开启和关闭">rabbitmq-plugins 插件的开启和关闭</h4>
+<pre><code>rabbitmq-plugins &lt;command&gt; [&lt;command options&gt;]
+Commands:
+list [-v] [-m] [-E] [-e] [&lt;pattern&gt;]  显示所有的的插件。-v 显示版本 -m 显示名称 -E 显示明确已经开启的 -e显示明确的和暗中开启的
+enable &lt;plugin&gt; <span class="keyword">...</span>   开启一个插件
+disable &lt;plugin&gt; <span class="keyword">...</span>  关闭一个插件
+</code></pre><h4 id="开启rabbitmq_management,_插件在安装目录的/plugins下面">开启rabbitmq_management, 插件在安装目录的/plugins下面</h4>
+<pre><code>rabbitmq-plugins enable rabbitmq_management
+abbitmq_management提供一个基于HTTP的API接口，来管理和监控你的rabbitmq。他有web方式和<span class="keyword">CLI</span>方式，其实web方式是在后端调用HTTP api
+</code></pre>
     
 	</div>
 	<footer class="entry-footer">
