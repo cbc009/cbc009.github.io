@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.chenbaocheng.com/"/>
-  <updated>2015-06-24T08:09:45.639Z</updated>
+  <updated>2015-06-26T09:27:20.769Z</updated>
   <id>http://www.chenbaocheng.com/</id>
   
   <author>
@@ -13,6 +13,77 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[JVM内存管理与垃圾回收]]></title>
+    <link href="http://www.chenbaocheng.com/2015/06/26/Java%E5%A0%86%E5%86%85%E5%AD%98/"/>
+    <id>http://www.chenbaocheng.com/2015/06/26/Java堆内存/</id>
+    <published>2015-06-26T03:53:26.000Z</published>
+    <updated>2015-06-26T09:20:18.000Z</updated>
+    <content type="html"><![CDATA[<p>因为Java虚拟机拥有自动管理内存机制，所以Java 程序员不需要像C/C++一样去关注内存的分配和释放，也不容易出现内存泄露和内存溢出的问题。但是如果一旦出现此类问题，如果我们对虚拟机的内存管理机制不了解，那么解决这类问题还是比较困难的，所以我们要深入学习JVM的内存管理。</p>
+<h4 id="Java代码是如何执行的？">Java代码是如何执行的？</h4>
+<p><img src="cbc009/cbc009.github.io/master/images/jvm-arch.png" alt="image java代码执行过程"></p>
+<h4 id="JVM_运行时数据区域">JVM 运行时数据区域</h4>
+<p><img src="cbc009/cbc009.github.io/master/images/jvm_memory_structure.png" alt="image description"></p>
+<p>Java 虚拟机在执行Java 程序过程中会把它所管理的内存划分为几个不同的数据区域。这些区域都有各自的用途，以及创建和销毁的时间，有的区域随着虚拟机进程的启动而存在，有些区域则是依赖用户线程的启动和结束而建立和销毁。</p>
+<p>这几个区域如下：</p>
+<pre><code>方法区（<span class="function"><span class="keyword">Method</span> <span class="title">Area</span>）
+虚拟机栈（<span class="title">VM</span> <span class="title">Stack</span>）
+本地方法栈（<span class="title">Natvie</span> <span class="title">Method</span> <span class="title">Stack</span>）
+堆（<span class="title">Heap</span>）
+程序计数器（<span class="title">Program</span> <span class="title">Counter</span> <span class="title">Register</span>）</span>
+</code></pre><h4 id="JVM中Stack和Heap的关系">JVM中Stack和Heap的关系</h4>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;我们经常会把 Java 内存分为堆内存（Heap）和栈内存（Stack），这是一种比较粗糙区分方式。我们平时所关注的也主要是这两个区域。栈指的是上图中的Java虚拟机栈。Java 虚拟机栈是线程私有的，其生命周期和线程相同。虚拟机栈描述的是Java方法执行的内存模型，每个方法被执行时都会创建一个栈帧（Stack Frame），用来存储局部变量表、操作数栈、动态链接、方法出口等信息，<strong>每一个方法被调用直至执行完成的过程，就对应着一个栈帧在虚拟机栈中从入栈到出栈的过程</strong>。</p>
+<p><img src="cbc009/cbc009.github.io/master/images/jvm-thread-stack.gif" alt="image description"></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;局部变量表存放了编译期可知的各种基本数据类型（boolean、byte、char、short、int、float、long、double）、对象引用（reference）和 returnAddress（指向一条字节码指令的地址）。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果线程请求的栈深度大于虚拟机允许的深度，会抛出 StackOverflowException 异常；如果虚拟机栈可以动态扩展，扩展时无法申请到足够内存时会抛出 OutOfMemoryError 异常。递归调用时如果深度过深，很容易出现栈溢出。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;对于大多数应用程序来说，堆(Heap)是Java虚拟机管理的内存中最大的一块。 堆是所有线程共享的一块内存区域，几乎所有的对象实例都在这里分配内存。根据Java虚拟机规范的规定，Java堆可以处于物理上不连续的内存空间中，只要逻辑上是连续的即可，就像我们的磁盘空间一样。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在Java体系中，即便是最简单的对象访问，也会涉及栈、堆、方法区这三个最重要的内存区域。例如下面这行代码：</p>
+<pre><code><span class="built_in">Object</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>();
+</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;假如这段代码出现在方法体中，Object obj 这部分的语意会反映到Java虚拟机栈的本地变量表中，做为一个reference 类型数据出现。new Object()这部分语意会反映在Java堆中，形成一块存储了 Object 类型所有实例数据值（Instance Data，对象中各个实例字段的数据）的结构化内存。不同虚拟机的对象访问方式有所不同，主流的访问方式有两种：使用句柄和直接指针。</p>
+<h4 id="堆内存">堆内存</h4>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Java中堆是JVM 管理的最大一块内存空间，主要用于存放各种类的实例对象。堆被划分成两个不同的区域：新生代 ( Young )、老年代 ( Old )。新生代 ( Young ) 又被划分为三个区域：Eden、From Survivor、To Survivor。这样划分的目的是为了使 JVM 能够更好的管理堆内存中的对象，包括内存的分配以及回收。堆的内存模型大致为：</p>
+<p><img src="cbc009/cbc009.github.io/master/images/jvm-memory-heap.png" alt="image description"></p>
+<pre><code><span class="attribute">堆大小 </span>=<span class="string"> 新生代 + 老年代</span>
+</code></pre><h4 id="常用的内存区域调节参数">常用的内存区域调节参数</h4>
+<pre><code>-<span class="ruby"><span class="constant">Xms</span>：初始堆大小，默认为物理内存的<span class="number">1</span>/<span class="number">64</span>(&lt;<span class="number">1</span>GB)；默认(<span class="constant">MinHeapFreeRatio</span>参数可以调整)空余堆内存小于<span class="number">40</span>%时，<span class="constant">JVM</span>就会增大堆直到-<span class="constant">Xmx</span>的最大限制
+</span>
+-<span class="ruby"><span class="constant">Xmx</span>：最大堆大小，默认(<span class="constant">MaxHeapFreeRatio</span>参数可以调整)空余堆内存大于<span class="number">70</span>%时，<span class="constant">JVM</span>会减少堆直到 -<span class="constant">Xms</span>的最小限制
+</span>
+-<span class="ruby"><span class="constant">Xmn</span>：新生代的内存空间大小，注意：此处的大小是（eden+ <span class="number">2</span> survivor space)。与jmap -heap中显示的<span class="constant">New</span> gen是不同的。整个堆大小=新生代大小 + 老生代大小 + 永久代大小。 在保证堆大小不变的情况下，增大新生代后,将会减小老生代大小。此值对系统性能影响较大,<span class="constant">Sun</span>官方推荐配置为整个堆的<span class="number">3</span>/<span class="number">8</span>。
+</span>
+-<span class="ruby"><span class="constant">XX</span><span class="symbol">:SurvivorRatio</span>：新生代中<span class="constant">Eden</span>区域与<span class="constant">Survivor</span>区域的容量比值，默认值为<span class="number">8</span>。两个<span class="constant">Survivor</span>区与一个<span class="constant">Eden</span>区的比值为<span class="number">2</span><span class="symbol">:</span><span class="number">8</span>,一个<span class="constant">Survivor</span>区占整个年轻代的<span class="number">1</span>/<span class="number">10</span>。
+</span>
+-<span class="ruby"><span class="constant">Xss</span>：每个线程的堆栈大小。<span class="constant">JDK5</span>.<span class="number">0</span>以后每个线程堆栈大小为<span class="number">1</span>M,以前每个线程堆栈大小为<span class="number">256</span>K。应根据应用的线程所需内存大小进行适当调整。在相同物理内存下,减小这个值能生成更多的线程。但是操作系统对一个进程内的线程数还是有限制的，不能无限生成，经验值在<span class="number">3000</span>~<span class="number">5000</span>左右。一般小的应用， 如果栈不是很深， 应该是<span class="number">128</span>k够用的，大的应用建议使用<span class="number">256</span>k。这个选项对性能影响比较大，需要严格的测试。和threadstacksize选项解释很类似,官方文档似乎没有解释,在论坛中有这样一句话<span class="symbol">:<span class="string">"-Xss is translated in a VM flag named ThreadStackSize”一般设置这个值就可以了。
+</span></span></span>
+-<span class="ruby"><span class="constant">XX</span><span class="symbol">:PermSize</span>：设置永久代(perm gen)初始值。默认值为物理内存的<span class="number">1</span>/<span class="number">64</span>。
+</span>
+-<span class="ruby"><span class="constant">XX</span><span class="symbol">:MaxPermSize</span>：设置持久代最大值。物理内存的<span class="number">1</span>/<span class="number">4</span>。</span>
+</code></pre><p>这里有一张图片简单明了的说明一下相关参数对各个区域的影响：</p>
+<p><img src="cbc009/cbc009.github.io/master/images/jvm-heap-optimize.png" alt="image description"></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>因为Java虚拟机拥有自动管理内存机制，所以Java 程序员不需要像C/C++一样去关注内存的分配和释放，也不容易出现内存泄露和内存溢出的问题。但是如果一旦出现此类问题，如果我们对虚拟机的内存管理机制不了解，那么解决这类问题还是比较困难的，所以我们要深入学习JVM的内存管理]]>
+    </summary>
+    
+      <category term="java" scheme="http://www.chenbaocheng.com/categories/java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Java堆内存]]></title>
+    <link href="http://www.chenbaocheng.com/2015/06/26/Java%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"/>
+    <id>http://www.chenbaocheng.com/2015/06/26/Java内存管理/</id>
+    <published>2015-06-26T03:53:26.000Z</published>
+    <updated>2015-06-26T03:53:26.000Z</updated>
+    <content type="html"><![CDATA[]]></content>
+    <summary type="html">
+    <![CDATA[]]>
+    </summary>
+    
+      <category term="java" scheme="http://www.chenbaocheng.com/categories/java/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Java设计模式(一)]]></title>
@@ -1415,111 +1486,6 @@ traceroute nis.nsf.net
     </summary>
     
       <category term="golang" scheme="http://www.chenbaocheng.com/categories/golang/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[用Hexo写博客 --- Hexo的配置与使用]]></title>
-    <link href="http://www.chenbaocheng.com/2015/01/09/%E7%94%A8Hexo%E5%86%99%E5%8D%9A%E5%AE%A2%20---%20Hexo%E7%9A%84%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8/"/>
-    <id>http://www.chenbaocheng.com/2015/01/09/用Hexo写博客 --- Hexo的配置与使用/</id>
-    <published>2015-01-09T07:20:45.000Z</published>
-    <updated>2015-02-22T18:27:22.000Z</updated>
-    <content type="html"><![CDATA[<p>本站由 SourceForge 迁移到 GitHub.</p>
-<p>之前是在 SourceForge 提供的空间搭了一个 Wordpress, 访问很慢。</p>
-<pre><code>Hexo is <span class="operator">a</span> fast, simple &amp; powerful blog framework powered <span class="keyword">by</span> Node.js.
-</code></pre><p><br>Hexo 基于 Node.js 开发的一个轻量级的 Blog 框架，使用自然没有 Wordpress 那么方便，好在也是生成 HTML，访问会快些。</p>
-<p><strong>搭建本站过程看的一些资料整理一下，逐步操作如下：</strong><br><a id="more"></a><br>1、Mac OS x 默认自带 git，无需重复安装</p>
-<p>2、安装 Node.js </p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install node</div></pre></td></tr></table></figure>
-
-<p><em><br>进入本地存放博客的目录继续操作……</em></p>
-<p>3、安装、初始化 Hexo</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#install hexo</span></div><div class="line">npm install -g hexo</div><div class="line"> </div><div class="line"><span class="comment">#init hexo</span></div><div class="line">hexo init ./</div><div class="line">npm install</div></pre></td></tr></table></figure>
-
-<p><br>4、预览网站</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo server</div></pre></td></tr></table></figure><br>通过以上操作，一个基于 Hexo 搭建的网站就初步完成了，通过浏览器访问一下劳(piao)动(qie)成果：<a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a><br><br><strong>Hexo 的常用操作</strong><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#初始化</span></div><div class="line">hexo init [folder]</div><div class="line"> </div><div class="line"><span class="comment">#新发一片page|post</span></div><div class="line">hexo new [layout] &lt;title&gt;</div><div class="line"> </div><div class="line"><span class="comment">#生成静态文件</span></div><div class="line">hexo generate</div><div class="line"> </div><div class="line"><span class="comment">#清理缓存 --- db.json、public/</span></div><div class="line">hexo clean</div><div class="line"> </div><div class="line"><span class="comment">#启动本地服务，默认端口4000</span></div><div class="line">hexo server</div><div class="line"> </div><div class="line"><span class="comment">#将public/下的文件部署到配置文件制定的服务器</span></div><div class="line">hexo deploy</div></pre></td></tr></table></figure><br>详细查看官方文档:<a href="http://hexo.io/docs/commands.html" target="_blank" rel="external">http://hexo.io/docs/commands.html</a><br><br>现在网站已经搭起来了，开始写点什么~<br><br>Hexo 里写文章是用Markdown，如果之前没有用过，建议看看这篇文章 : <a href="http://wowubuntu.com/markdown" target="_blank" rel="external">http://wowubuntu.com/markdown</a><br><br>现在已经了解 Markdown 是什么，那我们继续，<strong>开始用 Hexo 写文章</strong><br><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo new <span class="string">"Hello world !"</span></div><div class="line"><span class="comment">#会提示你输入dquote，请输入双引号 — ”</span></div><div class="line"><span class="comment">#如果你的文件名里没有特殊字符就不要加双引号了~~~</span></div></pre></td></tr></table></figure>
-
-<p><br>用你喜欢的编辑用户打开 source/_posts/Hello-world.md，内容如下：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">title: 标题</div><div class="line">date: 2015-01-09 17:42:00</div><div class="line">categories:</div><div class="line">tags:</div><div class="line">---</div><div class="line">文章正文，啦啦啦啦~</div></pre></td></tr></table></figure>
-
-<p><br>更多编辑文章技能看官方文档：<a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">http://hexo.io/docs/writing.html</a></p>
-<p>刷新浏览器，文章列表是不是发生变化了！</p>
-<p><strong>如果需要发布到服务器</strong>，需要先生成一下静态文件:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo g</div><div class="line"><span class="comment">#hexo generate的简写</span></div></pre></td></tr></table></figure>
-
-<p><br>生成的静态文件地址跟类型相关：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">类型</th>
-<th style="text-align:center">生成目录</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">post (Default)</td>
-<td style="text-align:center">source/_posts</td>
-</tr>
-<tr>
-<td style="text-align:center">page</td>
-<td style="text-align:center">source</td>
-</tr>
-</tbody>
-</table>
-<p><br>OK, 现在网站已经有，是不是迫不及待想发布到服务器让大家来访问了？！</p>
-<p>首先，你得有一个 github.com 的账号，如果没有请先<a href="https://github.com/join" target="_blank" rel="external">去注册</a></p>
-<p>1、新建一个your_user_name.github.com的仓库<br>2、添加SSH公钥.Account settings &gt; SSH Keys &gt; Add SSH Key<br>3、修改本地博客根目录下的 _config.yml，</p>
-<pre><code>deploy:
-      <span class="class"><span class="keyword">type</span>: <span class="title">github</span></span>
-      repo: https:<span class="comment">//github.com/your_user_name/your_user_name.github.io.git</span>
-</code></pre><p><br>4、执行 hexo d</p>
-<p>如果想绑定域名，在仓库里新建一个CNAME,文件内容为你的域名，比如chenbaocheng.com,前面不要加http://</p>
-<p>修改域名 DNS 信息：</p>
-<p>1、增加CNAME记录：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center"></th>
-<th style="text-align:center"></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">*</td>
-<td style="text-align:center">your_user_name.github.io</td>
-</tr>
-</tbody>
-</table>
-<p><br>2、增加 A 记录</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center"></th>
-<th style="text-align:center"></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">@</td>
-<td style="text-align:center">192.30.252.153</td>
-</tr>
-<tr>
-<td style="text-align:center">@</td>
-<td style="text-align:center">192.30.252.154</td>
-</tr>
-</tbody>
-</table>
-<p><br>域名绑定参考官方文档：<a href="https://help.github.com/articles/my-custom-domain-isn-t-working/" target="_blank" rel="external">https://help.github.com/articles/my-custom-domain-isn-t-working/</a></p>
-<p>—全文完—</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>本站由 SourceForge 迁移到 GitHub.</p>
-<p>之前是在 SourceForge 提供的空间搭了一个 Wordpress, 访问很慢。</p>
-<pre><code>Hexo is <span class="operator">a</span> fast, simple &amp; powerful blog framework powered <span class="keyword">by</span> Node.js.
-</code></pre><p><br>Hexo 基于 Node.js 开发的一个轻量级的 Blog 框架，使用自然没有 Wordpress 那么方便，好在也是生成 HTML，访问会快些。</p>
-<p><strong>搭建本站过程看的一些资料整理一下，逐步操作如下：</strong><br>]]>
-    
-    </summary>
     
   </entry>
   

@@ -47,6 +47,147 @@
     <div id="main">
       
   
+    <article id="post-Java堆内存" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2015/06/26/Java堆内存/" class="article-date">
+  <time datetime="2015-06-26T03:53:26.000Z" itemprop="datePublished">6月 26 2015</time>
+</a>
+		</span>
+		<!-- <span class="meta-elements author">CBC</span> -->
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 itemprop="name" class="entry-title">
+      <a class="article-title" href="/2015/06/26/Java堆内存/">JVM内存管理与垃圾回收</a>
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	<p>因为Java虚拟机拥有自动管理内存机制，所以Java 程序员不需要像C/C++一样去关注内存的分配和释放，也不容易出现内存泄露和内存溢出的问题。但是如果一旦出现此类问题，如果我们对虚拟机的内存管理机制不了解，那么解决这类问题还是比较困难的，所以我们要深入学习JVM的内存管理。</p>
+<h4 id="Java代码是如何执行的？">Java代码是如何执行的？</h4>
+<p><img src="cbc009/cbc009.github.io/master/images/jvm-arch.png" alt="image java代码执行过程"></p>
+<h4 id="JVM_运行时数据区域">JVM 运行时数据区域</h4>
+<p><img src="cbc009/cbc009.github.io/master/images/jvm_memory_structure.png" alt="image description"></p>
+<p>Java 虚拟机在执行Java 程序过程中会把它所管理的内存划分为几个不同的数据区域。这些区域都有各自的用途，以及创建和销毁的时间，有的区域随着虚拟机进程的启动而存在，有些区域则是依赖用户线程的启动和结束而建立和销毁。</p>
+<p>这几个区域如下：</p>
+<pre><code>方法区（<span class="function"><span class="keyword">Method</span> <span class="title">Area</span>）
+虚拟机栈（<span class="title">VM</span> <span class="title">Stack</span>）
+本地方法栈（<span class="title">Natvie</span> <span class="title">Method</span> <span class="title">Stack</span>）
+堆（<span class="title">Heap</span>）
+程序计数器（<span class="title">Program</span> <span class="title">Counter</span> <span class="title">Register</span>）</span>
+</code></pre><h4 id="JVM中Stack和Heap的关系">JVM中Stack和Heap的关系</h4>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;我们经常会把 Java 内存分为堆内存（Heap）和栈内存（Stack），这是一种比较粗糙区分方式。我们平时所关注的也主要是这两个区域。栈指的是上图中的Java虚拟机栈。Java 虚拟机栈是线程私有的，其生命周期和线程相同。虚拟机栈描述的是Java方法执行的内存模型，每个方法被执行时都会创建一个栈帧（Stack Frame），用来存储局部变量表、操作数栈、动态链接、方法出口等信息，<strong>每一个方法被调用直至执行完成的过程，就对应着一个栈帧在虚拟机栈中从入栈到出栈的过程</strong>。</p>
+<p><img src="cbc009/cbc009.github.io/master/images/jvm-thread-stack.gif" alt="image description"></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;局部变量表存放了编译期可知的各种基本数据类型（boolean、byte、char、short、int、float、long、double）、对象引用（reference）和 returnAddress（指向一条字节码指令的地址）。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果线程请求的栈深度大于虚拟机允许的深度，会抛出 StackOverflowException 异常；如果虚拟机栈可以动态扩展，扩展时无法申请到足够内存时会抛出 OutOfMemoryError 异常。递归调用时如果深度过深，很容易出现栈溢出。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;对于大多数应用程序来说，堆(Heap)是Java虚拟机管理的内存中最大的一块。 堆是所有线程共享的一块内存区域，几乎所有的对象实例都在这里分配内存。根据Java虚拟机规范的规定，Java堆可以处于物理上不连续的内存空间中，只要逻辑上是连续的即可，就像我们的磁盘空间一样。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在Java体系中，即便是最简单的对象访问，也会涉及栈、堆、方法区这三个最重要的内存区域。例如下面这行代码：</p>
+<pre><code><span class="built_in">Object</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>();
+</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;假如这段代码出现在方法体中，Object obj 这部分的语意会反映到Java虚拟机栈的本地变量表中，做为一个reference 类型数据出现。new Object()这部分语意会反映在Java堆中，形成一块存储了 Object 类型所有实例数据值（Instance Data，对象中各个实例字段的数据）的结构化内存。不同虚拟机的对象访问方式有所不同，主流的访问方式有两种：使用句柄和直接指针。</p>
+<h4 id="堆内存">堆内存</h4>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Java中堆是JVM 管理的最大一块内存空间，主要用于存放各种类的实例对象。堆被划分成两个不同的区域：新生代 ( Young )、老年代 ( Old )。新生代 ( Young ) 又被划分为三个区域：Eden、From Survivor、To Survivor。这样划分的目的是为了使 JVM 能够更好的管理堆内存中的对象，包括内存的分配以及回收。堆的内存模型大致为：</p>
+<p><img src="cbc009/cbc009.github.io/master/images/jvm-memory-heap.png" alt="image description"></p>
+<pre><code><span class="attribute">堆大小 </span>=<span class="string"> 新生代 + 老年代</span>
+</code></pre><h4 id="常用的内存区域调节参数">常用的内存区域调节参数</h4>
+<pre><code>-<span class="ruby"><span class="constant">Xms</span>：初始堆大小，默认为物理内存的<span class="number">1</span>/<span class="number">64</span>(&lt;<span class="number">1</span>GB)；默认(<span class="constant">MinHeapFreeRatio</span>参数可以调整)空余堆内存小于<span class="number">40</span>%时，<span class="constant">JVM</span>就会增大堆直到-<span class="constant">Xmx</span>的最大限制
+</span>
+-<span class="ruby"><span class="constant">Xmx</span>：最大堆大小，默认(<span class="constant">MaxHeapFreeRatio</span>参数可以调整)空余堆内存大于<span class="number">70</span>%时，<span class="constant">JVM</span>会减少堆直到 -<span class="constant">Xms</span>的最小限制
+</span>
+-<span class="ruby"><span class="constant">Xmn</span>：新生代的内存空间大小，注意：此处的大小是（eden+ <span class="number">2</span> survivor space)。与jmap -heap中显示的<span class="constant">New</span> gen是不同的。整个堆大小=新生代大小 + 老生代大小 + 永久代大小。 在保证堆大小不变的情况下，增大新生代后,将会减小老生代大小。此值对系统性能影响较大,<span class="constant">Sun</span>官方推荐配置为整个堆的<span class="number">3</span>/<span class="number">8</span>。
+</span>
+-<span class="ruby"><span class="constant">XX</span><span class="symbol">:SurvivorRatio</span>：新生代中<span class="constant">Eden</span>区域与<span class="constant">Survivor</span>区域的容量比值，默认值为<span class="number">8</span>。两个<span class="constant">Survivor</span>区与一个<span class="constant">Eden</span>区的比值为<span class="number">2</span><span class="symbol">:</span><span class="number">8</span>,一个<span class="constant">Survivor</span>区占整个年轻代的<span class="number">1</span>/<span class="number">10</span>。
+</span>
+-<span class="ruby"><span class="constant">Xss</span>：每个线程的堆栈大小。<span class="constant">JDK5</span>.<span class="number">0</span>以后每个线程堆栈大小为<span class="number">1</span>M,以前每个线程堆栈大小为<span class="number">256</span>K。应根据应用的线程所需内存大小进行适当调整。在相同物理内存下,减小这个值能生成更多的线程。但是操作系统对一个进程内的线程数还是有限制的，不能无限生成，经验值在<span class="number">3000</span>~<span class="number">5000</span>左右。一般小的应用， 如果栈不是很深， 应该是<span class="number">128</span>k够用的，大的应用建议使用<span class="number">256</span>k。这个选项对性能影响比较大，需要严格的测试。和threadstacksize选项解释很类似,官方文档似乎没有解释,在论坛中有这样一句话<span class="symbol">:<span class="string">"-Xss is translated in a VM flag named ThreadStackSize”一般设置这个值就可以了。
+</span></span></span>
+-<span class="ruby"><span class="constant">XX</span><span class="symbol">:PermSize</span>：设置永久代(perm gen)初始值。默认值为物理内存的<span class="number">1</span>/<span class="number">64</span>。
+</span>
+-<span class="ruby"><span class="constant">XX</span><span class="symbol">:MaxPermSize</span>：设置持久代最大值。物理内存的<span class="number">1</span>/<span class="number">4</span>。</span>
+</code></pre><p>这里有一张图片简单明了的说明一下相关参数对各个区域的影响：</p>
+<p><img src="cbc009/cbc009.github.io/master/images/jvm-heap-optimize.png" alt="image description"></p>
+
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java/">java</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+			</span>
+		</div>
+	</footer>
+	
+</article>
+
+
+	<hr class="article-devider">
+
+
+
+  
+    <article id="post-Java内存管理" class="post">
+	<footer class="entry-meta-header">
+		<span class="meta-elements date">
+			<a href="/2015/06/26/Java内存管理/" class="article-date">
+  <time datetime="2015-06-26T03:53:26.000Z" itemprop="datePublished">6月 26 2015</time>
+</a>
+		</span>
+		<!-- <span class="meta-elements author">CBC</span> -->
+		<div class="commentscount">
+			
+		</div>
+	</footer>
+	
+	<header class="entry-header">
+		
+  
+    <h1 itemprop="name" class="entry-title">
+      <a class="article-title" href="/2015/06/26/Java内存管理/">Java堆内存</a>
+    </h1>
+  
+
+	</header>
+	<div class="entry-content">
+		
+    	
+    
+	</div>
+	<footer class="entry-footer">
+		<div class="entry-meta-footer">
+			<span class="category">
+				
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java/">java</a>
+  </div>
+
+			</span>
+			<span class="tags">
+				
+			</span>
+		</div>
+	</footer>
+	
+</article>
+
+
+	<hr class="article-devider">
+
+
+
+  
     <article id="post-Java设计模式(一)" class="post">
 	<footer class="entry-meta-header">
 		<span class="meta-elements date">
@@ -607,129 +748,9 @@ yum -y install yum-priorities
 
 
   
-    <article id="post-Docker学习-一-Docker基础" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2015/04/30/Docker学习-一-Docker基础/" class="article-date">
-  <time datetime="2015-04-30T07:28:12.000Z" itemprop="datePublished">4月 30 2015</time>
-</a>
-		</span>
-		<!-- <span class="meta-elements author">CBC</span> -->
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
-  
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2015/04/30/Docker学习-一-Docker基础/">Docker学习(一) Docker基础</a>
-    </h1>
-  
-
-	</header>
-	<div class="entry-content">
-		
-			<h4 id="使用_Docker_的目的">使用 Docker 的目的</h4>
-<p><strong>交付和部署更快速</strong>，一次创建，随处运行，创建容器的全过程可见，对所有人都是透明的；</p>
-<p><strong>虚拟化更高效</strong>，少了一层虚拟化当然更高效，接近于物理机的性能；我的理解是 Docker 对物理资源做了隔离，所以更轻量。</p>
-<p><strong>迁移和扩展更轻松</strong>，可以从私有仓库，共有仓库拉取image, 用过 maven 的同学应该会有类似的体验；</p>
-<h4 id="常用概念">常用概念</h4>
-<p><strong>image,镜像</strong>，用户可以通过相关命令轻松创建一个image，也可以通过命令轻松仓库里下载一个 image。image 是只读的、静止的。我们通过命令可以启动一个image，从而创建一个 Docker 容器。<br>
-			
-				<p class="article-more-link">
-					<br/>
-					<a href="/2015/04/30/Docker学习-一-Docker基础/#more">阅读全文 &gt;&gt;</a>
-				</p>
-      
-    
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/docker/">docker</a>
-  </div>
-
-			</span>
-			<span class="tags">
-				
-			</span>
-		</div>
-	</footer>
-	
-</article>
-
-
-	<hr class="article-devider">
-
-
-
-  
-    <article id="post-Linux开机获取IP发送到指定邮箱" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2015/04/30/Linux开机获取IP发送到指定邮箱/" class="article-date">
-  <time datetime="2015-04-30T05:20:19.000Z" itemprop="datePublished">4月 30 2015</time>
-</a>
-		</span>
-		<!-- <span class="meta-elements author">CBC</span> -->
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
-  
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2015/04/30/Linux开机获取IP发送到指定邮箱/">Linux开机获取IP发送到指定邮箱</a>
-    </h1>
-  
-
-	</header>
-	<div class="entry-content">
-		
-			<p>之所以有这样的需求，是因为平日主力是用自己的笔记本，公司给配的台式机（主机、显示器）扔工位下面，装了 Centos 玩儿，公司是DHCP 分配IP，每次重启开机都得到台式机登录一下，才能获取最新IP，有点小麻烦，重启后给自己邮箱发个邮件，这样省事儿，看看邮件里的IP，远程 SSH 登录就可以了~</p>
-<p>我的台式机系统是 CENTOS，邮箱是163的，安装配置如下:</p>
-<p>1、安装mailx</p>
-<p>yum install mailx<br>
-			
-				<p class="article-more-link">
-					<br/>
-					<a href="/2015/04/30/Linux开机获取IP发送到指定邮箱/#more">阅读全文 &gt;&gt;</a>
-				</p>
-      
-    
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/系统维护/">系统维护</a>
-  </div>
-
-			</span>
-			<span class="tags">
-				
-			</span>
-		</div>
-	</footer>
-	
-</article>
-
-
-	<hr class="article-devider">
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
