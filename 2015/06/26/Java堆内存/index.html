@@ -13,11 +13,11 @@ Java代码是如何执行的？">
 <meta property="og:site_name" content="CHENBAOCHENG.COM">
 <meta property="og:description" content="因为Java虚拟机拥有自动管理内存机制，所以Java 程序员不需要像C/C++一样去关注内存的分配和释放，也不容易出现内存泄露和内存溢出的问题。但是如果一旦出现此类问题，如果我们对虚拟机的内存管理机制不了解，那么解决这类问题还是比较困难的，所以我们要深入学习JVM的内存管理。
 Java代码是如何执行的？">
-<meta property="og:image" content="cbc009.github.io/master/images/jvm-arch.png">
-<meta property="og:image" content="cbc009/cbc009.github.io/master/images/jvm_memory_structure.png">
-<meta property="og:image" content="cbc009/cbc009.github.io/master/images/jvm-thread-stack.gif">
-<meta property="og:image" content="cbc009/cbc009.github.io/master/images/jvm-memory-heap.png">
-<meta property="og:image" content="cbc009/cbc009.github.io/master/images/jvm-heap-optimize.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/jvm-arch.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/jvm_memory_structure.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/jvm-thread-stack.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/jvm-memory-heap.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/jvm-heap-optimize.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM内存管理与垃圾回收">
 <meta name="twitter:description" content="因为Java虚拟机拥有自动管理内存机制，所以Java 程序员不需要像C/C++一样去关注内存的分配和释放，也不容易出现内存泄露和内存溢出的问题。但是如果一旦出现此类问题，如果我们对虚拟机的内存管理机制不了解，那么解决这类问题还是比较困难的，所以我们要深入学习JVM的内存管理。
@@ -79,11 +79,13 @@ Java代码是如何执行的？">
 		
     	<p>因为Java虚拟机拥有自动管理内存机制，所以Java 程序员不需要像C/C++一样去关注内存的分配和释放，也不容易出现内存泄露和内存溢出的问题。但是如果一旦出现此类问题，如果我们对虚拟机的内存管理机制不了解，那么解决这类问题还是比较困难的，所以我们要深入学习JVM的内存管理。</p>
 <h4 id="Java代码是如何执行的？">Java代码是如何执行的？</h4>
-<p><img src="cbc009.github.io/master/images/jvm-arch.png" alt="image java代码执行过程"></p>
+<img src="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/jvm-arch.png">
+
 <a id="more"></a>
 
 <h4 id="JVM_运行时数据区域">JVM 运行时数据区域</h4>
-<p><img src="cbc009/cbc009.github.io/master/images/jvm_memory_structure.png" alt="image description"></p>
+<img src="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/jvm_memory_structure.png">
+
 <p>Java 虚拟机在执行Java 程序过程中会把它所管理的内存划分为几个不同的数据区域。这些区域都有各自的用途，以及创建和销毁的时间，有的区域随着虚拟机进程的启动而存在，有些区域则是依赖用户线程的启动和结束而建立和销毁。</p>
 <p>这几个区域如下：</p>
 <pre><code>方法区（<span class="function"><span class="keyword">Method</span> <span class="title">Area</span>）
@@ -93,7 +95,8 @@ Java代码是如何执行的？">
 程序计数器（<span class="title">Program</span> <span class="title">Counter</span> <span class="title">Register</span>）</span>
 </code></pre><h4 id="JVM中Stack和Heap的关系">JVM中Stack和Heap的关系</h4>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;我们经常会把 Java 内存分为堆内存（Heap）和栈内存（Stack），这是一种比较粗糙区分方式。我们平时所关注的也主要是这两个区域。栈指的是上图中的Java虚拟机栈。Java 虚拟机栈是线程私有的，其生命周期和线程相同。虚拟机栈描述的是Java方法执行的内存模型，每个方法被执行时都会创建一个栈帧（Stack Frame），用来存储局部变量表、操作数栈、动态链接、方法出口等信息，<strong>每一个方法被调用直至执行完成的过程，就对应着一个栈帧在虚拟机栈中从入栈到出栈的过程</strong>。</p>
-<p><img src="cbc009/cbc009.github.io/master/images/jvm-thread-stack.gif" alt="image description"></p>
+<img src="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/jvm-thread-stack.gif">
+
 <p>&nbsp;&nbsp;&nbsp;&nbsp;局部变量表存放了编译期可知的各种基本数据类型（boolean、byte、char、short、int、float、long、double）、对象引用（reference）和 returnAddress（指向一条字节码指令的地址）。</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;如果线程请求的栈深度大于虚拟机允许的深度，会抛出 StackOverflowException 异常；如果虚拟机栈可以动态扩展，扩展时无法申请到足够内存时会抛出 OutOfMemoryError 异常。递归调用时如果深度过深，很容易出现栈溢出。</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;对于大多数应用程序来说，堆(Heap)是Java虚拟机管理的内存中最大的一块。 堆是所有线程共享的一块内存区域，几乎所有的对象实例都在这里分配内存。根据Java虚拟机规范的规定，Java堆可以处于物理上不连续的内存空间中，只要逻辑上是连续的即可，就像我们的磁盘空间一样。</p>
@@ -102,7 +105,8 @@ Java代码是如何执行的？">
 </code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;假如这段代码出现在方法体中，Object obj 这部分的语意会反映到Java虚拟机栈的本地变量表中，做为一个reference 类型数据出现。new Object()这部分语意会反映在Java堆中，形成一块存储了 Object 类型所有实例数据值（Instance Data，对象中各个实例字段的数据）的结构化内存。不同虚拟机的对象访问方式有所不同，主流的访问方式有两种：使用句柄和直接指针。</p>
 <h4 id="堆内存">堆内存</h4>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;Java中堆是JVM 管理的最大一块内存空间，主要用于存放各种类的实例对象。堆被划分成两个不同的区域：新生代 ( Young )、老年代 ( Old )。新生代 ( Young ) 又被划分为三个区域：Eden、From Survivor、To Survivor。这样划分的目的是为了使 JVM 能够更好的管理堆内存中的对象，包括内存的分配以及回收。堆的内存模型大致为：</p>
-<p><img src="cbc009/cbc009.github.io/master/images/jvm-memory-heap.png" alt="image description"></p>
+<img src="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/jvm-memory-heap.png">
+
 <pre><code><span class="attribute">堆大小 </span>=<span class="string"> 新生代 + 老年代</span>
 </code></pre><h4 id="常用的内存区域调节参数">常用的内存区域调节参数</h4>
 <pre><code>-<span class="ruby"><span class="constant">Xms</span>：初始堆大小，默认为物理内存的<span class="number">1</span>/<span class="number">64</span>(&lt;<span class="number">1</span>GB)；默认(<span class="constant">MinHeapFreeRatio</span>参数可以调整)空余堆内存小于<span class="number">40</span>%时，<span class="constant">JVM</span>就会增大堆直到-<span class="constant">Xmx</span>的最大限制
@@ -119,7 +123,8 @@ Java代码是如何执行的？">
 </span>
 -<span class="ruby"><span class="constant">XX</span><span class="symbol">:MaxPermSize</span>：设置持久代最大值。物理内存的<span class="number">1</span>/<span class="number">4</span>。</span>
 </code></pre><p>这里有一张图片简单明了的说明一下相关参数对各个区域的影响：</p>
-<p><img src="cbc009/cbc009.github.io/master/images/jvm-heap-optimize.png" alt="image description"></p>
+<img src="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/jvm-heap-optimize.png">
+
 
     
 	</div>
