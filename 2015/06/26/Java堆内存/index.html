@@ -5,13 +5,13 @@
   
   <title>JVM内存管理与垃圾回收 | CHENBAOCHENG.COM</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="因为Java虚拟机拥有自动管理内存机制，所以Java 程序员不需要像C/C++一样去关注内存的分配和释放，也不容易出现内存泄露和内存溢出的问题。但是如果一旦出现此类问题，如果我们对虚拟机的内存管理机制不了解，那么解决这类问题还是比较困难的，所以我们要深入学习JVM的内存管理。
+  <meta name="description" content="Java虚拟机拥有自动管理内存机制，所以Java 程序员不需要像C/C++一样去关注内存的分配和释放，也不容易出现内存泄露和内存溢出的问题。但是如果一旦出现此类问题，如果我们对虚拟机的内存管理机制不了解，那么解决这类问题还是比较困难的，所以我们要深入学习JVM的内存管理。
 Java代码是如何执行的？">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM内存管理与垃圾回收">
 <meta property="og:url" content="http://www.chenbaocheng.com/2015/06/26/Java堆内存/">
 <meta property="og:site_name" content="CHENBAOCHENG.COM">
-<meta property="og:description" content="因为Java虚拟机拥有自动管理内存机制，所以Java 程序员不需要像C/C++一样去关注内存的分配和释放，也不容易出现内存泄露和内存溢出的问题。但是如果一旦出现此类问题，如果我们对虚拟机的内存管理机制不了解，那么解决这类问题还是比较困难的，所以我们要深入学习JVM的内存管理。
+<meta property="og:description" content="Java虚拟机拥有自动管理内存机制，所以Java 程序员不需要像C/C++一样去关注内存的分配和释放，也不容易出现内存泄露和内存溢出的问题。但是如果一旦出现此类问题，如果我们对虚拟机的内存管理机制不了解，那么解决这类问题还是比较困难的，所以我们要深入学习JVM的内存管理。
 Java代码是如何执行的？">
 <meta property="og:image" content="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/jvm-arch.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/jvm_memory_structure.png">
@@ -20,7 +20,7 @@ Java代码是如何执行的？">
 <meta property="og:image" content="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/jvm-heap-optimize.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM内存管理与垃圾回收">
-<meta name="twitter:description" content="因为Java虚拟机拥有自动管理内存机制，所以Java 程序员不需要像C/C++一样去关注内存的分配和释放，也不容易出现内存泄露和内存溢出的问题。但是如果一旦出现此类问题，如果我们对虚拟机的内存管理机制不了解，那么解决这类问题还是比较困难的，所以我们要深入学习JVM的内存管理。
+<meta name="twitter:description" content="Java虚拟机拥有自动管理内存机制，所以Java 程序员不需要像C/C++一样去关注内存的分配和释放，也不容易出现内存泄露和内存溢出的问题。但是如果一旦出现此类问题，如果我们对虚拟机的内存管理机制不了解，那么解决这类问题还是比较困难的，所以我们要深入学习JVM的内存管理。
 Java代码是如何执行的？">
 
   
@@ -229,7 +229,7 @@ Java代码是如何执行的？">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>因为Java虚拟机拥有自动管理内存机制，所以Java 程序员不需要像C/C++一样去关注内存的分配和释放，也不容易出现内存泄露和内存溢出的问题。但是如果一旦出现此类问题，如果我们对虚拟机的内存管理机制不了解，那么解决这类问题还是比较困难的，所以我们要深入学习JVM的内存管理。</p>
+        <p>Java虚拟机拥有自动管理内存机制，所以Java 程序员不需要像C/C++一样去关注内存的分配和释放，也不容易出现内存泄露和内存溢出的问题。但是如果一旦出现此类问题，如果我们对虚拟机的内存管理机制不了解，那么解决这类问题还是比较困难的，所以我们要深入学习JVM的内存管理。</p>
 <h4 id="Java代码是如何执行的？">Java代码是如何执行的？</h4>
 <img src="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/jvm-arch.png">
 

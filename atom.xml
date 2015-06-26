@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.chenbaocheng.com/"/>
-  <updated>2015-06-26T09:51:54.780Z</updated>
+  <updated>2015-06-26T09:53:10.131Z</updated>
   <id>http://www.chenbaocheng.com/</id>
   
   <author>
@@ -19,8 +19,8 @@
     <link href="http://www.chenbaocheng.com/2015/06/26/Java%E5%A0%86%E5%86%85%E5%AD%98/"/>
     <id>http://www.chenbaocheng.com/2015/06/26/Java堆内存/</id>
     <published>2015-06-26T03:53:26.000Z</published>
-    <updated>2015-06-26T09:35:13.000Z</updated>
-    <content type="html"><![CDATA[<p>因为Java虚拟机拥有自动管理内存机制，所以Java 程序员不需要像C/C++一样去关注内存的分配和释放，也不容易出现内存泄露和内存溢出的问题。但是如果一旦出现此类问题，如果我们对虚拟机的内存管理机制不了解，那么解决这类问题还是比较困难的，所以我们要深入学习JVM的内存管理。</p>
+    <updated>2015-06-26T09:53:05.000Z</updated>
+    <content type="html"><![CDATA[<p>Java虚拟机拥有自动管理内存机制，所以Java 程序员不需要像C/C++一样去关注内存的分配和释放，也不容易出现内存泄露和内存溢出的问题。但是如果一旦出现此类问题，如果我们对虚拟机的内存管理机制不了解，那么解决这类问题还是比较困难的，所以我们要深入学习JVM的内存管理。</p>
 <h4 id="Java代码是如何执行的？">Java代码是如何执行的？</h4>
 <img src="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/jvm-arch.png">
 
@@ -70,7 +70,7 @@
 
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>因为Java虚拟机拥有自动管理内存机制，所以Java 程序员不需要像C/C++一样去关注内存的分配和释放，也不容易出现内存泄露和内存溢出的问题。但是如果一旦出现此类问题，如果我们对虚拟机的内存管理机制不了解，那么解决这类问题还是比较困难的，所以我们要深入学习JVM的内存管理。</p>
+    <![CDATA[<p>Java虚拟机拥有自动管理内存机制，所以Java 程序员不需要像C/C++一样去关注内存的分配和释放，也不容易出现内存泄露和内存溢出的问题。但是如果一旦出现此类问题，如果我们对虚拟机的内存管理机制不了解，那么解决这类问题还是比较困难的，所以我们要深入学习JVM的内存管理。</p>
 <h4 id="Java代码是如何执行的？">Java代码是如何执行的？</h4>
 <img src="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/jvm-arch.png">
 
