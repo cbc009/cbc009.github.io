@@ -6,21 +6,13 @@
   <title>JVM内存管理与垃圾回收 | CHENBAOCHENG.COM</title>
   <meta name="viewport" content="width=device-width">
   <meta name="description" content="因为Java虚拟机拥有自动管理内存机制，所以Java 程序员不需要像C/C++一样去关注内存的分配和释放，也不容易出现内存泄露和内存溢出的问题。但是如果一旦出现此类问题，如果我们对虚拟机的内存管理机制不了解，那么解决这类问题还是比较困难的，所以我们要深入学习JVM的内存管理。
-Java代码是如何执行的？
-
-JVM 运行时数据区域
-
-Java 虚拟机在执行Java 程序过程中会把它所管理的内存划分为">
+Java代码是如何执行的？">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM内存管理与垃圾回收">
 <meta property="og:url" content="http://www.chenbaocheng.com/2015/06/26/Java堆内存/">
 <meta property="og:site_name" content="CHENBAOCHENG.COM">
 <meta property="og:description" content="因为Java虚拟机拥有自动管理内存机制，所以Java 程序员不需要像C/C++一样去关注内存的分配和释放，也不容易出现内存泄露和内存溢出的问题。但是如果一旦出现此类问题，如果我们对虚拟机的内存管理机制不了解，那么解决这类问题还是比较困难的，所以我们要深入学习JVM的内存管理。
-Java代码是如何执行的？
-
-JVM 运行时数据区域
-
-Java 虚拟机在执行Java 程序过程中会把它所管理的内存划分为">
+Java代码是如何执行的？">
 <meta property="og:image" content="cbc009/cbc009.github.io/master/images/jvm-arch.png">
 <meta property="og:image" content="cbc009/cbc009.github.io/master/images/jvm_memory_structure.png">
 <meta property="og:image" content="cbc009/cbc009.github.io/master/images/jvm-thread-stack.gif">
@@ -29,11 +21,7 @@ Java 虚拟机在执行Java 程序过程中会把它所管理的内存划分为"
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM内存管理与垃圾回收">
 <meta name="twitter:description" content="因为Java虚拟机拥有自动管理内存机制，所以Java 程序员不需要像C/C++一样去关注内存的分配和释放，也不容易出现内存泄露和内存溢出的问题。但是如果一旦出现此类问题，如果我们对虚拟机的内存管理机制不了解，那么解决这类问题还是比较困难的，所以我们要深入学习JVM的内存管理。
-Java代码是如何执行的？
-
-JVM 运行时数据区域
-
-Java 虚拟机在执行Java 程序过程中会把它所管理的内存划分为">
+Java代码是如何执行的？">
 
   
     <link rel="alternative" href="/atom.xml" title="CHENBAOCHENG.COM" type="application/atom+xml">
@@ -92,6 +80,8 @@ Java 虚拟机在执行Java 程序过程中会把它所管理的内存划分为"
     	<p>因为Java虚拟机拥有自动管理内存机制，所以Java 程序员不需要像C/C++一样去关注内存的分配和释放，也不容易出现内存泄露和内存溢出的问题。但是如果一旦出现此类问题，如果我们对虚拟机的内存管理机制不了解，那么解决这类问题还是比较困难的，所以我们要深入学习JVM的内存管理。</p>
 <h4 id="Java代码是如何执行的？">Java代码是如何执行的？</h4>
 <p><img src="cbc009/cbc009.github.io/master/images/jvm-arch.png" alt="image java代码执行过程"></p>
+<a id="more"></a>
+
 <h4 id="JVM_运行时数据区域">JVM 运行时数据区域</h4>
 <p><img src="cbc009/cbc009.github.io/master/images/jvm_memory_structure.png" alt="image description"></p>
 <p>Java 虚拟机在执行Java 程序过程中会把它所管理的内存划分为几个不同的数据区域。这些区域都有各自的用途，以及创建和销毁的时间，有的区域随着虚拟机进程的启动而存在，有些区域则是依赖用户线程的启动和结束而建立和销毁。</p>
