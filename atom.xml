@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.chenbaocheng.com/"/>
-  <updated>2015-06-26T09:53:10.131Z</updated>
+  <updated>2015-06-26T09:54:39.582Z</updated>
   <id>http://www.chenbaocheng.com/</id>
   
   <author>
@@ -16,8 +16,8 @@
   
   <entry>
     <title><![CDATA[JVM内存管理与垃圾回收]]></title>
-    <link href="http://www.chenbaocheng.com/2015/06/26/Java%E5%A0%86%E5%86%85%E5%AD%98/"/>
-    <id>http://www.chenbaocheng.com/2015/06/26/Java堆内存/</id>
+    <link href="http://www.chenbaocheng.com/2015/06/26/%20JVM%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/"/>
+    <id>http://www.chenbaocheng.com/2015/06/26/ JVM内存管理与垃圾回收/</id>
     <published>2015-06-26T03:53:26.000Z</published>
     <updated>2015-06-26T09:53:05.000Z</updated>
     <content type="html"><![CDATA[<p>Java虚拟机拥有自动管理内存机制，所以Java 程序员不需要像C/C++一样去关注内存的分配和释放，也不容易出现内存泄露和内存溢出的问题。但是如果一旦出现此类问题，如果我们对虚拟机的内存管理机制不了解，那么解决这类问题还是比较困难的，所以我们要深入学习JVM的内存管理。</p>
