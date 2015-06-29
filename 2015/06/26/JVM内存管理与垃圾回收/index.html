@@ -485,6 +485,81 @@ object space <span class="number">30720</span><span class="keyword">K</span>, <s
 <li>降低Minor GC执行频率？</li>
 <li>降低Minor GC消耗时间？<br>例如某系统的GC调优目标：降低Full GC执行频率的同时，尽可能降低minor GC的执行频率、消耗时间以及GC对应用造成的停顿时间。</li>
 </ol>
+<p><strong>衡量调优：</strong></p>
+<p>1、衡量工具<br>    1）打印GC日志信息：-XX:+PrintGCDetails –XX:+PrintGCApplicationStoppedTime     -Xloggc: {文件名}  -XX:+PrintGCTimeStamps</p>
+<pre><code><span class="number">2</span>）jmap：（由于每个版本<span class="keyword">jvm</span>的默认值可能会有改变，建议还是用jmap首先观察下目前每个代的内存大小、<span class="type">GC</span>方式） 
+
+<span class="number">3</span>）运行状况监测工具：jstat、jvisualvm、sar 、gclogviewer
+</code></pre><p>2、应收集的信息<br>    1）minor gc的执行频率；full gc的执行频率，每次GC耗时多少？</p>
+<pre><code><span class="number">2</span>）高峰期什么状况？
+
+<span class="number">3</span>）minor gc回收的效果如何？survivor的消耗状况如何，每次有多少对象会进入老生代？
+
+<span class="number">4</span>）full gc回收的效果如何？（简单的memory leak判断方法）
+
+<span class="number">5</span>）系统的<span class="built_in">load</span>、cpu消耗、qps <span class="keyword">or</span> tps、响应时间
+</code></pre><p>QPS每秒查询率：是对一个特定的查询服务器在规定时间内所处理流量多少的衡量标准。在因特网上，作为域名服务器的机器性能经常用每秒查询率来衡量。对应fetches/sec，即每秒的响应请求数，也即是最大吞吐能力。<br>TPS(Transaction Per Second)：每秒钟系统能够处理的交易或事务的数量。</p>
+<p><strong>尝试调优：</strong></p>
+<p>注意Java RMI的定时GC触发机制，可通过：-XX:+DisableExplicitGC来禁止或通过 -Dsun.rmi.dgc.server.gcInterval=3600000来控制触发的时间。</p>
+<p>1）降低Full GC执行频率 – 通常瓶颈<br>老生代本身占用的内存空间就一直偏高，所以只要稍微放点对象到老生代，就full GC了；<br>通常原因：系统缓存的东西太多；<br>例如：使用oracle 10g驱动时preparedstatement cache太大；<br>查找办法：现执行Dump然后再进行MAT分析；</p>
+<p>（1）Minor GC后总是有对象不断的进入老生代，导致老生代不断的满<br>通常原因：Survivor太小了<br>系统表现：系统响应太慢、请求量太大、每次请求分配的内存太多、分配的对象太大…<br>查找办法：分析两次minor GC之间到底哪些地方分配了内存；<br>利用jstat观察Survivor的消耗状况，-XX:PrintHeapAtGC，输出GC前后的详细信息；<br>对于系统响应慢可以采用系统优化，不是GC优化的内容；</p>
+<p>（2）老生代的内存占用一直偏高<br>调优方法：① 扩大老生代的大小（减少新生代的大小或调大heap的 大小）；<br>减少new注意对minor gc的影响并且同时有可能造成full gc还是严重；<br>调大heap注意full gc的时间的延长，cpu够强悍嘛，os是32 bit的吗？<br>② 程序优化（去掉一些不必要的缓存）</p>
+<p>（3）Minor GC后总是有对象不断的进入老生代<br>前提：这些进入老生代的对象在full GC时大部分都会被回收<br>调优方法：<br>① 降低Minor GC的执行频率；<br>② 让对象尽量在Minor GC中就被回收掉：增大Eden区、增大survivor、增大TenuringThreshold；注意这些可能会造成minor gc执行频繁；<br>③ 切换成CMS GC：老生代还没有满就回收掉，从而降低Full GC触发的可能性；<br>④ 程序优化：提升响应速度、降低每次请求分配的内存、</p>
+<p>（4）降低单次Full GC的执行时间<br>通常原因：老生代太大了…<br>调优方法：1）是并行GC吗？   2）升级CPU  3）减小Heap或老生代</p>
+<p>（5）降低Minor GC执行频率<br>通常原因：每次请求分配的内存多、请求量大<br>通常办法：1）扩大heap、扩大新生代、扩大eden。注意点：降低每次请求分配的内存；横向增加机器的数量分担请求的数量。</p>
+<p>（6）降低Minor GC执行时间<br>通常原因：新生代太大了，响应速度太慢了，导致每次Minor GC时存活的对象多<br>通常办法：1）减小点新生代吧；2）增加CPU的数量、升级CPU的配置；加快系统的响应速度</p>
+<p>细微调整：</p>
+<p>首先需要了解以下情况：</p>
+<p>① 当响应速度下降到多少或请求量上涨到多少时，系统会宕掉？</p>
+<p>② 参数调整后系统多久会执行一次Minor GC，多久会执行一次Full GC，高峰期会如何？</p>
+<p>需要计算的量：</p>
+<p>①每次请求平均需要分配多少内存？系统的平均响应时间是多少呢？请求量是多少、多常时间执行一次Minor GC、Full GC？</p>
+<p>②现有参数下，应该是多久一次Minor GC、Full GC，对比真实状况，做一定的调整；</p>
+<p>必杀技：提升响应速度、降低每次请求分配的内存？</p>
+<h4 id="垃圾回收的实现原理">垃圾回收的实现原理</h4>
+<p> 内存回收的实现方法：1）引用计数：不适合复杂对象的引用关系，尤其是循环依赖的场景。2）有向图Tracing：适合于复杂对象的引用关系场景，Hotspot采用这种。常用算法：Copying、Mark-Sweep、Mark-Compact。</p>
+<p>Hotspot从root set开始扫描有引用的对象并对Reference类型的对象进行特殊处理。以下是Root Set的列表：<br>1）当前正在执行的线程；<br>2）全局/静态变量；<br>3）JVM Handles；<br>4）JNI 【 Java Native Interface 】Handles；</p>
+<p>另外：minor GC只扫描新生代，当老生代的对象引用了新生代的对象时，会采用如下的处理方式：在给对象赋引用时，会经过一个write barrier的过程，以便检查是否有老生代引用新生代对象的情况，如有则记录到remember set中。并在minor gc时，remember set指向的新生代对象也作为root set。</p>
+<p><strong>新生代串行GC(Serial Copying)：</strong></p>
+<p>新生代串行GC(Serial Copying)完整内存的分配策略：</p>
+<p>1）首先在TLAB（本地线程分配缓冲区）上尝试分配；</p>
+<p>2）检查是否需要在新生代上分配，如需要分配的大小小于PretenureSizeThreshold，则在eden区上进行分配，分配成功则返回；分配失败则继续；</p>
+<p>3）检查是否需要尝试在老生代上分配，如需要，则遍历所有代并检查是否可在该代上分配，如可以则进行分配；如不需要在老生代上尝试分配，则继续；</p>
+<p>4）根据策略决定执行新生代GC或Full GC，执行full gc时不清除soft Ref；</p>
+<p>5）如需要分配的大小大于PretenureSizeThreshold，尝试在老生代上分配，否则尝试在新生代上分配；</p>
+<p>6）尝试扩大堆并分配；</p>
+<p>7）执行full gc，并清除所有soft Ref，按步骤5继续尝试分配。  </p>
+<p>新生代串行GC(Serial Copying)完整内存回收策略<br>1）检查to是否为空，不为空返回false；</p>
+<p>2）检查老生代剩余空间是否大于当前eden+from已用的大小，如大于则返回true，如小于且HandlePromotionFailure为true，则检查剩余空间是否大于之前每次minor gc晋级到老生代的平均大小，如大于返回true，如小于返回false。</p>
+<p>3）如上面的结果为false，则执行full gc；如上面的结果为true，执行下面的步骤；</p>
+<p>4）扫描引用关系，将活的对象copy到to space，如对象在minor gc中的存活次数超过tenuring_threshold或分配失败，则往老生代复制，如仍然复制失败，则取决于HandlePromotionFailure，如不需要处理，直接抛出OOM，并退出vm，如需处理，则保持这些新生代对象不动；</p>
+<p><strong>新生代可用GC-PS</strong></p>
+<p>完整内存分配策略<br>1）先在TLAB上分配，分配失败则直接在eden上分配；</p>
+<p>2）当eden上分配失败时，检查需要分配的大小是否 &gt;= eden space的一半，如是，则直接在老生代分配；</p>
+<p>3）如分配仍然失败，且gc已超过频率，则抛出OOM；</p>
+<p>4）进入基本分配策略失败的模式；</p>
+<p>5）执行PS GC，在eden上分配；</p>
+<p>6）执行非最大压缩的full gc，在eden上分配；</p>
+<p>7）在旧生代上分配；</p>
+<p>8）执行最大压缩full gc，在eden上分配；</p>
+<p>9）在旧生代上分配；</p>
+<p>10）如还失败，回到2。</p>
+<p>最悲惨的情况，分配触发多次PS GC和多次Full GC，直到OOM。</p>
+<p>完整内存回收策略<br>1）如gc所执行的时间超过，直接结束；</p>
+<p>2）先调用invoke_nopolicy<br>    2.1 先检查是不是要尝试scavenge；<br>    2.1.1 to space必须为空，如不为空，则返回false；<br>    2.1.2 获取之前所有minor gc晋级到old的平均大小，并对比目前eden+from已使用的大小，取更小的一个值，如老生代剩余空间小于此值，则返回false，如大于则返回true；<br>    2.2 如不需要尝试scavenge，则返回false，否则继续；<br>    2.3 多线程扫描活的对象，并基亍copying算法回收，回收时相应的晋升对象到旧生代；<br>    2.4 如UseAdaptiveSizePolicy，那么重新计算to space和tenuringThreshold的值，并调整。</p>
+<p>3）如invoke_nopolicy返回的是false，或之前所有minor gc晋级到老生代的平均大小 &gt; 旧生代的剩余空间，那么继续下面的步骤，否则结束；</p>
+<p>4）如UseParallelOldGC，则执行PSParallelCompact，如不是UseParallelOldGC，则执行PSMarkSweep。</p>
+<p><strong>老生代并行CMS GC：</strong></p>
+<p>优缺点：</p>
+<ol>
+<li>大部分时候和应用并发进行，因此只会造成很短的暂停时间；</li>
+<li>浮动垃圾，没办法，所以内存空间要稍微大一点；</li>
+<li>内存碎片，-XX:+UseCMSCompactAtFullCollection 来解决；</li>
+<li>争抢CPU，这GC方式就这样；</li>
+<li>多次remark，所以总的gc时间会比并行的长；</li>
+<li>内存分配，free list方式，so性能稍差，对minor GC会有一点影响；</li>
+<li>和应用并发，有可能分配和回收同时，产生竞争，引入了锁，JVM分配优先。</li>
+</ol>
 
       
     </div>
