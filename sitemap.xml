@@ -2,11 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://www.chenbaocheng.com/2015/07/01/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95%E4%B8%8E%E5%9B%9E%E6%94%B6%E5%99%A8/</loc>
-    <lastmod>2015-07-01T09:04:14.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://www.chenbaocheng.com/2015/06/30/Java%208%E5%85%83%E7%A9%BA%E9%97%B4(Metaspace)/</loc>
     <lastmod>2015-06-30T09:35:47.000Z</lastmod>
   </url>

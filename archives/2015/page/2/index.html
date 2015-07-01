@@ -116,75 +116,6 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-Docker学习-二-安装与配置" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/04/30/Docker学习-二-安装与配置/" class="article-date">
-  	<time datetime="2015-04-30T07:50:46.000Z" itemprop="datePublished">4月 30 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/30/Docker学习-二-安装与配置/">Docker学习(二) 安装与配置</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="Docker_的安装与配置">Docker 的安装与配置</h4>
-<p>Docker 支持 CentOS 6 及后续版本。</p>
-<h4 id="CentOS_6_下安装Docker服务">CentOS 6 下安装Docker服务</h4>
-<pre><code><span class="preprocessor">#禁用SELINUX</span>
-vim /etc/selinux/config
-SELINUX=disabled
-
-<span class="preprocessor">#配置Fedora EPEL 源</span>
-rpm -ivh http:<span class="comment">//dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm</span>
-rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-<span class="number">6</span>
-yum -y install yum-priorities
-</code></pre><p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/docker/">docker</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/04/30/Docker学习-二-安装与配置/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
     <article id="post-Docker学习-一-Docker基础" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -763,6 +694,73 @@ traceroute nis.nsf.net
       
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/os/">os</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-Go语言学习-配置开发环境-IntelliJ-IDEA-14-For-Mac-OS-10-10" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/01/23/Go语言学习-配置开发环境-IntelliJ-IDEA-14-For-Mac-OS-10-10/" class="article-date">
+  	<time datetime="2015-01-23T05:11:31.000Z" itemprop="datePublished">1月 23 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/01/23/Go语言学习-配置开发环境-IntelliJ-IDEA-14-For-Mac-OS-10-10/">Go语言学习 - 配置开发环境(IntelliJ IDEA 14 For Mac OS 10.10)</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1、安装 Go-Lang</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ brew install go</div><div class="line">$ go version</div></pre></td></tr></table></figure>
+
+<p><br><strong>2、配置环境变量</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ vim ~/.zshrc</div><div class="line"><span class="keyword">export</span> GOROOT=/usr/local/opt/go/libexec</div><div class="line"><span class="keyword">export</span> GOPATH=<span class="variable">$HOME</span>/.go</div></pre></td></tr></table></figure>
+
+<p><br><strong>3、Intellij IDEA 安装 go-lang-idea-plugin</strong></p>
+<ul>
+<li>IntelliJ IDEA -&gt; Preferences -&gt; Plugins -&gt; Browse Repositories</li>
+<li>搜索golang，点击 “Install plugin”</li>
+<li>安装完重启</li>
+</ul>
+<p><strong>go-lang-idea-plugin会提示配置GOROOT,GOPATH。。。搜了各种资料，需要这样配置一下：</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">vim .zshrc</div><div class="line">launchctl setenv GOROOT /usr/local/opt/go/libexec</div><div class="line">launchctl setenv GOBIN /usr/local/opt/go/libexec/bin</div><div class="line">launchctl setenv GOPATH /ROOT/www/go</div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/golang/">golang</a>
 	</div>
 
 

@@ -116,67 +116,6 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-JVM垃圾回收算法与回收器" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/01/JVM垃圾回收算法与回收器/" class="article-date">
-  	<time datetime="2015-07-01T08:29:30.000Z" itemprop="datePublished">7月 1 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/01/JVM垃圾回收算法与回收器/">JVM垃圾回收算法与回收器</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="回收算法">回收算法</h4>
-<h5 id="引用计数法_(Reference_Counting)">引用计数法 (Reference Counting)</h5>
-<p>引用计数器的实现很简单，对于一个对象 A，只要有任何一个对象引用了 A，则 A 的引用计数器就加 1，当引用失效时，引用计数器就减 1。只要对象 A 的引用计数器的值为 0，则对象 A 就不可能再被使用。但是引用计数器有一个严重的问题，即无法处理循环引用的情况。因此，在 Java 的垃圾回收器中没有使用这种算法。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/java/">java</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/07/01/JVM垃圾回收算法与回收器/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
     <article id="post-Java 8元空间(Metaspace)" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -773,6 +712,71 @@ ip.<span class="variable">src=</span>=<span class="number">192.168</span>.<span 
       
         <p class="article-more-link">
           <a  href="/2015/04/23/Java-Unsupported-major-minor-version-51-0/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-Mac-OS管理多个JDK版本" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/02/23/Mac-OS管理多个JDK版本/" class="article-date">
+  	<time datetime="2015-02-22T18:36:02.000Z" itemprop="datePublished">2月 23 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/02/23/Mac-OS管理多个JDK版本/">Mac OS管理多个JDK版本</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>作为一个Java程序员，同一台工作机上可能会安装多个Java版本，工作时可能是用1.6版本，而工作之余1.7或1.8版本用于学习一下，版本间的手动切换也是麻烦事儿。有次同事问在Mac下是如何管理多个版本的JDK， 当时没有答案，直到偶然见发现jEnv。jEnv的安装、使用都很简单。</p>
+<h5 id="什么是jEnv?">什么是jEnv?</h5>
+<pre><code><span class="title">jEnv</span> 是一个帮助你管理 <span class="variable">$JAVA_HOME</span> 环境变量的命令行工具。
+</code></pre><h5 id="安装">安装</h5>
+<pre><code><span class="title">brew</span> install jenv
+ echo <span class="string">'export PATH="<span class="variable">$HOME</span>/.jenv/bin:<span class="variable">$PATH</span>"'</span> &gt;&gt; ~/.zshrc
+ echo <span class="string">'eval "$(jenv init -)"'</span> &gt;&gt; ~/.zshrc
+</code></pre>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/java/">java</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/02/23/Mac-OS管理多个JDK版本/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>

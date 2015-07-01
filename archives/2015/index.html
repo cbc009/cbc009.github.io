@@ -116,67 +116,6 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-JVM垃圾回收算法与回收器" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/01/JVM垃圾回收算法与回收器/" class="article-date">
-  	<time datetime="2015-07-01T08:29:30.000Z" itemprop="datePublished">7月 1 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/01/JVM垃圾回收算法与回收器/">JVM垃圾回收算法与回收器</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="回收算法">回收算法</h4>
-<h5 id="引用计数法_(Reference_Counting)">引用计数法 (Reference Counting)</h5>
-<p>引用计数器的实现很简单，对于一个对象 A，只要有任何一个对象引用了 A，则 A 的引用计数器就加 1，当引用失效时，引用计数器就减 1。只要对象 A 的引用计数器的值为 0，则对象 A 就不可能再被使用。但是引用计数器有一个严重的问题，即无法处理循环引用的情况。因此，在 Java 的垃圾回收器中没有使用这种算法。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/java/">java</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/07/01/JVM垃圾回收算法与回收器/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
     <article id="post-Java 8元空间(Metaspace)" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -794,6 +733,75 @@ centos              latest              fd44297e2ddb        <span class="number"
       
         <p class="article-more-link">
           <a  href="/2015/04/30/Docker学习-三-Docker镜像和容器的常用操作/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-Docker学习-二-安装与配置" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/04/30/Docker学习-二-安装与配置/" class="article-date">
+  	<time datetime="2015-04-30T07:50:46.000Z" itemprop="datePublished">4月 30 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/04/30/Docker学习-二-安装与配置/">Docker学习(二) 安装与配置</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="Docker_的安装与配置">Docker 的安装与配置</h4>
+<p>Docker 支持 CentOS 6 及后续版本。</p>
+<h4 id="CentOS_6_下安装Docker服务">CentOS 6 下安装Docker服务</h4>
+<pre><code><span class="preprocessor">#禁用SELINUX</span>
+vim /etc/selinux/config
+SELINUX=disabled
+
+<span class="preprocessor">#配置Fedora EPEL 源</span>
+rpm -ivh http:<span class="comment">//dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm</span>
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-<span class="number">6</span>
+yum -y install yum-priorities
+</code></pre><p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/docker/">docker</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/04/30/Docker学习-二-安装与配置/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
