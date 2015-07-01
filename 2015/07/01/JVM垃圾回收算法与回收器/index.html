@@ -3,17 +3,26 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Category: java | CHENBAOCHENG.COM</title>
+  <title>JVM垃圾回收算法与回收器 | CHENBAOCHENG.COM</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="CHENBAOCHENG.COM">
-<meta property="og:url" content="http://www.chenbaocheng.com/categories/java/">
+  <meta name="description" content="回收算法
+引用计数法 (Reference Counting)
+引用计数器的实现很简单，对于一个对象 A，只要有任何一个对象引用了 A，则 A 的引用计数器就加 1，当引用失效时，引用计数器就减 1。只要对象 A 的引用计数器的值为 0，则对象 A 就不可能再被使用。
+引用计数器的实现也非常简单，只需要为每个对象配置一个整形的计数器即可。但是引用计数器有一个严重的问题，即无法处理循环引用的情况。因">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM垃圾回收算法与回收器">
+<meta property="og:url" content="http://www.chenbaocheng.com/2015/07/01/JVM垃圾回收算法与回收器/">
 <meta property="og:site_name" content="CHENBAOCHENG.COM">
-<meta property="og:description">
+<meta property="og:description" content="回收算法
+引用计数法 (Reference Counting)
+引用计数器的实现很简单，对于一个对象 A，只要有任何一个对象引用了 A，则 A 的引用计数器就加 1，当引用失效时，引用计数器就减 1。只要对象 A 的引用计数器的值为 0，则对象 A 就不可能再被使用。
+引用计数器的实现也非常简单，只需要为每个对象配置一个整形的计数器即可。但是引用计数器有一个严重的问题，即无法处理循环引用的情况。因">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CHENBAOCHENG.COM">
-<meta name="twitter:description">
+<meta name="twitter:title" content="JVM垃圾回收算法与回收器">
+<meta name="twitter:description" content="回收算法
+引用计数法 (Reference Counting)
+引用计数器的实现很简单，对于一个对象 A，只要有任何一个对象引用了 A，则 A 的引用计数器就加 1，当引用失效时，引用计数器就减 1。只要对象 A 的引用计数器的值为 0，则对象 A 就不可能再被使用。
+引用计数器的实现也非常简单，只需要为每个对象配置一个整形的计数器即可。但是引用计数器有一个严重的问题，即无法处理循环引用的情况。因">
 
   
     <link rel="alternative" href="/atom.xml" title="CHENBAOCHENG.COM" type="application/atom+xml">
@@ -114,9 +123,7 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap">
-  
-    <article id="post-JVM垃圾回收算法与回收器" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-JVM垃圾回收算法与回收器" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2015/07/01/JVM垃圾回收算法与回收器/" class="article-date">
@@ -132,12 +139,23 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/01/JVM垃圾回收算法与回收器/">JVM垃圾回收算法与回收器</a>
+    <h1 class="article-title" itemprop="name">
+      JVM垃圾回收算法与回收器
     </h1>
   
 
       </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/java/">java</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -254,647 +272,62 @@
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/java/">java</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/06/30/Java 8元空间(Metaspace)/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java 8元空间(Metaspace)</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
   
 </article>
 
 
-
-
-
-
-
-  
-    <article id="post-Java 8元空间(Metaspace)" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/06/30/Java 8元空间(Metaspace)/" class="article-date">
-  	<time datetime="2015-06-30T07:30:29.000Z" itemprop="datePublished">6月 30 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/30/Java 8元空间(Metaspace)/">Java 8元空间(Metaspace)</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="元空间（Metaspace）：">元空间（Metaspace）：</h4>
-<p>相信许多Java开发者都见过“java.lang.OutOfMemoryError: PermGen space”问题，这通常是类加载器相关的内存泄漏以及新类加载器的创建导致的，一般出现于代码热部署时。相对于正式产品，该问题在开发机上出现的频率更高，通常“问题”是默认值太低了, 常用的解决方法是将其设置为256MB或更高。</p>
-<p>PermGen space的全称是Permanent Generation space,是指JVM永久保存区域，这一部分用于存放Class和Meta的信息,Class在被 Load的时候被放入PermGen space区域，它和和存放Instance的Heap区域不同,所以如果你的APP会LOAD很多CLASS的话,就很可能出现PermGen space错误。这种错误常见在web服务器对JSP进行pre compile的时候。JVM 种类有很多(如Oralce-Sun Hotspot, Oralce JRockit, IBM J9, Taobao JVM）。Oracle-Sun Hotspot才有PermGen space，JRockit以及J9没有这个区域。</p>
-<p>随着JAVA8时代的来临,新增一种使用本地内存来存储类元数据信息称之为元空间(Metaspace)，JVM永久区被元空间(Metaspace)替换(JEP 122), 与Oracle JRockit 和IBM JVM’s很相似。JVM参数 -XX:PermSize 和 -XX:MaxPermSize被XX:MetaSpaceSize 和 -XX:MaxMetaspaceSize代替，如果使用了-XX:PermSize 和 -XX:MaxPermSize启动时会发出警告。。 这意味着不会再有java.lang.OutOfMemoryError: PermGen问题，也不再需要你进行调优及监控内存空间的使用。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/java/">java</a>
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
 
-      
-        <p class="article-more-link">
-          <a  href="/2015/06/30/Java 8元空间(Metaspace)/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
 
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="JVM垃圾回收算法与回收器" data-title="JVM垃圾回收算法与回收器" data-url="http://www.chenbaocheng.com/2015/07/01/JVM垃圾回收算法与回收器/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
 
 
 
-
-
-  
-    <article id="post-JVM内存管理与垃圾回收" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/06/26/JVM内存管理与垃圾回收/" class="article-date">
-  	<time datetime="2015-06-26T03:53:26.000Z" itemprop="datePublished">6月 26 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/26/JVM内存管理与垃圾回收/">JVM内存管理与垃圾回收</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Java虚拟机拥有自动管理内存机制，所以Java 程序员不需要像C/C++一样去关注内存的分配和释放，也不容易出现内存泄露和内存溢出的问题。但是如果一旦出现此类问题，如果我们对虚拟机的内存管理机制不了解，那么解决这类问题还是比较困难的，所以我们要深入学习JVM的内存管理。</p>
-<h4 id="Java代码是如何执行的？">Java代码是如何执行的？</h4>
-<img src="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/jvm-arch.png">
-
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/java/">java</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/06/26/JVM内存管理与垃圾回收/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Java设计模式(一)" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/06/24/Java设计模式(一)/" class="article-date">
-  	<time datetime="2015-06-24T07:13:11.000Z" itemprop="datePublished">6月 24 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/24/Java设计模式(一)/">Java设计模式(一)</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="设计模式的分类">设计模式的分类</h4>
-<p>创建型模式，共5种</p>
-<pre><code><span class="bullet">1. </span>工厂方法模式
-<span class="bullet">2. </span>抽象工厂模式
-<span class="bullet">3. </span>单例模式
-<span class="bullet">4. </span>建造者模式
-<span class="bullet">5. </span>原型模式
-</code></pre><p>结构型模式，共7种</p>
-<pre><code><span class="bullet">1. </span>适配器模式
-<span class="bullet">2. </span>装饰器模式
-<span class="bullet">3. </span>代理模式
-<span class="bullet">4. </span>外观模式
-<span class="bullet">5. </span>桥接模式
-<span class="bullet">6. </span>组合模式
-<span class="bullet">7. </span>享元模式。
-</code></pre><p>行为型模式，共11种：</p>
-<pre><code><span class="bullet">1. </span>策略模式
-<span class="bullet">2. </span>模板方法模式
-<span class="bullet">3. </span>观察者模式
-<span class="bullet">4. </span>迭代子模式
-<span class="bullet">5. </span>责任链模式
-<span class="bullet">6. </span>命令模式
-<span class="bullet">7. </span>备忘录模式
-<span class="bullet">8. </span>状态模式
-<span class="bullet">9. </span>访问者模式
-<span class="bullet">10. </span>中介者模式
-<span class="bullet">11. </span>解释器模式
-</code></pre>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/java/">java</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/06/24/Java设计模式(一)/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-RabbitMQ基本应用" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/06/16/RabbitMQ基本应用/" class="article-date">
-  	<time datetime="2015-06-16T08:05:42.000Z" itemprop="datePublished">6月 16 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/16/RabbitMQ基本应用/">RabbitMQ基本应用</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>RabbitMQ是流行的开源消息队列系统，用erlang语言开发。RabbitMQ是AMQP（高级消息队列协议）的标准实现。</p>
-<p><img src="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/n2gyg2.png"><br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/java/">java</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/06/16/RabbitMQ基本应用/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-JVM性能监控工具" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/06/15/JVM性能监控工具/" class="article-date">
-  	<time datetime="2015-06-15T07:50:07.000Z" itemprop="datePublished">6月 15 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/15/JVM性能监控工具/">JVM性能监控工具</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在 java 的 bin 目录下，jdk 提供了很多使用的工具，下面学习一些监控和故障处理的工具。</p>
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>jps</td>
-<td>JVM process status tool，显示指定系统内所有的 HotSpot 虚拟机进程</td>
-</tr>
-<tr>
-<td>jstat</td>
-<td>JVM statistics monitoring tool，用于收集 HotSpot 虚拟机各方面的运行数据</td>
-</tr>
-<tr>
-<td>jinfo</td>
-<td>显示虚拟机配置信息</td>
-</tr>
-<tr>
-<td>jmap</td>
-<td>生产虚拟机的内存快照 dump 文件</td>
-</tr>
-<tr>
-<td>jhat</td>
-<td>分析 dump 文件</td>
-</tr>
-<tr>
-<td>jstack</td>
-<td>显示虚拟机的线程快照</td>
-</tr>
-</tbody>
-</table>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/java/">java</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/06/15/JVM性能监控工具/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Mac-OS-X下使用-Charles-进行抓包" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/06/15/Mac-OS-X下使用-Charles-进行抓包/" class="article-date">
-  	<time datetime="2015-06-15T07:14:12.000Z" itemprop="datePublished">6月 15 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/15/Mac-OS-X下使用-Charles-进行抓包/">Mac OS X下使用 Charles 进行抓包</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Charles 是一个网络抓包工具，可以在电脑起一个代理，手机配置代理 IP 后，就可以用 Charles 看到手机的网络请求了。</p>
-<h4 id="1、下载">1、下载</h4>
-<p><a href="http://www.charlesproxy.com/" target="_blank" rel="external">http://www.charlesproxy.com/</a></p>
-<h4 id="2、启动_Charles，支持正版，如需破解请自行搜索">2、启动 Charles，支持正版，如需破解请自行搜索</h4>
-<h4 id="3、手机设置代理,_以_iPhone_为例">3、手机设置代理, 以 iPhone 为例</h4>
-<p>设置-无线局域网-选择已连接的局域网-HTTP代理-手动，服务器：你电脑的 IP，端口：8888</p>
-<p>第一次用手机请求网络时，Charles会提示是否允许接入，选择Allow就可以了。</p>
-<p>如果是 HTTPS 抓包，需要安装证书，证书地址：<a href="http://www.charlesproxy.com/ssl.zip" target="_blank" rel="external">http://www.charlesproxy.com/ssl.zip</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/java/">java</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-MacOS环境使用wireshark抓包" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/05/07/MacOS环境使用wireshark抓包/" class="article-date">
-  	<time datetime="2015-05-07T04:17:31.000Z" itemprop="datePublished">5月 7 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/07/MacOS环境使用wireshark抓包/">MacOS环境使用wireshark抓包</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h5 id="安装">安装</h5>
-<pre><code>brew <span class="operator"><span class="keyword">install</span> wireshark —<span class="keyword">with</span>-qt5</span>
-</code></pre><h5 id="启动应用">启动应用</h5>
-<pre><code><span class="comment">#如果不是管理员身份启动，则获取不到网卡信息。</span>
-<span class="built_in">sudo</span> wireshark-qt
-</code></pre><h5 id="IP过滤">IP过滤</h5>
-<pre><code><span class="comment">#来源IP</span>
-ip.<span class="variable">src =</span>= 
-<span class="comment">#目标IP</span>
-ip.<span class="variable">dst =</span>=
-<span class="comment">#例如过滤来源192.168.1.10的请求</span>
-ip.<span class="variable">src=</span>=<span class="number">192.168</span>.<span class="number">1.10</span>
-</code></pre><p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/java/">java</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/05/07/MacOS环境使用wireshark抓包/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-在-github-发一个spring-boot-jpa-DEMO" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/04/29/在-github-发一个spring-boot-jpa-DEMO/" class="article-date">
-  	<time datetime="2015-04-29T08:58:12.000Z" itemprop="datePublished">4月 29 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/29/在-github-发一个spring-boot-jpa-DEMO/">在 github 放一个spring-boot-jpa DEMO</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在 github 放一个spring-boot-jpa DEMO。</p>
-<p>Spring Boot 的出现极大提高了生产效率, 尤其是做一些规模不太大的项目，它非常好用了，你不必再为繁杂的配置文件而烦恼，只需在 pom 里增加想依赖的组件就可以了，然后定义 Entity，声明 Dao，在 Service 层包装一下业务, controller 里去做 WEB 页面展示的准备工作就好了。</p>
-<p>这个DEMO主要演示基于 spring boot 的项目开发，如何使用 jpa 对数据库 CRUD 操作，如何用 freemarker 展示页面。</p>
-<p>项目地址：<a href="https://github.com/cbc009/spring-boot-jpa" target="_blank" rel="external">spring-boot-jpa DEMO</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/java/">java</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Java-Unsupported-major-minor-version-51-0" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/04/23/Java-Unsupported-major-minor-version-51-0/" class="article-date">
-  	<time datetime="2015-04-23T06:44:35.000Z" itemprop="datePublished">4月 23 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/23/Java-Unsupported-major-minor-version-51-0/">Java : Unsupported major.minor version 51.0解决方法</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在使用 intellij idea  插件 QAPlug - FindBugs 时报错：</p>
-<p>======Cannot Load Project======<br>Cannot load project:<br>com.intellij.ide.plugins.PluginMananger:$StartupAboortedException:<br>com.intellij.diagnostic.PluginException:<br>com/soldevelo/findbugs/FindBugsComponent:Unsupported major.minor version 51.0[Plugin:QAPlug - FindBugs][Plugin:QAPlug - FindBugs]</p>
-<p>经过一番搜索，找到如下 JDK 版本对应关系 ：<br>J2SE 8 = 52 (0x34 hex)<br>J2SE 7 = 51 (0x33 hex)<br>J2SE 6.0 = 50 (0x32 hex)<br>J2SE 5.0 = 49 (0x31 hex)<br>JDK 1.4 = 48 (0x30 hex)<br>JDK 1.3 = 47 (0x2F hex)<br>JDK 1.2 = 46 (0x2E hex)<br>JDK 1.1 = 45 (0x2D hex)</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/java/">java</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/04/23/Java-Unsupported-major-minor-version-51-0/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/categories/java/page/2/">2</a><a class="extend next" rel="next" href="/categories/java/page/2/">Next &raquo;</a>
-    </nav>
-  
 </div>
       <footer id="footer">
   <div class="outer">
@@ -920,10 +353,10 @@ ip.<span class="variable">src=</span>=<span class="number">192.168</span>.<span 
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
-		isCategory: true,
+		isCategory: false,
 		open_in_new: false
 	}
 </script>
