@@ -4,7 +4,7 @@
     
   <url>
     <loc>http://www.chenbaocheng.com/2015/07/02/JVM%20G1%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/</loc>
-    <lastmod>2015-07-02T06:29:46.000Z</lastmod>
+    <lastmod>2015-07-02T06:33:17.000Z</lastmod>
     <data>
         <display>
         <title>JVM G1垃圾回收器</title>
@@ -16,6 +16,8 @@
 
 <p><strong>Java 8 HotSpotVM</strong></p>
 <img src="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/java8-jvm-space.png">
+
+<a id="more"></a>
 
 <p>1、绝大部分新生成的对象都放在Eden区，当Eden区将满，JVM会因申请不到内存，而触发Young GC ,进行Eden区+有对象的Survivor区(设为S0区)垃圾回收，把存活的对象用复制算法拷贝到一个空的Survivor(S1)中，此时Eden区被清空，另外一个Survivor S0也为空。下次触发Young GC回收Eden+S0，将存活对象拷贝到S1中。新生代垃圾回收简单、粗暴、高效。</p>
 <p>2、若发现Survivor区满了，则将这些对象拷贝到old区或者Survivor没满但某些对象足够Old,也拷贝到Old区(每次Young GC都会使Survivor区存活对象值+1，直到阈值)。 </p>
@@ -46,14 +48,14 @@
 <p>1、标记阶段，首先初始标记(Initial-Mark),这个阶段是停顿的(Stop the World Event)，并且会触发一次普通Mintor GC。对应GC log:GC pause (young) (inital-mark)</p>
 <p>2、Root Region Scanning，程序运行过程中会回收survivor区(存活到老年代)，这一过程必须在young GC之前完成。</p>
 <p>3、Concurrent Marking，在整个堆中进行并发标记(和应用程序并发执行)，此过程可能被young GC中断。在并发标记阶段，若发现区域对象中的所有对象都是垃圾，那个这个区域会被立即回收(图中打X)。同时，并发标记过程中，会计算每个区域的对象活性(区域中存活对象的比例)。</p>
-<img src="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/jvm-g1-old-1.png">
+<img src="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/jvm-g1-old-1.jpg">
 
 <p>4、Remark, 再标记，会有短暂停顿(STW)。再标记阶段是用来收集 并发标记阶段 产生新的垃圾(并发阶段和应用程序一同运行)；G1中采用了比CMS更快的初始快照算法:snapshot-at-the-beginning (SATB)。</p>
 <p>5、Copy/Clean up，多线程清除失活对象，会有STW。G1将回收区域的存活对象拷贝到新区域，清除Remember Sets，并发清空回收区域并把它返回到空闲区域链表中。</p>
-<img src="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/jvm-g1-old-2.png">
+<img src="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/jvm-g1-old-2.jpg">
 
 <p>6、复制/清除过程后。回收区域的活性对象已经被集中回收到深蓝色和深绿色区域。</p>
-<img src="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/jvm-g1-old-3.png">
+<img src="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/jvm-g1-old-3.jpg">
 
 <p><strong>关于Remembered Set概念</strong>：G1收集器中，Region之间的对象引用以及其他收集器中的新生代和老年代之间的对象引用是使用Remembered Set来避免扫描全堆。G1中每个Region都有一个与之对应的Remembered Set，虚拟机发现程序对Reference类型数据进行写操作时，会产生一个Write Barrier暂时中断写操作，检查Reference引用的对象是否处于不同的Region之间(在分代中例子中就是检查是否老年代中的对象引用了新生代的对象)，如果是便通过CardTable把相关引用信息记录到被引用对象所属的Region的Remembered Set中。当内存回收时，在GC根节点的枚举范围加入Remembered Set即可保证不对全局堆扫描也不会有遗漏。</p>
 <p>G1虽然保留了CMS关于代的概念，但是代已经不是物理上连续区域，而是一个逻辑的概念。在标记过程中，每个区域的对象活性都被计算，在回收时候，就可以根据用户设置的停顿时间，选择活性较低的区域收集，这样既能保证垃圾回收，又能保证停顿时间，而且也不会降低太多的吞吐量。Remark阶段新算法的运用，以及收集过程中的压缩，都弥补了CMS不足。引用Oracle官网的一句话：“G1 is planned as the long term replacement for the Concurrent Mark-Sweep Collector (CMS)”。</p>
