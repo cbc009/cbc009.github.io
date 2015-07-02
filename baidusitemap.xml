@@ -3,11 +3,11 @@
 
     
   <url>
-    <loc>http://www.chenbaocheng.com/2015/07/02/JAVA7-8-G1%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E8%AF%A6/</loc>
-    <lastmod>2015-07-02T06:29:18.000Z</lastmod>
+    <loc>http://www.chenbaocheng.com/2015/07/02/JVM%20G1%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/</loc>
+    <lastmod>2015-07-02T06:29:46.000Z</lastmod>
     <data>
         <display>
-        <title>JVM G1垃圾回收器详</title>
+        <title>JVM G1垃圾回收器</title>
         <pubTime>2015-07-02T02:35:59.000Z</pubTime>
         
          <content><![CDATA[<p>回顾一下主流的(HotSpot JVM)JAVA垃圾回收器，堆被内存分解为三个区域，具体分为：新生代、老年代、持久代。</p>

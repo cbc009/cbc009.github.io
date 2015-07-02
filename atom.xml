@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.chenbaocheng.com/"/>
-  <updated>2015-07-02T06:29:28.252Z</updated>
+  <updated>2015-07-02T06:30:36.152Z</updated>
   <id>http://www.chenbaocheng.com/</id>
   
   <author>
@@ -15,11 +15,11 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[JVM G1垃圾回收器详]]></title>
-    <link href="http://www.chenbaocheng.com/2015/07/02/JAVA7-8-G1%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E8%AF%A6/"/>
-    <id>http://www.chenbaocheng.com/2015/07/02/JAVA7-8-G1垃圾回收器详/</id>
+    <title><![CDATA[JVM G1垃圾回收器]]></title>
+    <link href="http://www.chenbaocheng.com/2015/07/02/JVM%20G1%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/"/>
+    <id>http://www.chenbaocheng.com/2015/07/02/JVM G1垃圾回收器/</id>
     <published>2015-07-02T02:35:59.000Z</published>
-    <updated>2015-07-02T06:29:18.000Z</updated>
+    <updated>2015-07-02T06:29:46.000Z</updated>
     <content type="html"><![CDATA[<p>回顾一下主流的(HotSpot JVM)JAVA垃圾回收器，堆被内存分解为三个区域，具体分为：新生代、老年代、持久代。</p>
 <p><strong>Java 7 HotSpotVM</strong></p>
 <img src="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/java7-jvm-space.png">
