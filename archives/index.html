@@ -116,6 +116,72 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-ZooKeeper配置与使用" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/03/ZooKeeper配置与使用/" class="article-date">
+  	<time datetime="2015-07-03T06:16:00.000Z" itemprop="datePublished">7月 3 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/03/ZooKeeper配置与使用/">ZooKeeper配置与使用</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>ZooKeeper Server是一个Java语言实现的分布式协调服务框架，因此需要JDK6+的支持。为了确保ZooKeeper服务的稳定与可靠性，通常是搭建成一个ZK集群来对外提供服务。ZK有一个重要的特性：集群中只要有过半的机器是正常工作的，那么整个集群对外就是可用的，所以建议集群的机器数量为奇数。</p>
+<h4 id="1、安装JDK6+">1、安装JDK6+</h4>
+<h4 id="2、去官网选择一个合适的版本下载。">2、去官网选择一个合适的版本下载。</h4>
+<pre><code><span class="comment">#官网 http://www.apache.org/dyn/closer.cgi/zookeeper/</span>
+
+wget <span class="symbol">http:</span>/<span class="regexp">/mirrors.cnnic.cn/apache</span><span class="regexp">/zookeeper/zookeeper</span>-<span class="number">3.4</span>.<span class="number">6</span>/zookeeper-<span class="number">3.4</span>.<span class="number">6</span>.tar.gz
+tar zxf zookeeper-<span class="number">3.4</span>.<span class="number">6</span>.tar.gz
+cd zookeeper-<span class="number">3.4</span>.<span class="number">6</span>
+</code></pre>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/java/">java</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/07/03/ZooKeeper配置与使用/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-JVM G1垃圾回收器" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -727,77 +793,6 @@ ip.<span class="variable">src=</span>=<span class="number">192.168</span>.<span 
       
         <p class="article-more-link">
           <a  href="/2015/05/05/Docker学习-四-Dockerfile/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Docker学习-三-Docker镜像和容器的常用操作" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/04/30/Docker学习-三-Docker镜像和容器的常用操作/" class="article-date">
-  	<time datetime="2015-04-30T08:06:29.000Z" itemprop="datePublished">4月 30 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/30/Docker学习-三-Docker镜像和容器的常用操作/">Docker学习(三) Docker镜像和容器的常用操作</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h5 id="列出镜像">列出镜像</h5>
-<pre><code>cbc ~ # docker images
-REPOSITORY         <span class="constant"> TAG </span>               <span class="constant"> IMAGE </span>ID           <span class="constant"> CREATED </span>           <span class="constant"> VIRTUAL </span>SIZE
-centos              <span class="number">7</span>                   fd44297e2ddb        <span class="number">8</span> days ago          <span class="number">229.6</span> MB
-centos              centos7             fd44297e2ddb        <span class="number">8</span> days ago          <span class="number">229.6</span> MB
-centos              latest              fd44297e2ddb        <span class="number">8</span> days ago          <span class="number">229.6</span> MB
-&lt;none&gt;              &lt;none&gt;              ae0c2d0bdc10        <span class="number">5</span> months ago        <span class="number">224</span> MB
-
-<span class="preprocessor">#REPOSITORY 镜像来源仓库</span>
-<span class="preprocessor">#TAG 镜像标记</span>
-<span class="preprocessor">#IMAGE ID 镜像唯一 ID</span>
-<span class="preprocessor">#CREATED 镜像创建时间</span>
-<span class="preprocessor">#VIRTUAL SIZE 镜像大小</span>
-</code></pre>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/docker/">docker</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/04/30/Docker学习-三-Docker镜像和容器的常用操作/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
