@@ -116,6 +116,308 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-TOP命令解释" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/09/TOP命令解释/" class="article-date">
+  	<time datetime="2015-07-09T09:36:36.000Z" itemprop="datePublished">7月 9 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/09/TOP命令解释/">TOP命令解释</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> top命令是Linux下最常用的性能分析工具，它能够实时显示系统中各个进程的资源占用状况。</p>
+<p><strong>top命令参数</strong></p>
+<pre><code>-<span class="ruby">b   批处理模式（batch mode），可输出到管道、文件。默认情况下-b会一直输出，可以用-nN指定输出次数。
+</span>-<span class="ruby">n <span class="constant">N</span>限制输出次数。
+</span>-<span class="ruby">d <span class="constant">N</span>    刷新时间间隔。
+</span>-<span class="ruby">p <span class="constant">PID</span>  监控指定进程。
+</span>-<span class="ruby"><span class="constant">H</span> -p <span class="constant">PID</span>   监控指定进程和进行内线程信息。</span>
+</code></pre><p><strong>执行top命令按键操作</strong></p>
+<pre><code>c       显示完整的命令名。c为Command之意。
+d       修改刷新时间。d为Display之意。
+u       显示指定用户相关进程。u为User之意。
+P       按<span class="built_in">CPU</span>使用排序。P为Processor（处理器）之意。
+M       按内存使用排序。M为Momery之意。
+F       排序（进入新的界面，并选择排序的目标字段）。
+R       顺序或逆序。
+H       显示线程
+Z       以多色彩显示top。
+l/t/m   toggle，load/<span class="built_in">cpu</span>/内存信息
+<span class="number">1</span>       显示多<span class="built_in">CPU</span>的信息（多核机器上查看每个<span class="built_in">CPU</span>的使用率）。
+W       保存当前top的配置
+</code></pre><p><strong>top命令演示</strong></p>
+<pre><code>$ top
+top - <span class="number">17</span>:<span class="number">38</span>:<span class="number">29</span> up <span class="number">3</span> days, <span class="number">45</span> min,  <span class="number">2</span> users,  load average: <span class="number">0.00</span>, <span class="number">0.00</span>, <span class="number">0.00</span>
+Tasks: <span class="number">116</span> total,   <span class="number">1</span> running, <span class="number">115</span> sleeping,   <span class="number">0</span> stopped,   <span class="number">0</span> zombie
+Cpu(s):  <span class="number">0.1</span>%us,  <span class="number">0.1</span>%sy,  <span class="number">0.0</span>%ni, <span class="number">98.9</span>%id,  <span class="number">0.8</span>%wa,  <span class="number">0.0</span>%hi,  <span class="number">0.0</span>%si,  <span class="number">0.0</span>%st
+Mem:   7956536k total,  7774476k used,   182060k free,   170028k buffers
+Swap:  8093692k total,        0k used,  8093692k free,  6241820k cached
+
+  PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND
+   <span class="number">11</span> root      <span class="number">20</span>   <span class="number">0</span>     <span class="number">0</span>    <span class="number">0</span>    <span class="number">0</span> S  <span class="number">2.0</span>  <span class="number">0.0</span>   <span class="number">2</span>:<span class="number">55.94</span> events/<span class="number">0</span>
+    <span class="number">1</span> root      <span class="number">20</span>   <span class="number">0</span> <span class="number">19232</span> <span class="number">1508</span> <span class="number">1216</span> S  <span class="number">0.0</span>  <span class="number">0.0</span>   <span class="number">0</span>:<span class="number">00.72</span> init
+  <span class="keyword">...</span>
+  <span class="keyword">...</span> 篇幅太长，已删除
+  <span class="keyword">...</span>
+</code></pre><p><strong>第 1 行 效果同直行uptime命令</strong></p>
+<table>
+<thead>
+<tr>
+<th>-</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>17:38:29</td>
+<td>当前时间</td>
+</tr>
+<tr>
+<td>up 3 days, 45 min</td>
+<td>系统启动到当前的时间</td>
+</tr>
+<tr>
+<td>2 users</td>
+<td>当前登录用户数</td>
+</tr>
+<tr>
+<td>load average: 0.00, 0.00, 0.00</td>
+<td>系统负载，即任务队列的平均长度。 三个数值分别为  1分钟、5分钟、15分钟前到现在的平均值。</td>
+</tr>
+</tbody>
+</table>
+<p><strong>第 2 行 进程</strong></p>
+<table>
+<thead>
+<tr>
+<th>-</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>116 total</td>
+<td>进程总数</td>
+</tr>
+<tr>
+<td>1 running</td>
+<td>正在运行进程数</td>
+</tr>
+<tr>
+<td>115 sleeping</td>
+<td>休眠进程数</td>
+</tr>
+<tr>
+<td>0 stopped</td>
+<td>停止的进程数</td>
+</tr>
+<tr>
+<td>0 zombie</td>
+<td>僵尸进程数</td>
+</tr>
+</tbody>
+</table>
+<p><strong>第 3 行 CPU</strong></p>
+<table>
+<thead>
+<tr>
+<th>-</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.1%us</td>
+<td>用户占用CPU百分比</td>
+</tr>
+<tr>
+<td>0.1%sy</td>
+<td>内核占用CPU百分比</td>
+</tr>
+<tr>
+<td>0.0%ni</td>
+<td>用户进程改变过优先级的进程占用CPU百分比</td>
+</tr>
+<tr>
+<td>98.9%id</td>
+<td>空闲CPU百分比</td>
+</tr>
+<tr>
+<td>0.8%wa</td>
+<td>等待输入输出的CPU时间百分比</td>
+</tr>
+<tr>
+<td>0.0%hi</td>
+<td>硬中断（Hardware IRQ）占用CPU的百分比</td>
+</tr>
+<tr>
+<td>0.0%si</td>
+<td>软中断（Software Interrupts）占用CPU的百分比</td>
+</tr>
+<tr>
+<td>0.0%st</td>
+<td>丢失时间占用CPU</td>
+</tr>
+</tbody>
+</table>
+<p><strong>第 4 行 内存</strong></p>
+<table>
+<thead>
+<tr>
+<th>-</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7956536k total</td>
+<td>物理内存总量</td>
+</tr>
+<tr>
+<td>7774476k used</td>
+<td>已使用内存总量</td>
+</tr>
+<tr>
+<td>182060k free</td>
+<td>空闲内存总量</td>
+</tr>
+<tr>
+<td>170028k buffers</td>
+<td>缓存的内存量</td>
+</tr>
+</tbody>
+</table>
+<p><strong>第 5 行 swap交换分区信息</strong></p>
+<table>
+<thead>
+<tr>
+<th>-</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8093692k total</td>
+<td>交换区总量</td>
+</tr>
+<tr>
+<td>0k used</td>
+<td>已使用交换区总量</td>
+</tr>
+<tr>
+<td>8093692k free</td>
+<td>空闲交换区总量</td>
+</tr>
+<tr>
+<td>6241820k cached</td>
+<td>缓冲的交换区总量</td>
+</tr>
+</tbody>
+</table>
+<p><strong>第 7 行 各进程状态监控</strong></p>
+<table>
+<thead>
+<tr>
+<th>-</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PID</td>
+<td>进程id</td>
+</tr>
+<tr>
+<td>USER</td>
+<td>进程所有者</td>
+</tr>
+<tr>
+<td>PR</td>
+<td>进程优先级</td>
+</tr>
+<tr>
+<td>NI</td>
+<td>nice值。负值表示高优先级，正值表示低优先级</td>
+</tr>
+<tr>
+<td>VIRT</td>
+<td>进程使用的虚拟内存总量，单位kb。VIRT=SWAP+RES</td>
+</tr>
+<tr>
+<td>RES</td>
+<td>进程使用的、未被换出的物理内存大小，单位kb。RES=CODE+DATA</td>
+</tr>
+<tr>
+<td>SHR</td>
+<td>共享内存大小，单位kb</td>
+</tr>
+<tr>
+<td>S</td>
+<td>进程状态。D=不可中断的睡眠状态 R=运行 S=睡眠 T=跟踪/停止 Z=僵尸进程</td>
+</tr>
+<tr>
+<td>%CPU</td>
+<td>上次更新到现在的CPU时间占用百分比</td>
+</tr>
+<tr>
+<td>%MEM</td>
+<td>进程使用的物理内存百分比</td>
+</tr>
+<tr>
+<td>TIME+</td>
+<td>进程使用的CPU时间总计，单位1/100秒</td>
+</tr>
+<tr>
+<td>COMMAND</td>
+<td>进程名称（命令名/命令行）</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/java/">java</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-ZooKeeper配置与使用" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -725,64 +1027,6 @@ ip.<span class="variable">src=</span>=<span class="number">192.168</span>.<span 
         <p class="article-more-link">
           <a  href="/2015/05/07/MacOS环境使用wireshark抓包/#more">more >></a>
         </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-在-github-发一个spring-boot-jpa-DEMO" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/04/29/在-github-发一个spring-boot-jpa-DEMO/" class="article-date">
-  	<time datetime="2015-04-29T08:58:12.000Z" itemprop="datePublished">4月 29 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/29/在-github-发一个spring-boot-jpa-DEMO/">在 github 放一个spring-boot-jpa DEMO</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在 github 放一个spring-boot-jpa DEMO。</p>
-<p>Spring Boot 的出现极大提高了生产效率, 尤其是做一些规模不太大的项目，它非常好用了，你不必再为繁杂的配置文件而烦恼，只需在 pom 里增加想依赖的组件就可以了，然后定义 Entity，声明 Dao，在 Service 层包装一下业务, controller 里去做 WEB 页面展示的准备工作就好了。</p>
-<p>这个DEMO主要演示基于 spring boot 的项目开发，如何使用 jpa 对数据库 CRUD 操作，如何用 freemarker 展示页面。</p>
-<p>项目地址：<a href="https://github.com/cbc009/spring-boot-jpa" target="_blank" rel="external">spring-boot-jpa DEMO</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/java/">java</a>
-	</div>
-
-
       
       <div class="clearfix"></div>
     </div>
