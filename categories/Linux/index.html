@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2015/7 | CHENBAOCHENG.COM</title>
+  <title>Category: Linux | CHENBAOCHENG.COM</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description">
 <meta property="og:type" content="website">
 <meta property="og:title" content="CHENBAOCHENG.COM">
-<meta property="og:url" content="http://www.chenbaocheng.com/archives/2015/07/">
+<meta property="og:url" content="http://www.chenbaocheng.com/categories/Linux/">
 <meta property="og:site_name" content="CHENBAOCHENG.COM">
 <meta property="og:description">
 <meta name="twitter:card" content="summary">
@@ -170,11 +170,11 @@
 
 
   
-    <article id="post-ZooKeeper配置与使用" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Linux开机获取IP发送到指定邮箱" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/07/03/ZooKeeper配置与使用/" class="article-date">
-  	<time datetime="2015-07-03T06:16:00.000Z" itemprop="datePublished">7月 3 2015</time>
+      <a href="/2015/04/30/Linux开机获取IP发送到指定邮箱/" class="article-date">
+  	<time datetime="2015-04-30T05:20:19.000Z" itemprop="datePublished">4月 30 2015</time>
 </a>
     </div>
   
@@ -187,7 +187,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/03/ZooKeeper配置与使用/">ZooKeeper配置与使用</a>
+      <a class="article-title" href="/2015/04/30/Linux开机获取IP发送到指定邮箱/">Linux开机获取IP发送到指定邮箱</a>
     </h1>
   
 
@@ -196,15 +196,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>ZooKeeper Server是一个Java语言实现的分布式协调服务框架，因此需要JDK6+的支持。为了确保ZooKeeper服务的稳定与可靠性，通常是搭建成一个ZK集群来对外提供服务。ZK有一个重要的特性：集群中只要有过半的机器是正常工作的，那么整个集群对外就是可用的，所以建议集群的机器数量为奇数。</p>
-<h4 id="1、安装JDK6+">1、安装JDK6+</h4>
-<h4 id="2、去官网选择一个合适的版本下载。">2、去官网选择一个合适的版本下载。</h4>
-<pre><code><span class="comment">#官网 http://www.apache.org/dyn/closer.cgi/zookeeper/</span>
-
-wget <span class="symbol">http:</span>/<span class="regexp">/mirrors.cnnic.cn/apache</span><span class="regexp">/zookeeper/zookeeper</span>-<span class="number">3.4</span>.<span class="number">6</span>/zookeeper-<span class="number">3.4</span>.<span class="number">6</span>.tar.gz
-tar zxf zookeeper-<span class="number">3.4</span>.<span class="number">6</span>.tar.gz
-cd zookeeper-<span class="number">3.4</span>.<span class="number">6</span>
-</code></pre>
+        <p>之所以有这样的需求，是因为平日主力是用自己的笔记本，公司给配的台式机（主机、显示器）扔工位下面，装了 Centos 玩儿，公司是DHCP 分配IP，每次重启开机都得到台式机登录一下，才能获取最新IP，有点小麻烦，重启后给自己邮箱发个邮件，这样省事儿，看看邮件里的IP，远程 SSH 登录就可以了~</p>
+<p>我的台式机系统是 CENTOS，邮箱是163的，安装配置如下:</p>
+<p>1、安装mailx</p>
+<p>yum install mailx<br>
       
     </div>
     
@@ -213,78 +208,13 @@ cd zookeeper-<span class="number">3.4</span>.<span class="number">6</span>
       
       
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/java/">java</a>
+	<a class="article-category-link" href="/categories/Linux/">Linux</a>
 	</div>
 
 
       
         <p class="article-more-link">
-          <a  href="/2015/07/03/ZooKeeper配置与使用/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-JVM G1垃圾回收器" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/02/JVM G1垃圾回收器/" class="article-date">
-  	<time datetime="2015-07-02T02:35:59.000Z" itemprop="datePublished">7月 2 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/02/JVM G1垃圾回收器/">JVM G1垃圾回收器</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>回顾一下主流的(HotSpot JVM)JAVA垃圾回收器，堆被内存分解为三个区域，具体分为：新生代、老年代、持久代。</p>
-<p><strong>Java 7 HotSpotVM</strong></p>
-<img src="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/java7-jvm-space.png">
-
-<p><strong>Java 8 HotSpotVM</strong></p>
-<img src="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/java8-jvm-space.png">
-
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/java/">java</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/07/02/JVM G1垃圾回收器/#more">more >></a>
+          <a  href="/2015/04/30/Linux开机获取IP发送到指定邮箱/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -328,9 +258,9 @@ cd zookeeper-<span class="number">3.4</span>.<span class="number">6</span>
 		animate: true,
 		isHome: false,
 		isPost: false,
-		isArchive: true,
+		isArchive: false,
 		isTag: false,
-		isCategory: false,
+		isCategory: true,
 		open_in_new: false
 	}
 </script>
