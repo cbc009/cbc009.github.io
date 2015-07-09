@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.chenbaocheng.com/"/>
-  <updated>2015-07-09T10:10:08.242Z</updated>
+  <updated>2015-07-09T10:11:15.116Z</updated>
   <id>http://www.chenbaocheng.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://www.chenbaocheng.com/2015/07/09/TOP%E5%91%BD%E4%BB%A4%E8%A7%A3%E9%87%8A/"/>
     <id>http://www.chenbaocheng.com/2015/07/09/TOP命令解释/</id>
     <published>2015-07-09T09:36:36.000Z</published>
-    <updated>2015-07-09T10:09:23.000Z</updated>
+    <updated>2015-07-09T10:11:07.000Z</updated>
     <content type="html"><![CDATA[<p> top命令是Linux下最常用的性能分析工具，它能够实时显示系统中各个进程的资源占用状况。</p>
 <p><strong>top命令参数</strong></p>
 <pre><code>-<span class="ruby">b   批处理模式（batch mode），可输出到管道、文件。默认情况下-b会一直输出，可以用-nN指定输出次数。
@@ -283,7 +283,7 @@ Swap:  8093692k total,        0k used,  8093692k free,  6241820k cached
     
     </summary>
     
-      <category term="java" scheme="http://www.chenbaocheng.com/categories/java/"/>
+      <category term="Linux" scheme="http://www.chenbaocheng.com/categories/Linux/"/>
     
   </entry>
   
