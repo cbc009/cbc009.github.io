@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.chenbaocheng.com/"/>
-  <updated>2015-07-09T10:09:08.470Z</updated>
+  <updated>2015-07-09T10:10:08.242Z</updated>
   <id>http://www.chenbaocheng.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://www.chenbaocheng.com/2015/07/09/TOP%E5%91%BD%E4%BB%A4%E8%A7%A3%E9%87%8A/"/>
     <id>http://www.chenbaocheng.com/2015/07/09/TOP命令解释/</id>
     <published>2015-07-09T09:36:36.000Z</published>
-    <updated>2015-07-09T10:08:35.000Z</updated>
+    <updated>2015-07-09T10:09:23.000Z</updated>
     <content type="html"><![CDATA[<p> top命令是Linux下最常用的性能分析工具，它能够实时显示系统中各个进程的资源占用状况。</p>
 <p><strong>top命令参数</strong></p>
 <pre><code>-<span class="ruby">b   批处理模式（batch mode），可输出到管道、文件。默认情况下-b会一直输出，可以用-nN指定输出次数。
@@ -27,7 +27,9 @@
 </span>-<span class="ruby">d <span class="constant">N</span>    刷新时间间隔。
 </span>-<span class="ruby">p <span class="constant">PID</span>  监控指定进程。
 </span>-<span class="ruby"><span class="constant">H</span> -p <span class="constant">PID</span>   监控指定进程和进行内线程信息。</span>
-</code></pre><p><strong>执行top命令按键操作</strong></p>
+</code></pre><a id="more"></a>
+
+<p><strong>执行top命令按键操作</strong></p>
 <pre><code>c       显示完整的命令名。c为Command之意。
 d       修改刷新时间。d为Display之意。
 u       显示指定用户相关进程。u为User之意。
@@ -272,7 +274,13 @@ Swap:  8093692k total,        0k used,  8093692k free,  6241820k cached
     <summary type="html">
     <![CDATA[<p> top命令是Linux下最常用的性能分析工具，它能够实时显示系统中各个进程的资源占用状况。</p>
 <p><strong>top命令参数</strong></p>
-<pre><code>-<span class="ruby">b   批处理模式（batch mode），可]]>
+<pre><code>-<span class="ruby">b   批处理模式（batch mode），可输出到管道、文件。默认情况下-b会一直输出，可以用-nN指定输出次数。
+</span>-<span class="ruby">n <span class="constant">N</span>限制输出次数。
+</span>-<span class="ruby">d <span class="constant">N</span>    刷新时间间隔。
+</span>-<span class="ruby">p <span class="constant">PID</span>  监控指定进程。
+</span>-<span class="ruby"><span class="constant">H</span> -p <span class="constant">PID</span>   监控指定进程和进行内线程信息。</span>
+</code></pre>]]>
+    
     </summary>
     
       <category term="java" scheme="http://www.chenbaocheng.com/categories/java/"/>
