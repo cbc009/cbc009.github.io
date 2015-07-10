@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.chenbaocheng.com/"/>
-  <updated>2015-07-10T08:15:07.275Z</updated>
+  <updated>2015-07-10T09:03:51.165Z</updated>
   <id>http://www.chenbaocheng.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://www.chenbaocheng.com/2015/07/10/Docker%E5%AD%A6%E4%B9%A0-%E4%BA%94-%E5%B8%A6web%E7%95%8C%E9%9D%A2%E7%9A%84Docker%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0shipyard/"/>
     <id>http://www.chenbaocheng.com/2015/07/10/Docker学习-五-带web界面的Docker管理平台shipyard/</id>
     <published>2015-07-10T06:17:29.000Z</published>
-    <updated>2015-07-10T08:15:01.000Z</updated>
+    <updated>2015-07-10T09:03:17.000Z</updated>
     <content type="html"><![CDATA[<p><strong>Shipyard</strong> 是一个管理容器、主机等资源的web图形化工具，它建立在docker集群管理工具Citadel之上。有core和extension两个版本：</p>
 <table>
 <thead>
@@ -122,6 +122,15 @@ GLOBAL OPTIONS:
    <span class="comment">--help, -h           show help</span>
    <span class="comment">--generate-bash-completion   </span>
    <span class="comment">--version, -v        print the version   </span>
+</code></pre><p><strong>修改密码</strong></p>
+<pre><code>shipyard <span class="keyword">cli</span>&gt; shipyard login
+<span class="label">URL:</span> http://&lt;服务器IP&gt;:<span class="number">8080</span>
+<span class="label">Username:</span> admin
+<span class="label">Password:</span> shipyard
+
+shipyard <span class="keyword">cli</span>&gt; shipyard change-password
+<span class="label">Password:</span> 新密码
+<span class="label">Confirm:</span> 验证密码
 </code></pre>]]></content>
     <summary type="html">
     <![CDATA[<p><strong>Shipyard</strong> 是一个管理容器、主机等资源的web图形化工具，它建立在docker集群管理工具Citadel之上。有core和extension两个版本：</p>
