@@ -116,71 +116,6 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-基于docker-jenkins-gitlab-maven的持续集成-CI-环境" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/09/基于docker-jenkins-gitlab-maven的持续集成-CI-环境/" class="article-date">
-  	<time datetime="2015-07-09T11:11:40.000Z" itemprop="datePublished">7月 9 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/09/基于docker-jenkins-gitlab-maven的持续集成-CI-环境/">基于docker+jenkins+gitlab+maven的持续集成(CI)环境</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="1、Docker_安装_点击查看">1、Docker 安装 <a href="http://chenbaocheng.com/2015/04/30/Docker%E5%AD%A6%E4%B9%A0-%E4%BA%8C-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" target="_blank" rel="external">点击查看</a></h4>
-<h4 id="2、安装配置GitLab">2、安装配置GitLab</h4>
-<pre><code>docker pull sameersbn/gitla<span class="variable">b:latest</span>
-
-curl -O -sSL http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/rpm/<span class="number">1.7</span>.<span class="number">0</span>/centos-<span class="number">6</span>/RPMS/x86_64/docker-engine-<span class="number">1.7</span>.<span class="number">0</span>-<span class="number">1</span>.el6.x86_64.rpm
-
-yum localinstall --nogpgcheck docker-engine-<span class="number">1.7</span>.<span class="number">0</span>-<span class="number">1</span>.el6.x86_64.rpm
-
-service docker start
-</code></pre><h4 id="4、安装配置Jenkins_Image">4、安装配置Jenkins Image</h4>
-<h4 id="5、jenkins使用相关">5、jenkins使用相关</h4>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/持续集成/">持续集成</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
     <article id="post-TOP命令解释" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -781,6 +716,68 @@ cd zookeeper-<span class="number">3.4</span>.<span class="number">6</span>
         <p class="article-more-link">
           <a  href="/2015/06/15/JVM性能监控工具/#more">more >></a>
         </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-Mac-OS-X下使用-Charles-进行抓包" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/06/15/Mac-OS-X下使用-Charles-进行抓包/" class="article-date">
+  	<time datetime="2015-06-15T07:14:12.000Z" itemprop="datePublished">6月 15 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/06/15/Mac-OS-X下使用-Charles-进行抓包/">Mac OS X下使用 Charles 进行抓包</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Charles 是一个网络抓包工具，可以在电脑起一个代理，手机配置代理 IP 后，就可以用 Charles 看到手机的网络请求了。</p>
+<h4 id="1、下载">1、下载</h4>
+<p><a href="http://www.charlesproxy.com/" target="_blank" rel="external">http://www.charlesproxy.com/</a></p>
+<h4 id="2、启动_Charles，支持正版，如需破解请自行搜索">2、启动 Charles，支持正版，如需破解请自行搜索</h4>
+<h4 id="3、手机设置代理,_以_iPhone_为例">3、手机设置代理, 以 iPhone 为例</h4>
+<p>设置-无线局域网-选择已连接的局域网-HTTP代理-手动，服务器：你电脑的 IP，端口：8888</p>
+<p>第一次用手机请求网络时，Charles会提示是否允许接入，选择Allow就可以了。</p>
+<p>如果是 HTTPS 抓包，需要安装证书，证书地址：<a href="http://www.charlesproxy.com/ssl.zip" target="_blank" rel="external">http://www.charlesproxy.com/ssl.zip</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/java/">java</a>
+	</div>
+
+
       
       <div class="clearfix"></div>
     </div>
