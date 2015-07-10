@@ -116,6 +116,116 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Docker学习-五-带web界面的Docker管理平台shipyard" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/10/Docker学习-五-带web界面的Docker管理平台shipyard/" class="article-date">
+  	<time datetime="2015-07-10T06:17:29.000Z" itemprop="datePublished">7月 10 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/10/Docker学习-五-带web界面的Docker管理平台shipyard/">带web界面的Docker管理平台shipyard</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>Shipyard</strong> 是一个管理容器、主机等资源的web图形化工具，它建立在docker集群管理工具Citadel之上。有core和extension两个版本：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>core</td>
+<td>把多个Docker host上的 containers 统一管理，支持跨越多个host。</td>
+</tr>
+<tr>
+<td>extension</td>
+<td>添加了应用路由和负载均衡、集中化日志、部署等功能。</td>
+</tr>
+</tbody>
+</table>
+<h4 id="engine">engine</h4>
+<p>一个shipyard管理的docker集群可以包含一个或多个engine，一个engine就是监听tcp端口的docker daemon。shipyard管理docker daemon、images、containers完全基于Docker API，不需要做其他的修改。另外，shipyard可以对每个engine做资源限制，包括CPU和内存；因为TCP监听相比Unix socket方式会有一定的安全隐患，所以shipyard还支持通过SSL证书与docker后台进程安全通信。</p>
+<h4 id="rethinkdb">rethinkdb</h4>
+<p>RethinkDB是一个shipyard项目的一个docker镜像，用来存放账号（account）、引擎（engine）、服务密钥（service key）、扩展元数据（extension metadata）等信息，但不会存储任何有关容器或镜像的内容。一般会启动一个shipyard/rethinkdb容器shipyard-rethinkdb-data来使用它的/data作为数据卷供另外rethinkdb一个挂载，专门用于数据存储。</p>
+<h4 id="搭建">搭建</h4>
+<p><strong> 修改配置文件</strong></p>
+<pre><code>vim /etc/sysconfig/docker
+
+<span class="preprocessor">#修改other_args值</span>
+other_args=<span class="string">"-H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock"</span>
+
+<span class="preprocessor">#重启docker后查看端口</span>
+netstat -plt | grep <span class="number">4243</span>
+</code></pre><p><strong>启动rethinkdb</strong></p>
+<pre><code>docker pull shipyard/shipyard
+
+
+docker run -<span class="keyword">it</span> -d <span class="comment">--name shipyard-rethinkdb-data \</span>
+<span class="comment">--entrypoint /bin/bash shipyard/rethinkdb -l</span>
+
+docker run -<span class="keyword">it</span> -P -d <span class="comment">--name shipyard-rethinkdb \</span>
+<span class="comment">--volumes-from shipyard-rethinkdb-data shipyard/rethinkdb</span>
+
+docker run -<span class="keyword">it</span> -p <span class="number">8080</span>:<span class="number">8080</span> -d <span class="comment">--name shipyard \</span>
+<span class="comment">--link shipyard-rethinkdb:rethinkdb shipyard/shipyard</span>
+
+<span class="built_in">URL</span>         <span class="keyword">http</span>://&lt;your-host-ip&gt;:<span class="number">8080</span>
+USER        admin
+PASSSWORD   shipyard
+</code></pre><p><strong>修改密码</strong></p>
+<p>图形界面没有提供修改密码的功能，不过可以通过命令行来操作。</p>
+<pre><code>docker <span class="command">run</span> -ti <span class="comment">--rm shipyard/shipyard-cli</span>
+
+docker <span class="command">run</span> -<span class="keyword">it</span> shipyard/shipyard-cli
+
+<span class="comment">#执行shipyard-cli后，通过下面的命令查看更多功能</span>
+shipyard help
+</code></pre>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/docker/">docker</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-TOP命令解释" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
