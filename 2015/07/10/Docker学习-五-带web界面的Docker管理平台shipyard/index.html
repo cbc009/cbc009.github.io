@@ -20,12 +20,7 @@ core
 
 
 extension
-添加了应用路由和负载均衡、集中化日志、部署等功能。
-
-
-
-engine
-一个shipyard">
+添加了应用路由和负载均衡、集中化日志、部署等功能。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="带web界面的Docker管理平台shipyard">
 <meta property="og:url" content="http://www.chenbaocheng.com/2015/07/10/Docker学习-五-带web界面的Docker管理平台shipyard/">
@@ -45,12 +40,7 @@ core
 
 
 extension
-添加了应用路由和负载均衡、集中化日志、部署等功能。
-
-
-
-engine
-一个shipyard">
+添加了应用路由和负载均衡、集中化日志、部署等功能。">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="带web界面的Docker管理平台shipyard">
 <meta name="twitter:description" content="Shipyard 是一个管理容器、主机等资源的web图形化工具，它建立在docker集群管理工具Citadel之上。有core和extension两个版本：
@@ -68,12 +58,7 @@ core
 
 
 extension
-添加了应用路由和负载均衡、集中化日志、部署等功能。
-
-
-
-engine
-一个shipyard">
+添加了应用路由和负载均衡、集中化日志、部署等功能。">
 
   
     <link rel="alternative" href="/atom.xml" title="CHENBAOCHENG.COM" type="application/atom+xml">
@@ -230,6 +215,8 @@ engine
 </tr>
 </tbody>
 </table>
+<a id="more"></a>
+
 <h4 id="engine">engine</h4>
 <p>一个shipyard管理的docker集群可以包含一个或多个engine，一个engine就是监听tcp端口的docker daemon。shipyard管理docker daemon、images、containers完全基于Docker API，不需要做其他的修改。另外，shipyard可以对每个engine做资源限制，包括CPU和内存；因为TCP监听相比Unix socket方式会有一定的安全隐患，所以shipyard还支持通过SSL证书与docker后台进程安全通信。</p>
 <h4 id="rethinkdb">rethinkdb</h4>
@@ -259,14 +246,58 @@ docker run -<span class="keyword">it</span> -p <span class="number">8080</span>:
 <span class="built_in">URL</span>         <span class="keyword">http</span>://&lt;your-host-ip&gt;:<span class="number">8080</span>
 USER        admin
 PASSSWORD   shipyard
-</code></pre><p><strong>修改密码</strong></p>
-<p>图形界面没有提供修改密码的功能，不过可以通过命令行来操作。</p>
-<pre><code>docker <span class="command">run</span> -ti <span class="comment">--rm shipyard/shipyard-cli</span>
+</code></pre><p><strong>shipyard-cli</strong></p>
+<p>图形界面没有提供修改密码的功能，不过可以通过shipyard-cli来修改。</p>
+<pre><code>docker run -ti <span class="comment">--rm shipyard/shipyard-cli</span>
 
-docker <span class="command">run</span> -<span class="keyword">it</span> shipyard/shipyard-cli
+docker run -<span class="keyword">it</span> shipyard/shipyard-cli
 
 <span class="comment">#执行shipyard-cli后，通过下面的命令查看更多功能</span>
-shipyard help
+shipyard cli&gt; shipyard help
+NAME:
+   shipyard - manage <span class="operator">a</span> shipyard cluster
+
+USAGE:
+   shipyard [<span class="built_in">global</span> options] <span class="command"><span class="keyword">command</span> [<span class="title">command</span> <span class="title">options</span>] [<span class="title">arguments</span>...]</span>
+
+VERSION:
+   <span class="number">2.0</span><span class="number">.8</span>
+
+COMMANDS:
+   login        login <span class="built_in">to</span> <span class="operator">a</span> shipyard cluster
+   change-password  update your password
+   accounts     show accounts
+   <span class="built_in">add</span>-account      <span class="built_in">add</span> account
+   <span class="built_in">delete</span>-account   <span class="built_in">delete</span> account
+   containers       list containers
+   inspect      inspect container
+   run          run <span class="operator">a</span> container
+   stop         stop <span class="operator">a</span> container
+   restart      restart <span class="operator">a</span> container
+   scale        scale <span class="operator">a</span> container
+   logs         show container logs
+   destroy      destroy <span class="operator">a</span> container
+   engines      list engines
+   <span class="built_in">add</span>-engine       <span class="built_in">add</span> shipyard engine
+   remove-engine    removes <span class="operator">an</span> engine
+   inspect-engine   inspect <span class="operator">an</span> engine
+   service-<span class="built_in">keys</span>     list service <span class="built_in">keys</span>
+   <span class="built_in">add</span>-service-key  adds <span class="operator">a</span> service key
+   remove-service-key   removes <span class="operator">a</span> service key
+   extensions       show extensions
+   <span class="built_in">add</span>-extension    <span class="built_in">add</span> extension
+   remove-extension remove <span class="operator">an</span> extension
+   webhook-<span class="built_in">keys</span>     list webhook <span class="built_in">keys</span>
+   <span class="built_in">add</span>-webhook-key  adds <span class="operator">a</span> webhook key
+   remove-webhook-key   removes <span class="operator">a</span> webhook key
+   info         show cluster info
+   events       show cluster events
+   help, h      Shows <span class="operator">a</span> list <span class="operator">of</span> commands <span class="operator">or</span> help <span class="keyword">for</span> <span class="constant">one</span> <span class="command"><span class="keyword">command</span></span>
+
+GLOBAL OPTIONS:
+   <span class="comment">--help, -h           show help</span>
+   <span class="comment">--generate-bash-completion   </span>
+   <span class="comment">--version, -v        print the version   </span>
 </code></pre>
       
     </div>
