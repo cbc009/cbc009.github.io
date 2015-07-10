@@ -201,7 +201,9 @@ docker pull 注册服务器地址[<span class="symbol">:</span>端口号]/仓库
 <pre><code>docker rmi ae0c2d0bdc10
 <span class="preprocessor"># 移除镜像前，先移除依赖该镜像的容器</span>
 </code></pre><h4 id="使用镜像创建一个容器">使用镜像创建一个容器</h4>
-<pre><code>cbc ~ # docker run -itd --name tengine01 mimosa/tengine /bin/bash
+<pre><code>格式 : docker run [OPTIONS]<span class="constant"> IMAGE </span>[COMMAND] [ARG...]
+
+cbc ~ # docker run -itd --name tengine01 mimosa/tengine /bin/bash -v /tmp:/mnt
 ca98201350dd0c30bc4f37992b22d70594ae0fabe1992457776e5cc5b113c9e7
 
 <span class="preprocessor"># -t 让docker分配一个伪终端(pseudo-tty)并绑定到容器的标准输入</span>
@@ -209,6 +211,7 @@ ca98201350dd0c30bc4f37992b22d70594ae0fabe1992457776e5cc5b113c9e7
 <span class="preprocessor"># -d 让容器在后台以守护进程（Daemonized）形式运行</span>
 <span class="preprocessor"># --name 给容器起个名儿</span>
 <span class="preprocessor"># /bin/bash 启动一个bash终端，允许用户进行交互    </span>
+<span class="preprocessor"># -v 把一个本地主机的目录当做数据卷挂载在容器上, 格式 : [host-dir]:[container-dir]:[rw|ro],</span>
 </code></pre><h4 id="导出镜像到本地文件">导出镜像到本地文件</h4>
 <pre><code><span class="title">cbc</span> <span class="regexp">~ #</span> docker save -o tengine.tar mimosa/tengine
 </code></pre><h4 id="从本地文件导入镜像">从本地文件导入镜像</h4>
@@ -229,14 +232,14 @@ a7e4a6d0c994        ae0c2d0bdc10            <span class="string">"/usr/bin/"</sp
 ad418b05441f        ae0c2d0bdc10            <span class="string">"/bin/bash"</span>         <span class="number">5</span> months ago                                                        sick_colden
 dffb9f3f6677        ae0c2d0bdc10            <span class="string">"/bin/bash"</span>         <span class="number">5</span> months ago        Exited (<span class="number">0</span>) <span class="number">5</span> months ago                         determined_shockley
 e9297baee616        ae0c2d0bdc10            <span class="string">"/bin/bash"</span>         <span class="number">5</span> months ago        Exited (<span class="number">0</span>) <span class="number">5</span> months ago                         thirsty_pare
+</code></pre><h4 id="从终止状态启动一个容器">从终止状态启动一个容器</h4>
+<pre><code><span class="title">cbc</span> <span class="regexp">~ #</span> docker start ca98201350dd
+ca98201350dd 
 </code></pre><h4 id="停止容器">停止容器</h4>
 <pre><code><span class="title">cbc</span> <span class="regexp">~ #</span> docker stop ca98201350dd 
 </code></pre><h4 id="重启容器">重启容器</h4>
 <pre><code><span class="title">cbc</span> <span class="regexp">~ #</span> docker restart ca98201350dd
 ca98201350dd
-</code></pre><h4 id="从终止状态启动一个容器">从终止状态启动一个容器</h4>
-<pre><code><span class="title">cbc</span> <span class="regexp">~ #</span> docker start ca98201350dd
-ca98201350dd 
 </code></pre><h4 id="进入一个运行状态的容器">进入一个运行状态的容器</h4>
 <pre><code>cbc ~ <span class="comment"># docker attach ca98201350dd</span>
 [ root<span class="variable">@ca98201350dd</span><span class="symbol">:/etc/nginx</span> ]$

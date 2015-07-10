@@ -116,6 +116,71 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-基于docker-jenkins-gitlab-maven的持续集成-CI-环境" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/09/基于docker-jenkins-gitlab-maven的持续集成-CI-环境/" class="article-date">
+  	<time datetime="2015-07-09T11:11:40.000Z" itemprop="datePublished">7月 9 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/09/基于docker-jenkins-gitlab-maven的持续集成-CI-环境/">基于docker+jenkins+gitlab+maven的持续集成(CI)环境</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="1、Docker_安装_点击查看">1、Docker 安装 <a href="http://chenbaocheng.com/2015/04/30/Docker%E5%AD%A6%E4%B9%A0-%E4%BA%8C-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" target="_blank" rel="external">点击查看</a></h4>
+<h4 id="2、安装配置GitLab">2、安装配置GitLab</h4>
+<pre><code>docker pull sameersbn/gitla<span class="variable">b:latest</span>
+
+curl -O -sSL http<span class="variable">s:</span>//<span class="built_in">get</span>.docker.<span class="keyword">com</span>/rpm/<span class="number">1.7</span>.<span class="number">0</span>/centos-<span class="number">6</span>/RPMS/x86_64/docker-engine-<span class="number">1.7</span>.<span class="number">0</span>-<span class="number">1</span>.el6.x86_64.rpm
+
+yum localinstall --nogpgcheck docker-engine-<span class="number">1.7</span>.<span class="number">0</span>-<span class="number">1</span>.el6.x86_64.rpm
+
+service docker start
+</code></pre><h4 id="4、安装配置Jenkins_Image">4、安装配置Jenkins Image</h4>
+<h4 id="5、jenkins使用相关">5、jenkins使用相关</h4>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/持续集成/">持续集成</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-TOP命令解释" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">

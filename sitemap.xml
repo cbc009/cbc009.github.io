@@ -2,6 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.chenbaocheng.com/2015/04/30/Docker%E5%AD%A6%E4%B9%A0-%E4%B8%89-Docker%E9%95%9C%E5%83%8F%E5%92%8C%E5%AE%B9%E5%99%A8%E7%9A%84%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/</loc>
+    <lastmod>2015-07-10T03:54:26.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.chenbaocheng.com/2015/07/09/%E5%9F%BA%E4%BA%8Edocker-jenkins-gitlab-maven%E7%9A%84%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-CI-%E7%8E%AF%E5%A2%83/</loc>
+    <lastmod>2015-07-10T03:48:54.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://www.chenbaocheng.com/2015/07/09/TOP%E5%91%BD%E4%BB%A4%E8%A7%A3%E9%87%8A/</loc>
     <lastmod>2015-07-09T10:11:07.000Z</lastmod>
   </url>
@@ -74,11 +84,6 @@
   <url>
     <loc>http://www.chenbaocheng.com/2015/05/05/Docker%E5%AD%A6%E4%B9%A0-%E5%9B%9B-Dockerfile/</loc>
     <lastmod>2015-05-05T08:47:33.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://www.chenbaocheng.com/2015/04/30/Docker%E5%AD%A6%E4%B9%A0-%E4%B8%89-Docker%E9%95%9C%E5%83%8F%E5%92%8C%E5%AE%B9%E5%99%A8%E7%9A%84%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/</loc>
-    <lastmod>2015-04-30T10:07:26.000Z</lastmod>
   </url>
   
   <url>
