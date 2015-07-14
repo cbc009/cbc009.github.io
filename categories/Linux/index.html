@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Category: Linux | CHENBAOCHENG.COM</title>
+  <title>Category: linux | CHENBAOCHENG.COM</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description">
 <meta property="og:type" content="website">
 <meta property="og:title" content="CHENBAOCHENG.COM">
-<meta property="og:url" content="http://www.chenbaocheng.com/categories/Linux/">
+<meta property="og:url" content="http://www.chenbaocheng.com/categories/linux/">
 <meta property="og:site_name" content="CHENBAOCHENG.COM">
 <meta property="og:description">
 <meta name="twitter:card" content="summary">
@@ -116,11 +116,11 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-TOP命令解释" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-从Centos-6-x-升级Centos7" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/07/09/TOP命令解释/" class="article-date">
-  	<time datetime="2015-07-09T09:36:36.000Z" itemprop="datePublished">7月 9 2015</time>
+      <a href="/2015/07/14/从Centos-6-x-升级Centos7/" class="article-date">
+  	<time datetime="2015-07-14T06:44:53.000Z" itemprop="datePublished">7月 14 2015</time>
 </a>
     </div>
   
@@ -133,7 +133,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/09/TOP命令解释/">TOP命令解释</a>
+      <a class="article-title" href="/2015/07/14/从Centos-6-x-升级Centos7/">从Centos 6.x 升级Centos7</a>
     </h1>
   
 
@@ -142,13 +142,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p> top命令是Linux下最常用的性能分析工具，它能够实时显示系统中各个进程的资源占用状况。</p>
-<p><strong>top命令参数</strong></p>
-<pre><code>-<span class="ruby">b   批处理模式（batch mode），可输出到管道、文件。默认情况下-b会一直输出，可以用-nN指定输出次数。
-</span>-<span class="ruby">n <span class="constant">N</span>限制输出次数。
-</span>-<span class="ruby">d <span class="constant">N</span>    刷新时间间隔。
-</span>-<span class="ruby">p <span class="constant">PID</span>  监控指定进程。
-</span>-<span class="ruby"><span class="constant">H</span> -p <span class="constant">PID</span>   监控指定进程和进行内线程信息。</span>
+        <p>1、安装升级工具依赖的软件包</p>
+<pre><code>yum -<span class="keyword">y</span> install openscap pcre-devel libxml2-devel libxslt-devel m2crypto <span class="keyword">python</span>-simplejson mod_wsgi
+</code></pre><p>2、安装以下软件的最新版，可以到这里查找：<a href="http://dev.centos.org/centos/6/upg/x86_64/Packages" target="_blank" rel="external">http://dev.centos.org/centos/6/upg/x86_64/Packages</a></p>
+<pre><code>rpm -ihv <span class="symbol">http:</span>/<span class="regexp">/dev.centos.org/centos</span><span class="regexp">/6/upg</span><span class="regexp">/x86_64/</span><span class="constant">Packages</span>/preupgrade-assistant-<span class="number">1.0</span>.<span class="number">2</span>-<span class="number">36.0</span>.<span class="number">1</span>.el6.centos.x86_64.rpm
+rpm -ihv <span class="symbol">http:</span>/<span class="regexp">/dev.centos.org/centos</span><span class="regexp">/6/upg</span><span class="regexp">/x86_64/</span><span class="constant">Packages</span>/preupgrade-assistant-contents-<span class="number">0</span>.<span class="number">5.14</span>-<span class="number">1</span>.el6.centos.noarch.rpm
+rpm -ihv <span class="symbol">http:</span>/<span class="regexp">/dev.centos.org/centos</span><span class="regexp">/6/upg</span><span class="regexp">/x86_64/</span><span class="constant">Packages</span>/preupgrade-assistant-ui-<span class="number">1.0</span>.<span class="number">2</span>-<span class="number">36.0</span>.<span class="number">1</span>.el6.centos.x86_64.rpm
+rpm -ihv <span class="symbol">http:</span>/<span class="regexp">/dev.centos.org/centos</span><span class="regexp">/6/upg</span><span class="regexp">/x86_64/</span><span class="constant">Packages</span>/redhat-upgrade-tool-<span class="number">0</span>.<span class="number">7.22</span>-<span class="number">3</span>.el6.centos.noarch.rpm
+</code></pre><p>3、直行升级</p>
+<pre><code><span class="comment">redhat</span><span class="literal">-</span><span class="comment">upgrade</span><span class="literal">-</span><span class="comment">tool</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">network</span> <span class="comment">7</span><span class="string">.</span><span class="comment">0</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">instrepo</span> <span class="comment">http://mirrors</span><span class="string">.</span><span class="comment">sohu</span><span class="string">.</span><span class="comment">com/centos/7</span><span class="string">.</span><span class="comment">0</span><span class="string">.</span><span class="comment">1406/os/x86_64/</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">force</span>
+</code></pre><p>升级成功后会看到消息“Finished. Reboot to start upgrade.”</p>
+<p>4、重启服务器</p>
+<p>重启主机后，OS将启动一个称为System Upgrade的新的grub对象，支持将所有已经通过upgrade tool下载的软件包更新。</p>
+<p>5、检查系统版本， 看到版本 CentOS Linux release 7.0.1406 (Core) 证明升级成功</p>
+<pre><code><span class="keyword">cat</span>  /etc/redhat-release
 </code></pre>
       
     </div>
@@ -158,133 +165,10 @@
       
       
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Linux/">Linux</a>
+	<a class="article-category-link" href="/categories/linux/">linux</a>
 	</div>
 
 
-      
-        <p class="article-more-link">
-          <a  href="/2015/07/09/TOP命令解释/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Linux性能监控工具集合-图" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/09/Linux性能监控工具集合-图/" class="article-date">
-  	<time datetime="2015-07-09T07:12:55.000Z" itemprop="datePublished">7月 9 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/09/Linux性能监控工具集合-图/">Linux性能监控工具集合(图)</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <img src="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/linux_observability_tools.png"><br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Linux/">Linux</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/07/09/Linux性能监控工具集合-图/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Linux开机获取IP发送到指定邮箱" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/04/30/Linux开机获取IP发送到指定邮箱/" class="article-date">
-  	<time datetime="2015-04-30T05:20:19.000Z" itemprop="datePublished">4月 30 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/30/Linux开机获取IP发送到指定邮箱/">Linux开机获取IP发送到指定邮箱</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>之所以有这样的需求，是因为平日主力是用自己的笔记本，公司给配的台式机（主机、显示器）扔工位下面，装了 Centos 玩儿，公司是DHCP 分配IP，每次重启开机都得到台式机登录一下，才能获取最新IP，有点小麻烦，重启后给自己邮箱发个邮件，这样省事儿，看看邮件里的IP，远程 SSH 登录就可以了~</p>
-<p>我的台式机系统是 CENTOS，邮箱是163的，安装配置如下:</p>
-<p>1、安装mailx</p>
-<p>yum install mailx<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Linux/">Linux</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/04/30/Linux开机获取IP发送到指定邮箱/#more">more >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>

@@ -3,41 +3,26 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Docker学习(二) 安装与配置 | CHENBAOCHENG.COM</title>
+  <title>从Centos 6.x 升级Centos7 | CHENBAOCHENG.COM</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Docker 的安装与配置
-Docker 支持 CentOS 6 及后续版本。
-CentOS 6 下安装Docker服务
-#禁用SELINUX
-vim /etc/selinux/config
-SELINUX=disabled
-
-#配置Fedora EPEL 源
-rpm -ivh http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8">
+  <meta name="description" content="1、安装升级工具依赖的软件包
+yum -y install openscap pcre-devel libxml2-devel libxslt-devel m2crypto python-simplejson mod_wsgi
+2、安装以下软件的最新版，可以到这里查找：http://dev.centos.org/centos/6/upg/x86_64/Packages
+rpm -ihv http:">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Docker学习(二) 安装与配置">
-<meta property="og:url" content="http://www.chenbaocheng.com/2015/04/30/Docker学习-二-安装与配置/">
+<meta property="og:title" content="从Centos 6.x 升级Centos7">
+<meta property="og:url" content="http://www.chenbaocheng.com/2015/07/14/从Centos-6-x-升级Centos7/">
 <meta property="og:site_name" content="CHENBAOCHENG.COM">
-<meta property="og:description" content="Docker 的安装与配置
-Docker 支持 CentOS 6 及后续版本。
-CentOS 6 下安装Docker服务
-#禁用SELINUX
-vim /etc/selinux/config
-SELINUX=disabled
-
-#配置Fedora EPEL 源
-rpm -ivh http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8">
+<meta property="og:description" content="1、安装升级工具依赖的软件包
+yum -y install openscap pcre-devel libxml2-devel libxslt-devel m2crypto python-simplejson mod_wsgi
+2、安装以下软件的最新版，可以到这里查找：http://dev.centos.org/centos/6/upg/x86_64/Packages
+rpm -ihv http:">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Docker学习(二) 安装与配置">
-<meta name="twitter:description" content="Docker 的安装与配置
-Docker 支持 CentOS 6 及后续版本。
-CentOS 6 下安装Docker服务
-#禁用SELINUX
-vim /etc/selinux/config
-SELINUX=disabled
-
-#配置Fedora EPEL 源
-rpm -ivh http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8">
+<meta name="twitter:title" content="从Centos 6.x 升级Centos7">
+<meta name="twitter:description" content="1、安装升级工具依赖的软件包
+yum -y install openscap pcre-devel libxml2-devel libxslt-devel m2crypto python-simplejson mod_wsgi
+2、安装以下软件的最新版，可以到这里查找：http://dev.centos.org/centos/6/upg/x86_64/Packages
+rpm -ihv http:">
 
   
     <link rel="alternative" href="/atom.xml" title="CHENBAOCHENG.COM" type="application/atom+xml">
@@ -138,11 +123,11 @@ rpm -ivh http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8">
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-Docker学习-二-安装与配置" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-从Centos-6-x-升级Centos7" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/04/30/Docker学习-二-安装与配置/" class="article-date">
-  	<time datetime="2015-04-30T07:50:46.000Z" itemprop="datePublished">4月 30 2015</time>
+      <a href="/2015/07/14/从Centos-6-x-升级Centos7/" class="article-date">
+  	<time datetime="2015-07-14T06:44:53.000Z" itemprop="datePublished">7月 14 2015</time>
 </a>
     </div>
   
@@ -155,7 +140,7 @@ rpm -ivh http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8">
         
   
     <h1 class="article-title" itemprop="name">
-      Docker学习(二) 安装与配置
+      从Centos 6.x 升级Centos7
     </h1>
   
 
@@ -165,7 +150,7 @@ rpm -ivh http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8">
         
         
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/docker/">docker</a>
+	<a class="article-category-link" href="/categories/linux/">linux</a>
 	</div>
 
 
@@ -175,31 +160,20 @@ rpm -ivh http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="Docker_的安装与配置">Docker 的安装与配置</h4>
-<p>Docker 支持 CentOS 6 及后续版本。</p>
-<h4 id="CentOS_6_下安装Docker服务">CentOS 6 下安装Docker服务</h4>
-<pre><code><span class="preprocessor">#禁用SELINUX</span>
-vim /etc/selinux/config
-SELINUX=disabled
-
-<span class="preprocessor">#配置Fedora EPEL 源</span>
-rpm -ivh http:<span class="comment">//dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm</span>
-rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-<span class="number">6</span>
-yum -y install yum-priorities
-</code></pre><p><a id="more"></a>    </p>
-<pre><code><span class="preprocessor">#安装</span>
-yum install docker-io
-</code></pre><h4 id="CentOS_7_下安装Docker服务">CentOS 7 下安装Docker服务</h4>
-<p>Centos 7 开始 CentOS-Extras 库自带 Docker，所以安装会相对更简单.</p>
-<pre><code>yum <span class="operator"><span class="keyword">install</span> docker</span>
-</code></pre><h4 id="启动_Docker">启动 Docker</h4>
-<pre><code><span class="class"><span class="keyword">service</span> <span class="title">docker</span> start</span>
-</code></pre><h4 id="开机启动">开机启动</h4>
-<pre><code>chkconfig docker <span class="command"><span class="keyword">on</span></span>
-</code></pre><h4 id="安装Compose">安装Compose</h4>
-<pre><code>curl -<span class="constant">L </span><span class="symbol">https:</span>/<span class="regexp">/github.com/docker</span><span class="regexp">/compose/releases</span><span class="regexp">/download/</span><span class="number">1.3</span>.<span class="number">1</span>/docker-compose-`uname -s`-`uname -m` &gt; <span class="regexp">/usr/local</span><span class="regexp">/bin/docker</span>-compose
-<span class="comment">#如果这一步不成功，手动下载，scp不过去吧。。。</span>
-chmod +x /usr/local/bin/docker-compose
+        <p>1、安装升级工具依赖的软件包</p>
+<pre><code>yum -<span class="keyword">y</span> install openscap pcre-devel libxml2-devel libxslt-devel m2crypto <span class="keyword">python</span>-simplejson mod_wsgi
+</code></pre><p>2、安装以下软件的最新版，可以到这里查找：<a href="http://dev.centos.org/centos/6/upg/x86_64/Packages" target="_blank" rel="external">http://dev.centos.org/centos/6/upg/x86_64/Packages</a></p>
+<pre><code>rpm -ihv <span class="symbol">http:</span>/<span class="regexp">/dev.centos.org/centos</span><span class="regexp">/6/upg</span><span class="regexp">/x86_64/</span><span class="constant">Packages</span>/preupgrade-assistant-<span class="number">1.0</span>.<span class="number">2</span>-<span class="number">36.0</span>.<span class="number">1</span>.el6.centos.x86_64.rpm
+rpm -ihv <span class="symbol">http:</span>/<span class="regexp">/dev.centos.org/centos</span><span class="regexp">/6/upg</span><span class="regexp">/x86_64/</span><span class="constant">Packages</span>/preupgrade-assistant-contents-<span class="number">0</span>.<span class="number">5.14</span>-<span class="number">1</span>.el6.centos.noarch.rpm
+rpm -ihv <span class="symbol">http:</span>/<span class="regexp">/dev.centos.org/centos</span><span class="regexp">/6/upg</span><span class="regexp">/x86_64/</span><span class="constant">Packages</span>/preupgrade-assistant-ui-<span class="number">1.0</span>.<span class="number">2</span>-<span class="number">36.0</span>.<span class="number">1</span>.el6.centos.x86_64.rpm
+rpm -ihv <span class="symbol">http:</span>/<span class="regexp">/dev.centos.org/centos</span><span class="regexp">/6/upg</span><span class="regexp">/x86_64/</span><span class="constant">Packages</span>/redhat-upgrade-tool-<span class="number">0</span>.<span class="number">7.22</span>-<span class="number">3</span>.el6.centos.noarch.rpm
+</code></pre><p>3、直行升级</p>
+<pre><code><span class="comment">redhat</span><span class="literal">-</span><span class="comment">upgrade</span><span class="literal">-</span><span class="comment">tool</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">network</span> <span class="comment">7</span><span class="string">.</span><span class="comment">0</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">instrepo</span> <span class="comment">http://mirrors</span><span class="string">.</span><span class="comment">sohu</span><span class="string">.</span><span class="comment">com/centos/7</span><span class="string">.</span><span class="comment">0</span><span class="string">.</span><span class="comment">1406/os/x86_64/</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">force</span>
+</code></pre><p>升级成功后会看到消息“Finished. Reboot to start upgrade.”</p>
+<p>4、重启服务器</p>
+<p>重启主机后，OS将启动一个称为System Upgrade的新的grub对象，支持将所有已经通过upgrade tool下载的软件包更新。</p>
+<p>5、检查系统版本， 看到版本 CentOS Linux release 7.0.1406 (Core) 证明升级成功</p>
+<pre><code><span class="keyword">cat</span>  /etc/redhat-release
 </code></pre>
       
     </div>
@@ -209,18 +183,9 @@ chmod +x /usr/local/bin/docker-compose
     
 <nav id="article-nav">
   
-    <a href="/2015/04/30/Docker学习-三-Docker镜像和容器的常用操作/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Docker学习(三) Docker镜像和容器的常用操作
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/04/30/Docker学习-一-Docker基础/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Docker学习(一) Docker基础</div>
+    <a href="/2015/07/10/Docker学习-五-带web界面的Docker管理平台shipyard/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">带web界面的Docker管理平台shipyard</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -249,7 +214,7 @@ chmod +x /usr/local/bin/docker-compose
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Docker学习-二-安装与配置" data-title="Docker学习(二) 安装与配置" data-url="http://www.chenbaocheng.com/2015/04/30/Docker学习-二-安装与配置/"></div>
+	<div class="ds-thread" data-thread-key="从Centos-6-x-升级Centos7" data-title="从Centos 6.x 升级Centos7" data-url="http://www.chenbaocheng.com/2015/07/14/从Centos-6-x-升级Centos7/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

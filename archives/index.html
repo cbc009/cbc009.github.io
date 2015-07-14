@@ -116,6 +116,74 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-从Centos-6-x-升级Centos7" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/14/从Centos-6-x-升级Centos7/" class="article-date">
+  	<time datetime="2015-07-14T06:44:53.000Z" itemprop="datePublished">7月 14 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/14/从Centos-6-x-升级Centos7/">从Centos 6.x 升级Centos7</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1、安装升级工具依赖的软件包</p>
+<pre><code>yum -<span class="keyword">y</span> install openscap pcre-devel libxml2-devel libxslt-devel m2crypto <span class="keyword">python</span>-simplejson mod_wsgi
+</code></pre><p>2、安装以下软件的最新版，可以到这里查找：<a href="http://dev.centos.org/centos/6/upg/x86_64/Packages" target="_blank" rel="external">http://dev.centos.org/centos/6/upg/x86_64/Packages</a></p>
+<pre><code>rpm -ihv <span class="symbol">http:</span>/<span class="regexp">/dev.centos.org/centos</span><span class="regexp">/6/upg</span><span class="regexp">/x86_64/</span><span class="constant">Packages</span>/preupgrade-assistant-<span class="number">1.0</span>.<span class="number">2</span>-<span class="number">36.0</span>.<span class="number">1</span>.el6.centos.x86_64.rpm
+rpm -ihv <span class="symbol">http:</span>/<span class="regexp">/dev.centos.org/centos</span><span class="regexp">/6/upg</span><span class="regexp">/x86_64/</span><span class="constant">Packages</span>/preupgrade-assistant-contents-<span class="number">0</span>.<span class="number">5.14</span>-<span class="number">1</span>.el6.centos.noarch.rpm
+rpm -ihv <span class="symbol">http:</span>/<span class="regexp">/dev.centos.org/centos</span><span class="regexp">/6/upg</span><span class="regexp">/x86_64/</span><span class="constant">Packages</span>/preupgrade-assistant-ui-<span class="number">1.0</span>.<span class="number">2</span>-<span class="number">36.0</span>.<span class="number">1</span>.el6.centos.x86_64.rpm
+rpm -ihv <span class="symbol">http:</span>/<span class="regexp">/dev.centos.org/centos</span><span class="regexp">/6/upg</span><span class="regexp">/x86_64/</span><span class="constant">Packages</span>/redhat-upgrade-tool-<span class="number">0</span>.<span class="number">7.22</span>-<span class="number">3</span>.el6.centos.noarch.rpm
+</code></pre><p>3、直行升级</p>
+<pre><code><span class="comment">redhat</span><span class="literal">-</span><span class="comment">upgrade</span><span class="literal">-</span><span class="comment">tool</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">network</span> <span class="comment">7</span><span class="string">.</span><span class="comment">0</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">instrepo</span> <span class="comment">http://mirrors</span><span class="string">.</span><span class="comment">sohu</span><span class="string">.</span><span class="comment">com/centos/7</span><span class="string">.</span><span class="comment">0</span><span class="string">.</span><span class="comment">1406/os/x86_64/</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">force</span>
+</code></pre><p>升级成功后会看到消息“Finished. Reboot to start upgrade.”</p>
+<p>4、重启服务器</p>
+<p>重启主机后，OS将启动一个称为System Upgrade的新的grub对象，支持将所有已经通过upgrade tool下载的软件包更新。</p>
+<p>5、检查系统版本， 看到版本 CentOS Linux release 7.0.1406 (Core) 证明升级成功</p>
+<pre><code><span class="keyword">cat</span>  /etc/redhat-release
+</code></pre>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/linux/">linux</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-Docker学习-五-带web界面的Docker管理平台shipyard" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -699,99 +767,6 @@ cd zookeeper-<span class="number">3.4</span>.<span class="number">6</span>
       
         <p class="article-more-link">
           <a  href="/2015/06/16/RabbitMQ基本应用/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-JVM性能监控工具" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/06/15/JVM性能监控工具/" class="article-date">
-  	<time datetime="2015-06-15T07:50:07.000Z" itemprop="datePublished">6月 15 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/15/JVM性能监控工具/">JVM性能监控工具</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在 java 的 bin 目录下，jdk 提供了很多使用的工具，下面学习一些监控和故障处理的工具。</p>
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>jps</td>
-<td>JVM process status tool，显示指定系统内所有的 HotSpot 虚拟机进程</td>
-</tr>
-<tr>
-<td>jstat</td>
-<td>JVM statistics monitoring tool，用于收集 HotSpot 虚拟机各方面的运行数据</td>
-</tr>
-<tr>
-<td>jinfo</td>
-<td>显示虚拟机配置信息</td>
-</tr>
-<tr>
-<td>jmap</td>
-<td>生产虚拟机的内存快照 dump 文件</td>
-</tr>
-<tr>
-<td>jhat</td>
-<td>分析 dump 文件</td>
-</tr>
-<tr>
-<td>jstack</td>
-<td>显示虚拟机的线程快照</td>
-</tr>
-</tbody>
-</table>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/java/">java</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/06/15/JVM性能监控工具/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>

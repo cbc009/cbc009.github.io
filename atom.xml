@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.chenbaocheng.com/"/>
-  <updated>2015-07-10T09:05:38.756Z</updated>
+  <updated>2015-07-14T06:46:50.728Z</updated>
   <id>http://www.chenbaocheng.com/</id>
   
   <author>
@@ -13,6 +13,36 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[从Centos 6.x 升级Centos7]]></title>
+    <link href="http://www.chenbaocheng.com/2015/07/14/%E4%BB%8ECentos-6-x-%E5%8D%87%E7%BA%A7Centos7/"/>
+    <id>http://www.chenbaocheng.com/2015/07/14/从Centos-6-x-升级Centos7/</id>
+    <published>2015-07-14T06:44:53.000Z</published>
+    <updated>2015-07-14T06:45:46.000Z</updated>
+    <content type="html"><![CDATA[<p>1、安装升级工具依赖的软件包</p>
+<pre><code>yum -<span class="keyword">y</span> install openscap pcre-devel libxml2-devel libxslt-devel m2crypto <span class="keyword">python</span>-simplejson mod_wsgi
+</code></pre><p>2、安装以下软件的最新版，可以到这里查找：<a href="http://dev.centos.org/centos/6/upg/x86_64/Packages" target="_blank" rel="external">http://dev.centos.org/centos/6/upg/x86_64/Packages</a></p>
+<pre><code>rpm -ihv <span class="symbol">http:</span>/<span class="regexp">/dev.centos.org/centos</span><span class="regexp">/6/upg</span><span class="regexp">/x86_64/</span><span class="constant">Packages</span>/preupgrade-assistant-<span class="number">1.0</span>.<span class="number">2</span>-<span class="number">36.0</span>.<span class="number">1</span>.el6.centos.x86_64.rpm
+rpm -ihv <span class="symbol">http:</span>/<span class="regexp">/dev.centos.org/centos</span><span class="regexp">/6/upg</span><span class="regexp">/x86_64/</span><span class="constant">Packages</span>/preupgrade-assistant-contents-<span class="number">0</span>.<span class="number">5.14</span>-<span class="number">1</span>.el6.centos.noarch.rpm
+rpm -ihv <span class="symbol">http:</span>/<span class="regexp">/dev.centos.org/centos</span><span class="regexp">/6/upg</span><span class="regexp">/x86_64/</span><span class="constant">Packages</span>/preupgrade-assistant-ui-<span class="number">1.0</span>.<span class="number">2</span>-<span class="number">36.0</span>.<span class="number">1</span>.el6.centos.x86_64.rpm
+rpm -ihv <span class="symbol">http:</span>/<span class="regexp">/dev.centos.org/centos</span><span class="regexp">/6/upg</span><span class="regexp">/x86_64/</span><span class="constant">Packages</span>/redhat-upgrade-tool-<span class="number">0</span>.<span class="number">7.22</span>-<span class="number">3</span>.el6.centos.noarch.rpm
+</code></pre><p>3、直行升级</p>
+<pre><code><span class="comment">redhat</span><span class="literal">-</span><span class="comment">upgrade</span><span class="literal">-</span><span class="comment">tool</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">network</span> <span class="comment">7</span><span class="string">.</span><span class="comment">0</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">instrepo</span> <span class="comment">http://mirrors</span><span class="string">.</span><span class="comment">sohu</span><span class="string">.</span><span class="comment">com/centos/7</span><span class="string">.</span><span class="comment">0</span><span class="string">.</span><span class="comment">1406/os/x86_64/</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">force</span>
+</code></pre><p>升级成功后会看到消息“Finished. Reboot to start upgrade.”</p>
+<p>4、重启服务器</p>
+<p>重启主机后，OS将启动一个称为System Upgrade的新的grub对象，支持将所有已经通过upgrade tool下载的软件包更新。</p>
+<p>5、检查系统版本， 看到版本 CentOS Linux release 7.0.1406 (Core) 证明升级成功</p>
+<pre><code><span class="keyword">cat</span>  /etc/redhat-release
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<p>1、安装升级工具依赖的软件包</p>
+<pre><code>yum -<span class="keyword">y</span> install openscap pcre-devel libxml2-devel libxslt-devel m2crypto <span ]]>
+    </summary>
+    
+      <category term="linux" scheme="http://www.chenbaocheng.com/categories/linux/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[带web界面的Docker管理平台shipyard]]></title>
@@ -1994,7 +2024,7 @@ centos              latest              fd44297e2ddb        <span class="number"
     <link href="http://www.chenbaocheng.com/2015/04/30/Docker%E5%AD%A6%E4%B9%A0-%E4%BA%8C-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/"/>
     <id>http://www.chenbaocheng.com/2015/04/30/Docker学习-二-安装与配置/</id>
     <published>2015-04-30T07:50:46.000Z</published>
-    <updated>2015-04-30T08:01:51.000Z</updated>
+    <updated>2015-07-10T10:56:00.000Z</updated>
     <content type="html"><![CDATA[<h4 id="Docker_的安装与配置">Docker 的安装与配置</h4>
 <p>Docker 支持 CentOS 6 及后续版本。</p>
 <h4 id="CentOS_6_下安装Docker服务">CentOS 6 下安装Docker服务</h4>
@@ -2016,6 +2046,10 @@ yum install docker-io
 <pre><code><span class="class"><span class="keyword">service</span> <span class="title">docker</span> start</span>
 </code></pre><h4 id="开机启动">开机启动</h4>
 <pre><code>chkconfig docker <span class="command"><span class="keyword">on</span></span>
+</code></pre><h4 id="安装Compose">安装Compose</h4>
+<pre><code>curl -<span class="constant">L </span><span class="symbol">https:</span>/<span class="regexp">/github.com/docker</span><span class="regexp">/compose/releases</span><span class="regexp">/download/</span><span class="number">1.3</span>.<span class="number">1</span>/docker-compose-`uname -s`-`uname -m` &gt; <span class="regexp">/usr/local</span><span class="regexp">/bin/docker</span>-compose
+<span class="comment">#如果这一步不成功，手动下载，scp不过去吧。。。</span>
+chmod +x /usr/local/bin/docker-compose
 </code></pre>]]></content>
     <summary type="html">
     <![CDATA[<h4 id="Docker_的安装与配置">Docker 的安装与配置</h4>
@@ -2172,68 +2206,6 @@ yum -y install yum-priorities
     </summary>
     
       <category term="java" scheme="http://www.chenbaocheng.com/categories/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[oh-my-zsh替代品prezto]]></title>
-    <link href="http://www.chenbaocheng.com/2015/04/02/oh-my-zsh%E6%9B%BF%E4%BB%A3%E5%93%81prezto/"/>
-    <id>http://www.chenbaocheng.com/2015/04/02/oh-my-zsh替代品prezto/</id>
-    <published>2015-04-02T07:46:44.000Z</published>
-    <updated>2015-04-02T10:49:32.000Z</updated>
-    <content type="html"><![CDATA[<p>每次启动terminal都很慢，实在无法忍受oh-my-zsh的龟速，发现一个替代品prezto，建议使用，oh-my-zsh 有的功能他都有了，最重要的是启动速度快！</p>
-<p>废话不多说，prezto项目地址：<a href="https://github.com/sorin-ionescu/prezto" target="_blank" rel="external">https://github.com/sorin-ionescu/prezto</a></p>
-<h6 id="安装：">安装：</h6>
-<p>1、启动zsh</p>
-<pre><code>zsh
-</code></pre><p><br>2、克隆项目到本地</p>
-<pre><code><span class="title">git</span> clone --recursive <span class="url">https://github.com/sorin-ionescu/prezto.git</span> <span class="string">"<span class="variable">${ZDOTDIR:-$HOME}</span>/.zprezto"</span>
-</code></pre><a id="more"></a>
-
-<p><br>3、创建Zsh配置文件</p>
-<pre><code>setopt EXTENDED_GLOB
- <span class="keyword">for</span> rcfile <span class="keyword">in</span> <span class="string">"<span class="variable">${ZDOTDIR:-$HOME}</span>"</span>/.zprezto/runcoms/^README.md(.N); <span class="keyword">do</span>
-   ln <span class="operator">-s</span> <span class="string">"<span class="variable">$rcfile</span>"</span> <span class="string">"<span class="variable">${ZDOTDIR:-$HOME}</span>/.<span class="variable">${rcfile:t}</span>"</span>
- <span class="keyword">done</span>
-</code></pre><p><br>4、设置 Zsh 为默认shell</p>
-<pre><code>chsh <span class="operator">-s</span> /bin/zsh
-</code></pre><p><br>5、新开窗口体验~~~</p>
-<h6 id="关于更新"><br>关于更新</h6>
-<pre><code><span class="keyword">cd</span>  ~/.zprezto
-git pull &amp;&amp; git submodule <span class="keyword">update</span> --init --recursive
-</code></pre><h6 id="oh-my-zsh的_z_命令替代品_fasd"><br>oh-my-zsh的 z 命令替代品 fasd</h6>
-<pre><code>brew install fasd
-
-<span class="keyword">vim</span> ~/.zshrc
-<span class="built_in">eval</span> <span class="string">"$(fasd --init auto)"</span>
-
-<span class="keyword">vim</span>  ~/.zpreztorc
-zstyle <span class="string">':prezto:load'</span> pmodule \
-    <span class="string">'environment'</span> \
-    <span class="string">'terminal'</span> \
-    <span class="string">'editor'</span> \
-    <span class="string">'history'</span> \
-    <span class="string">'directory'</span> \
-    <span class="string">'spectrum'</span> \
-    <span class="string">'utility'</span> \
-    <span class="string">'completion'</span> \
-    <span class="string">'history'</span> \
-    <span class="string">'history-substring-search'</span> \
-    <span class="string">'prompt'</span>
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<p>每次启动terminal都很慢，实在无法忍受oh-my-zsh的龟速，发现一个替代品prezto，建议使用，oh-my-zsh 有的功能他都有了，最重要的是启动速度快！</p>
-<p>废话不多说，prezto项目地址：<a href="https://github.com/sorin-ionescu/prezto" target="_blank" rel="external">https://github.com/sorin-ionescu/prezto</a></p>
-<h6 id="安装：">安装：</h6>
-<p>1、启动zsh</p>
-<pre><code>zsh
-</code></pre><p><br>2、克隆项目到本地</p>
-<pre><code><span class="title">git</span> clone --recursive <span class="url">https://github.com/sorin-ionescu/prezto.git</span> <span class="string">"<span class="variable">${ZDOTDIR:-$HOME}</span>/.zprezto"</span>
-</code></pre>]]>
-    
-    </summary>
-    
-      <category term="效率" scheme="http://www.chenbaocheng.com/categories/%E6%95%88%E7%8E%87/"/>
     
   </entry>
   
