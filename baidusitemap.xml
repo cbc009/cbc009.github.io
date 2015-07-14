@@ -4,7 +4,7 @@
     
   <url>
     <loc>http://www.chenbaocheng.com/2015/07/14/%E4%BB%8ECentos-6-x-%E5%8D%87%E7%BA%A7Centos7/</loc>
-    <lastmod>2015-07-14T06:45:46.000Z</lastmod>
+    <lastmod>2015-07-14T06:47:12.000Z</lastmod>
     <data>
         <display>
         <title>从Centos 6.x 升级Centos7</title>
@@ -17,7 +17,9 @@
 rpm -ihv <span class="symbol">http:</span>/<span class="regexp">/dev.centos.org/centos</span><span class="regexp">/6/upg</span><span class="regexp">/x86_64/</span><span class="constant">Packages</span>/preupgrade-assistant-contents-<span class="number">0</span>.<span class="number">5.14</span>-<span class="number">1</span>.el6.centos.noarch.rpm
 rpm -ihv <span class="symbol">http:</span>/<span class="regexp">/dev.centos.org/centos</span><span class="regexp">/6/upg</span><span class="regexp">/x86_64/</span><span class="constant">Packages</span>/preupgrade-assistant-ui-<span class="number">1.0</span>.<span class="number">2</span>-<span class="number">36.0</span>.<span class="number">1</span>.el6.centos.x86_64.rpm
 rpm -ihv <span class="symbol">http:</span>/<span class="regexp">/dev.centos.org/centos</span><span class="regexp">/6/upg</span><span class="regexp">/x86_64/</span><span class="constant">Packages</span>/redhat-upgrade-tool-<span class="number">0</span>.<span class="number">7.22</span>-<span class="number">3</span>.el6.centos.noarch.rpm
-</code></pre><p>3、直行升级</p>
+</code></pre><a id="more"></a>
+
+<p>3、执行升级</p>
 <pre><code><span class="comment">redhat</span><span class="literal">-</span><span class="comment">upgrade</span><span class="literal">-</span><span class="comment">tool</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">network</span> <span class="comment">7</span><span class="string">.</span><span class="comment">0</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">instrepo</span> <span class="comment">http://mirrors</span><span class="string">.</span><span class="comment">sohu</span><span class="string">.</span><span class="comment">com/centos/7</span><span class="string">.</span><span class="comment">0</span><span class="string">.</span><span class="comment">1406/os/x86_64/</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">force</span>
 </code></pre><p>升级成功后会看到消息“Finished. Reboot to start upgrade.”</p>
 <p>4、重启服务器</p>
