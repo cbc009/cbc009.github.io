@@ -3,6 +3,66 @@
 
     
   <url>
+    <loc>http://www.chenbaocheng.com/2015/07/15/Centos-7-%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEiptables/</loc>
+    <lastmod>2015-07-15T09:03:12.000Z</lastmod>
+    <data>
+        <display>
+        <title>CentOS 7 安装配置iptables</title>
+        <pubTime>2015-07-15T08:47:58.000Z</pubTime>
+        
+         <content><![CDATA[<p>CentOS 7 默认使用的是firewall作为防火墙, iptables用于过滤数据包，属于网络层防火墙.firewall能够允许哪些服务可用，那些端口可用,属于更高一层的防火墙。firewall的底层是使用iptables进行数据过滤，建立在iptables之上。习惯了iptables还是继续用吧~</p>
+<p><strong>CentOS 7 开始service命令不推荐使用了，提供了新的systemctl工具，为了向后兼容，旧的service命令仍然可用，但会重定向所有命令到新的systemctl工具。systemctl 是管理服务的主要工具，整合了chkconfig与service的功能。</strong></p>
+<a id="more"></a>
+
+<p><strong>systemctl的用法</strong></p>
+<pre><code>systemctl <span class="keyword">is</span>-enabled iptables.service
+systemctl <span class="keyword">is</span>-enabled iptables.service <span class="preprocessor">#查询服务是否开机启动</span>
+systemctl enable iptables.service <span class="preprocessor">#开机运行服务</span>
+systemctl disable iptables.service <span class="preprocessor">#取消开机运行</span>
+systemctl start iptables.service <span class="preprocessor">#启动服务</span>
+systemctl <span class="keyword">stop</span> iptables.service <span class="preprocessor">#停止服务</span>
+systemctl restart iptables.service <span class="preprocessor">#重启服务</span>
+systemctl reload iptables.service <span class="preprocessor">#重新加载服务配置文件</span>
+systemctl status iptables.service <span class="preprocessor">#查询服务运行状态</span>
+systemctl --failed <span class="preprocessor">#显示启动失败的服务</span>
+</code></pre><h4 id="1、关闭firewall">1、关闭firewall</h4>
+<pre><code>systemctl <span class="keyword">stop</span> firewalld.service <span class="preprocessor">#停止firewall</span>
+systemctl disable firewalld.service <span class="preprocessor">#禁止firewall开机启动</span>
+</code></pre><h4 id="2、安装iptables">2、安装iptables</h4>
+<pre><code>yum <span class="operator"><span class="keyword">install</span> iptables-services #安装
+
+vi /etc/sysconfig/iptables #编辑防火墙配置文件
+
+# sample configuration <span class="keyword">for</span> iptables service
+# you can edit this manually <span class="keyword">or</span> <span class="keyword">use</span> system-config-firewall
+# please <span class="keyword">do</span> <span class="keyword">not</span> ask us <span class="keyword">to</span> <span class="keyword">add</span> additional ports/services <span class="keyword">to</span> this <span class="keyword">default</span> configuration
+*filter
+:<span class="keyword">INPUT</span> ACCEPT [<span class="number">0</span>:<span class="number">0</span>]
+:FORWARD ACCEPT [<span class="number">0</span>:<span class="number">0</span>]
+:<span class="keyword">OUTPUT</span> ACCEPT [<span class="number">0</span>:<span class="number">0</span>]
+-A <span class="keyword">INPUT</span> -m state <span class="comment">--state RELATED,ESTABLISHED -j ACCEPT</span>
+-A <span class="keyword">INPUT</span> -p icmp -j ACCEPT
+-A <span class="keyword">INPUT</span> -i lo -j ACCEPT
+-A <span class="keyword">INPUT</span> -p tcp -m state <span class="comment">--state NEW -m tcp --dport 22 -j ACCEPT</span>
+-A <span class="keyword">INPUT</span> -j REJECT <span class="comment">--reject-with icmp-host-prohibited</span>
+-A FORWARD -j REJECT <span class="comment">--reject-with icmp-host-prohibited</span>
+<span class="keyword">COMMIT</span></span>
+</code></pre><h4 id="3、启动iptables">3、启动iptables</h4>
+<pre><code><span class="title">systemctl</span> restart iptables.service <span class="comment">#最后重启防火墙使配置生效</span>
+systemctl enable iptables.service <span class="comment">#设置防火墙开机启动</span>
+</code></pre>]]></content>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.chenbaocheng.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.chenbaocheng.com/2015/07/15/%E7%94%A8Mac-OS%E5%91%BD%E4%BB%A4%E6%8A%8AISO%E9%95%9C%E5%83%8F%E5%86%99%E5%85%A5U%E7%9B%98/</loc>
     <lastmod>2015-07-15T05:29:39.000Z</lastmod>
     <data>
