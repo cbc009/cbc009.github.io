@@ -3,26 +3,32 @@
 <head>
   <meta charset="utf-8">
   
-  <title>从Centos 6.x 升级Centos7 | CHENBAOCHENG.COM</title>
+  <title>用Mac OS命令把ISO镜像写入U盘 | CHENBAOCHENG.COM</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1、安装升级工具依赖的软件包
-yum -y install openscap pcre-devel libxml2-devel libxslt-devel m2crypto python-simplejson mod_wsgi
-2、安装以下软件的最新版，可以到这里查找：http://dev.centos.org/centos/6/upg/x86_64/Packages
-rpm -ihv http:">
+  <meta name="description" content="1、用磁盘工具查看磁盘空间使用情况
+~ ❯❯❯ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/disk1      238G  154G   84G  65% /
+/dev/disk2s2    15G  2.5M   15G   1% /Volumes/Centos
+/dev/disk3      4.4G  4.4G">
 <meta property="og:type" content="article">
-<meta property="og:title" content="从Centos 6.x 升级Centos7">
-<meta property="og:url" content="http://www.chenbaocheng.com/2015/07/14/从Centos-6-x-升级Centos7/">
+<meta property="og:title" content="用Mac OS命令把ISO镜像写入U盘">
+<meta property="og:url" content="http://www.chenbaocheng.com/2015/07/15/用Mac-OS命令把ISO镜像写入U盘/">
 <meta property="og:site_name" content="CHENBAOCHENG.COM">
-<meta property="og:description" content="1、安装升级工具依赖的软件包
-yum -y install openscap pcre-devel libxml2-devel libxslt-devel m2crypto python-simplejson mod_wsgi
-2、安装以下软件的最新版，可以到这里查找：http://dev.centos.org/centos/6/upg/x86_64/Packages
-rpm -ihv http:">
+<meta property="og:description" content="1、用磁盘工具查看磁盘空间使用情况
+~ ❯❯❯ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/disk1      238G  154G   84G  65% /
+/dev/disk2s2    15G  2.5M   15G   1% /Volumes/Centos
+/dev/disk3      4.4G  4.4G">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="从Centos 6.x 升级Centos7">
-<meta name="twitter:description" content="1、安装升级工具依赖的软件包
-yum -y install openscap pcre-devel libxml2-devel libxslt-devel m2crypto python-simplejson mod_wsgi
-2、安装以下软件的最新版，可以到这里查找：http://dev.centos.org/centos/6/upg/x86_64/Packages
-rpm -ihv http:">
+<meta name="twitter:title" content="用Mac OS命令把ISO镜像写入U盘">
+<meta name="twitter:description" content="1、用磁盘工具查看磁盘空间使用情况
+~ ❯❯❯ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/disk1      238G  154G   84G  65% /
+/dev/disk2s2    15G  2.5M   15G   1% /Volumes/Centos
+/dev/disk3      4.4G  4.4G">
 
   
     <link rel="alternative" href="/atom.xml" title="CHENBAOCHENG.COM" type="application/atom+xml">
@@ -123,11 +129,11 @@ rpm -ihv http:">
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-从Centos-6-x-升级Centos7" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-用Mac-OS命令把ISO镜像写入U盘" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/07/14/从Centos-6-x-升级Centos7/" class="article-date">
-  	<time datetime="2015-07-14T06:44:53.000Z" itemprop="datePublished">7月 14 2015</time>
+      <a href="/2015/07/15/用Mac-OS命令把ISO镜像写入U盘/" class="article-date">
+  	<time datetime="2015-07-15T03:59:57.000Z" itemprop="datePublished">7月 15 2015</time>
 </a>
     </div>
   
@@ -140,7 +146,7 @@ rpm -ihv http:">
         
   
     <h1 class="article-title" itemprop="name">
-      从Centos 6.x 升级Centos7
+      用Mac OS命令把ISO镜像写入U盘
     </h1>
   
 
@@ -150,7 +156,7 @@ rpm -ihv http:">
         
         
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/linux/">linux</a>
+	<a class="article-category-link" href="/categories/Mac-OS/">Mac OS</a>
 	</div>
 
 
@@ -160,22 +166,19 @@ rpm -ihv http:">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>1、安装升级工具依赖的软件包</p>
-<pre><code>yum -<span class="keyword">y</span> install openscap pcre-devel libxml2-devel libxslt-devel m2crypto <span class="keyword">python</span>-simplejson mod_wsgi
-</code></pre><p>2、安装以下软件的最新版，可以到这里查找：<a href="http://dev.centos.org/centos/6/upg/x86_64/Packages" target="_blank" rel="external">http://dev.centos.org/centos/6/upg/x86_64/Packages</a></p>
-<pre><code>rpm -ihv <span class="symbol">http:</span>/<span class="regexp">/dev.centos.org/centos</span><span class="regexp">/6/upg</span><span class="regexp">/x86_64/</span><span class="constant">Packages</span>/preupgrade-assistant-<span class="number">1.0</span>.<span class="number">2</span>-<span class="number">36.0</span>.<span class="number">1</span>.el6.centos.x86_64.rpm
-rpm -ihv <span class="symbol">http:</span>/<span class="regexp">/dev.centos.org/centos</span><span class="regexp">/6/upg</span><span class="regexp">/x86_64/</span><span class="constant">Packages</span>/preupgrade-assistant-contents-<span class="number">0</span>.<span class="number">5.14</span>-<span class="number">1</span>.el6.centos.noarch.rpm
-rpm -ihv <span class="symbol">http:</span>/<span class="regexp">/dev.centos.org/centos</span><span class="regexp">/6/upg</span><span class="regexp">/x86_64/</span><span class="constant">Packages</span>/preupgrade-assistant-ui-<span class="number">1.0</span>.<span class="number">2</span>-<span class="number">36.0</span>.<span class="number">1</span>.el6.centos.x86_64.rpm
-rpm -ihv <span class="symbol">http:</span>/<span class="regexp">/dev.centos.org/centos</span><span class="regexp">/6/upg</span><span class="regexp">/x86_64/</span><span class="constant">Packages</span>/redhat-upgrade-tool-<span class="number">0</span>.<span class="number">7.22</span>-<span class="number">3</span>.el6.centos.noarch.rpm
-</code></pre><a id="more"></a>
-
-<p>3、执行升级</p>
-<pre><code><span class="comment">redhat</span><span class="literal">-</span><span class="comment">upgrade</span><span class="literal">-</span><span class="comment">tool</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">network</span> <span class="comment">7</span><span class="string">.</span><span class="comment">0</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">instrepo</span> <span class="comment">http://mirrors</span><span class="string">.</span><span class="comment">sohu</span><span class="string">.</span><span class="comment">com/centos/7</span><span class="string">.</span><span class="comment">0</span><span class="string">.</span><span class="comment">1406/os/x86_64/</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">force</span>
-</code></pre><p>升级成功后会看到消息“Finished. Reboot to start upgrade.”</p>
-<p>4、重启服务器</p>
-<p>重启主机后，OS将启动一个称为System Upgrade的新的grub对象，支持将所有已经通过upgrade tool下载的软件包更新。</p>
-<p>5、检查系统版本， 看到版本 CentOS Linux release 7.0.1406 (Core) 证明升级成功</p>
-<pre><code><span class="keyword">cat</span>  /etc/redhat-release
+        <h4 id="1、用磁盘工具查看磁盘空间使用情况">1、用磁盘工具查看磁盘空间使用情况</h4>
+<pre><code>~ ❯❯❯ df -h
+<span class="variable">Filesystem</span>      <span class="variable">Size</span>  <span class="variable">Used</span> <span class="variable">Avail</span> <span class="variable">Use</span><span class="comment">% Mounted on</span>
+/dev/disk1      <span class="number">238</span><span class="variable">G</span>  <span class="number">154</span><span class="variable">G</span>   <span class="number">84</span><span class="variable">G</span>  <span class="number">65</span><span class="comment">% /</span>
+/dev/disk2s2    <span class="number">15</span><span class="variable">G</span>  <span class="number">2.5</span><span class="variable">M</span>   <span class="number">15</span><span class="variable">G</span>   <span class="number">1</span><span class="comment">% /Volumes/Centos</span>
+/dev/disk3      <span class="number">4.4</span><span class="variable">G</span>  <span class="number">4.4</span><span class="variable">G</span>     <span class="number">0</span> <span class="number">100</span><span class="comment">% /Volumes/CentOS_6.6_Final</span>
+</code></pre><p>这里的/dev/disk2s2是我的U盘，容量16G</p>
+<h4 id="2、umount掉U盘">2、umount掉U盘</h4>
+<pre><code>~ ❯❯❯ <span class="built_in">sudo</span> diskutil umount /dev/disk2s2
+</code></pre><h4 id="3、将镜像写入U盘">3、将镜像写入U盘</h4>
+<pre><code>~ ❯❯❯ sudo dd <span class="keyword">if</span>=<span class="regexp">/Users/</span>CBC<span class="regexp">/Desktop/</span>CentOS-<span class="number">6.6</span>-x86_64-bin-DVD1.iso of=<span class="regexp">/dev/</span>disk2s2
+</code></pre><h4 id="4、用iostat命令查看磁盘写入状态">4、用iostat命令查看磁盘写入状态</h4>
+<pre><code> ~ ❯❯❯ iostat -w 2
 </code></pre>
       
     </div>
@@ -185,18 +188,9 @@ rpm -ihv <span class="symbol">http:</span>/<span class="regexp">/dev.centos.org/
     
 <nav id="article-nav">
   
-    <a href="/2015/07/15/用Mac-OS命令把ISO镜像写入U盘/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          用Mac OS命令把ISO镜像写入U盘
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/07/10/Docker学习-五-带web界面的Docker管理平台shipyard/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">带web界面的Docker管理平台shipyard</div>
+    <a href="/2015/07/14/从Centos-6-x-升级Centos7/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">从Centos 6.x 升级Centos7</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -225,7 +219,7 @@ rpm -ihv <span class="symbol">http:</span>/<span class="regexp">/dev.centos.org/
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="从Centos-6-x-升级Centos7" data-title="从Centos 6.x 升级Centos7" data-url="http://www.chenbaocheng.com/2015/07/14/从Centos-6-x-升级Centos7/"></div>
+	<div class="ds-thread" data-thread-key="用Mac-OS命令把ISO镜像写入U盘" data-title="用Mac OS命令把ISO镜像写入U盘" data-url="http://www.chenbaocheng.com/2015/07/15/用Mac-OS命令把ISO镜像写入U盘/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

@@ -3,6 +3,39 @@
 
     
   <url>
+    <loc>http://www.chenbaocheng.com/2015/07/15/%E7%94%A8Mac-OS%E5%91%BD%E4%BB%A4%E6%8A%8AISO%E9%95%9C%E5%83%8F%E5%86%99%E5%85%A5U%E7%9B%98/</loc>
+    <lastmod>2015-07-15T04:06:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>用Mac OS命令把ISO镜像写入U盘</title>
+        <pubTime>2015-07-15T03:59:57.000Z</pubTime>
+        
+         <content><![CDATA[<h4 id="1、用磁盘工具查看磁盘空间使用情况">1、用磁盘工具查看磁盘空间使用情况</h4>
+<pre><code>~ ❯❯❯ df -h
+<span class="variable">Filesystem</span>      <span class="variable">Size</span>  <span class="variable">Used</span> <span class="variable">Avail</span> <span class="variable">Use</span><span class="comment">% Mounted on</span>
+/dev/disk1      <span class="number">238</span><span class="variable">G</span>  <span class="number">154</span><span class="variable">G</span>   <span class="number">84</span><span class="variable">G</span>  <span class="number">65</span><span class="comment">% /</span>
+/dev/disk2s2    <span class="number">15</span><span class="variable">G</span>  <span class="number">2.5</span><span class="variable">M</span>   <span class="number">15</span><span class="variable">G</span>   <span class="number">1</span><span class="comment">% /Volumes/Centos</span>
+/dev/disk3      <span class="number">4.4</span><span class="variable">G</span>  <span class="number">4.4</span><span class="variable">G</span>     <span class="number">0</span> <span class="number">100</span><span class="comment">% /Volumes/CentOS_6.6_Final</span>
+</code></pre><p>这里的/dev/disk2s2是我的U盘，容量16G</p>
+<h4 id="2、umount掉U盘">2、umount掉U盘</h4>
+<pre><code>~ ❯❯❯ <span class="built_in">sudo</span> diskutil umount /dev/disk2s2
+</code></pre><h4 id="3、将镜像写入U盘">3、将镜像写入U盘</h4>
+<pre><code>~ ❯❯❯ sudo dd <span class="keyword">if</span>=<span class="regexp">/Users/</span>CBC<span class="regexp">/Desktop/</span>CentOS-<span class="number">6.6</span>-x86_64-bin-DVD1.iso of=<span class="regexp">/dev/</span>disk2s2
+</code></pre><h4 id="4、用iostat命令查看磁盘写入状态">4、用iostat命令查看磁盘写入状态</h4>
+<pre><code> ~ ❯❯❯ iostat -w 2
+</code></pre>]]></content>
+         
+         
+           
+             
+              <breadCrumb title="Mac OS" url="http://www.chenbaocheng.com/categories/Mac-OS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.chenbaocheng.com/2015/07/14/%E4%BB%8ECentos-6-x-%E5%8D%87%E7%BA%A7Centos7/</loc>
     <lastmod>2015-07-14T06:47:12.000Z</lastmod>
     <data>
