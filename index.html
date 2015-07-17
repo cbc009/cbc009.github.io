@@ -116,6 +116,76 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-在CentOS-7-x上源码安装Xen-4-5" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/16/在CentOS-7-x上源码安装Xen-4-5/" class="article-date">
+  	<time datetime="2015-07-16T08:42:59.000Z" itemprop="datePublished">7月 16 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/16/在CentOS-7-x上源码安装Xen-4-5/">在CentOS 7.x上源码安装Xen 4.5</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>截止目前为止Xen4CentOS只有Centos6版本可以用，所以Centos7只能编译源码的方式安装。</p>
+<h4 id="安装需要的软件包">安装需要的软件包</h4>
+<pre><code>yum update
+yum groupinstall <span class="string">"Development Tools"</span>
+yum install -y gcc gcc-c++ git patch texinfo python-devel acpica-tools libuuid-devel ncurses-devel glib2 glib2-devel libaio-devel openssl-devel yajl-devel glibc-devel glibc-devel.i686 pixman-devel bc
+rpm -ivh  <span class="symbol">http:</span>/<span class="regexp">/mirror.centos.org/centos</span><span class="regexp">/6/os</span><span class="regexp">/x86_64/</span><span class="constant">Packages</span>/dev86-<span class="number">0</span>.<span class="number">16.17</span>-<span class="number">15.1</span>.el6.x86_64.rpm
+</code></pre><h4 id="安装_Xen">安装 Xen</h4>
+<pre><code>git clone gi<span class="variable">t:</span>//xenbits.xen.org/xen.git
+<span class="keyword">cd</span> xen/
+./configure
+<span class="keyword">make</span> dist
+<span class="keyword">make</span> install
+</code></pre>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/linux/">linux</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/07/16/在CentOS-7-x上源码安装Xen-4-5/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-Centos-7-安装配置iptables" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -687,68 +757,6 @@ cd zookeeper-<span class="number">3.4</span>.<span class="number">6</span>
       
         <p class="article-more-link">
           <a  href="/2015/06/30/Java 8元空间(Metaspace)/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-JVM内存管理与垃圾回收" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/06/26/JVM内存管理与垃圾回收/" class="article-date">
-  	<time datetime="2015-06-26T03:53:26.000Z" itemprop="datePublished">6月 26 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/26/JVM内存管理与垃圾回收/">JVM内存管理与垃圾回收</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Java虚拟机拥有自动管理内存机制，所以Java 程序员不需要像C/C++一样去关注内存的分配和释放，也不容易出现内存泄露和内存溢出的问题。但是如果一旦出现此类问题，如果我们对虚拟机的内存管理机制不了解，那么解决这类问题还是比较困难的，所以我们要深入学习JVM的内存管理。</p>
-<h4 id="Java代码是如何执行的？">Java代码是如何执行的？</h4>
-<img src="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/jvm-arch.png">
-
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/java/">java</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/06/26/JVM内存管理与垃圾回收/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>

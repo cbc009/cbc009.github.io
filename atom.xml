@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.chenbaocheng.com/"/>
-  <updated>2015-07-15T09:03:26.044Z</updated>
+  <updated>2015-07-17T07:24:10.239Z</updated>
   <id>http://www.chenbaocheng.com/</id>
   
   <author>
@@ -13,6 +13,216 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[在CentOS 7.x上源码安装Xen 4.5]]></title>
+    <link href="http://www.chenbaocheng.com/2015/07/16/%E5%9C%A8CentOS-7-x%E4%B8%8A%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85Xen-4-5/"/>
+    <id>http://www.chenbaocheng.com/2015/07/16/在CentOS-7-x上源码安装Xen-4-5/</id>
+    <published>2015-07-16T08:42:59.000Z</published>
+    <updated>2015-07-17T07:23:56.000Z</updated>
+    <content type="html"><![CDATA[<p>截止目前为止Xen4CentOS只有Centos6版本可以用，所以Centos7只能编译源码的方式安装。</p>
+<h4 id="安装需要的软件包">安装需要的软件包</h4>
+<pre><code>yum update
+yum groupinstall <span class="string">"Development Tools"</span>
+yum install -y gcc gcc-c++ git patch texinfo python-devel acpica-tools libuuid-devel ncurses-devel glib2 glib2-devel libaio-devel openssl-devel yajl-devel glibc-devel glibc-devel.i686 pixman-devel bc
+rpm -ivh  <span class="symbol">http:</span>/<span class="regexp">/mirror.centos.org/centos</span><span class="regexp">/6/os</span><span class="regexp">/x86_64/</span><span class="constant">Packages</span>/dev86-<span class="number">0</span>.<span class="number">16.17</span>-<span class="number">15.1</span>.el6.x86_64.rpm
+</code></pre><h4 id="安装_Xen">安装 Xen</h4>
+<pre><code>git clone gi<span class="variable">t:</span>//xenbits.xen.org/xen.git
+<span class="keyword">cd</span> xen/
+./configure
+<span class="keyword">make</span> dist
+<span class="keyword">make</span> install
+</code></pre><a id="more"></a>
+
+<h4 id="安装_dom0_内核">安装 dom0 内核</h4>
+<pre><code>wget https:<span class="comment">//www.kernel.org/pub/linux/kernel/v3.x/linux-3.18.18.tar.gz</span>
+tar zxf linux-<span class="number">3.18</span>.<span class="number">18</span>.tar.gz
+cd linux-<span class="number">3.18</span>.<span class="number">18</span>
+make menuconfig
+
+vim .config
+
+    #修改如下参数
+<span class="constant">    CONFIG_X86_IO_APIC</span>=y
+<span class="constant">    CONFIG_ACPI</span>=y
+<span class="constant">    CONFIG_ACPI_PROCFS</span>=y (<span class="keyword">optional</span>)
+<span class="constant">    CONFIG_XEN_DOM0</span>=y
+<span class="constant">    CONFIG_PCI_XEN</span>=y
+<span class="constant">    CONFIG_XEN_DEV_EVTCHN</span>=y
+<span class="constant">    CONFIG_XENFS</span>=y
+<span class="constant">    CONFIG_XEN_COMPAT_XENFS</span>=y
+<span class="constant">    CONFIG_XEN_SYS_HYPERVISOR</span>=y
+<span class="constant">    CONFIG_XEN_GNTDEV</span>=y
+<span class="constant">    CONFIG_XEN_BACKEND</span>=y
+<span class="constant">    CONFIG_XEN_NETDEV_BACKEND</span>=m
+<span class="constant">    CONFIG_XEN_BLKDEV_BACKEND</span>=m
+<span class="constant">    CONFIG_XEN_PCIDEV_BACKEND</span>=m
+<span class="constant">    CONFIG_XEN_BALLOON</span>=y
+<span class="constant">    CONFIG_XEN_SCRUB_PAGES</span>=y
+
+make
+make modules
+
+make modules_install
+make install
+</code></pre><h4 id="配置_GRUB">配置 GRUB</h4>
+<pre><code>grub2-mkconfig -o /etc/grub2.cfg
+
+<span class="comment">#查看grub2.cfg相关配置</span>
+cat /etc/grub2.cfg
+
+<span class="comment">#静态文件系统信息，定义了存储设备和分区整合到整个系统的方式</span>
+cat /etc/fstab 
+
+<span class="comment">#复制grub2.cfg里第一个引导配置到下面的文件，添加一行 multiboot /xen.gz，linux16、initrd16修改为module</span>
+vi /etc/grub.d/<span class="number">40</span>_custom
+
+    <span class="comment">#!/bin/sh</span>
+    exec tail -n +<span class="number">3</span> $<span class="number">0</span>
+    <span class="comment"># This file provides an easy way to add custom menu entries.  Simply type the</span>
+    <span class="comment"># menu entries you want to add after this comment.  Be careful not to change</span>
+    <span class="comment"># the 'exec tail' line above.</span>
+    menuentry 'CentOS Linux <span class="number">7</span> (Core), <span class="keyword">with</span> Linux <span class="number">3.18</span>.<span class="number">18</span> Xen' --class centos --class gnu-linux --class gnu --class os --unrestricted $menuentry_id_option 'gnulinux-<span class="number">3.18</span>.<span class="number">18</span>-advanced-dfad9c15-<span class="number">962</span>d-<span class="number">492</span>d-b83a-<span class="number">31</span>d22a5f0eec' {
+        load_video
+        insmod gzio
+        insmod part_msdos
+        insmod xfs
+        set <span class="variable">root=</span>'hd0,msdos1'
+        <span class="keyword">if</span> [ x$<span class="variable">feature_platform_search_hint =</span> xy ]; <span class="keyword">then</span>
+          search --no-floppy --fs-uuid <span class="variable">--set=</span>root <span class="variable">--hint-bios=</span>hd0,msdos1 <span class="variable">--hint-efi=</span>hd0,msdos1 <span class="variable">--hint-baremetal=</span>ahci0,msdos1 <span class="variable">--hint=</span>'hd0,msdos1'  <span class="number">8089210</span>c-<span class="number">1</span>bb3-<span class="number">4589</span>-b18d-cc5b2b97774e
+        <span class="keyword">else</span>
+          search --no-floppy --fs-uuid <span class="variable">--set=</span>root <span class="number">8089210</span>c-<span class="number">1</span>bb3-<span class="number">4589</span>-b18d-cc5b2b97774e
+        fi
+        multiboot /xen.gz
+        module /vmlinuz-<span class="number">3.18</span>.<span class="number">18</span> <span class="variable">root=</span>/dev/mapper/centos-root ro rd.lvm.<span class="variable">lv=</span>centos/root rd.lvm.<span class="variable">lv=</span>centos/swap <span class="variable">crashkernel=</span>auto rhgb quiet
+        module /initramfs-<span class="number">3.18</span>.<span class="number">18</span>.img
+    }
+
+
+<span class="comment">#重新生成菜单</span>
+grub2-mkconfig -o /etc/grub2.cfg
+</code></pre><h4 id="可能出现的错误和解决办法">可能出现的错误和解决办法</h4>
+<p>重启后，选择 CentOS Linux, with Linux 3.15.4 Xen 进入 Xen 系统，使用 xl info 命令发现有错，这是因为 Xen 相关的软件库被安装到了 /usr/local/lib 目录，系统找不到。所以做一些链接就可以了：</p>
+<pre><code>xl info
+
+    xl: error <span class="keyword">while</span> loading shared libraries: libxlutil.so<span class="number">.4</span><span class="number">.3</span>: cannot <span class="built_in">open</span> shared object <span class="built_in">file</span>: No such <span class="built_in">file</span> <span class="operator">or</span> <span class="built_in">directory</span>
+
+cd /usr/lib/
+<span class="built_in">ln</span> -s /usr/<span class="built_in">local</span>/lib/libxlutil.so<span class="number">.4</span><span class="number">.3</span><span class="number">.0</span> libxlutil.so<span class="number">.4</span><span class="number">.3</span>
+<span class="built_in">ln</span> -s /usr/<span class="built_in">local</span>/lib/libxlutil.so<span class="number">.4</span><span class="number">.3</span><span class="number">.0</span> libxlutil.so
+<span class="built_in">ln</span> -s /usr/<span class="built_in">local</span>/lib/libxenlight.so<span class="number">.4</span><span class="number">.5</span><span class="number">.0</span> libxenlight.so<span class="number">.4</span><span class="number">.5</span>
+<span class="built_in">ln</span> -s /usr/<span class="built_in">local</span>/lib/libxenlight.so<span class="number">.4</span><span class="number">.5</span><span class="number">.0</span> libxenlight.so
+<span class="built_in">ln</span> -s /usr/<span class="built_in">local</span>/lib/libxenctrl.so<span class="number">.4</span><span class="number">.5</span><span class="number">.0</span> libxenctrl.so<span class="number">.4</span><span class="number">.5</span>
+<span class="built_in">ln</span> -s /usr/<span class="built_in">local</span>/lib/libxenguest.so<span class="number">.4</span><span class="number">.5</span><span class="number">.0</span> libxenguest.so<span class="number">.4</span><span class="number">.5</span>
+<span class="built_in">ln</span> -s /usr/<span class="built_in">local</span>/lib/libxenguest.so<span class="number">.4</span><span class="number">.5</span><span class="number">.0</span> libxenguest.so
+<span class="built_in">ln</span> -s /usr/<span class="built_in">local</span>/lib/libxenstat.so<span class="number">.0</span><span class="number">.0</span> libxenstat.so<span class="number">.0</span>
+<span class="built_in">ln</span> -s /usr/<span class="built_in">local</span>/lib/libxenstat.so<span class="number">.0</span><span class="number">.0</span> libxenstat.so
+<span class="built_in">ln</span> -s /usr/<span class="built_in">local</span>/lib/libxenstore.so<span class="number">.3</span><span class="number">.0</span><span class="number">.3</span> libxenstore.so<span class="number">.3</span><span class="number">.0</span>
+<span class="built_in">ln</span> -s /usr/<span class="built_in">local</span>/lib/libxenstore.so<span class="number">.3</span><span class="number">.0</span><span class="number">.3</span> libxenstore.so
+<span class="built_in">ln</span> -s /usr/<span class="built_in">local</span>/lib/libxenvchan.so<span class="number">.1</span><span class="number">.0</span><span class="number">.0</span> libxenvchan.so<span class="number">.1</span><span class="number">.0</span>
+<span class="built_in">ln</span> -s /usr/<span class="built_in">local</span>/lib/libxenvchan.so<span class="number">.1</span><span class="number">.0</span><span class="number">.0</span> libxenvchan.so
+<span class="built_in">ln</span> -s /usr/<span class="built_in">local</span>/lib/libblktapctl.so<span class="number">.1</span><span class="number">.0</span><span class="number">.0</span> libblktapctl.so<span class="number">.1</span><span class="number">.0</span>
+<span class="built_in">ln</span> -s /usr/<span class="built_in">local</span>/lib/libblktapctl.so<span class="number">.1</span><span class="number">.0</span><span class="number">.0</span> libblktapctl.so
+
+ldconfig
+</code></pre><p>再次运行 xl info 发现如下问题：</p>
+<pre><code>xl info
+
+    xc: <span class="keyword">error</span>: Could <span class="keyword">not</span> obtain handle <span class="function_start"><span class="keyword">on</span></span> privileged command interface (<span class="number">2</span> = No such <span class="type">file</span> <span class="keyword">or</span> directory): Internal <span class="keyword">error</span>
+    libxl: <span class="keyword">error</span>: libxl.c:<span class="number">99</span>:libxl_ctx_alloc: cannot open libxc handle: No such <span class="type">file</span> <span class="keyword">or</span> directory
+    cannot init xl context
+</code></pre><p>是因为没有挂载 xenfs 的缘故，挂载一下就可以了：</p>
+<pre><code>modprobe xenfs
+mount -t xenfs xenfs /<span class="keyword">proc</span>/xen
+ls /<span class="keyword">proc</span>/xen/
+
+    capabilities  privcmd  xenbus  xsd_kva  xsd_port
+
+<span class="comment"># 一劳永逸的办法修改fstab文件</span>
+vim /etc/fstab
+
+    <span class="comment">#追加如下一行</span>
+    none                  /<span class="keyword">proc</span>/xen               xenfs   defaults        <span class="number">0</span> <span class="number">0</span>
+
+xl info
+
+    host                   : localhost.localdomain
+    release                : <span class="number">3</span>.<span class="number">18</span>.<span class="number">18</span>
+    version                : <span class="comment">#1 SMP Thu Jul 16 17:43:05 CST 2015</span>
+    machine                : x86_64
+    nr_cpus                : <span class="number">2</span>
+    max_cpu_id             : <span class="number">7</span>
+    nr_nodes               : <span class="number">1</span>
+    cores_per_socket       : <span class="number">2</span>
+    threads_per_core       : <span class="number">1</span>
+    cpu_mhz                : <span class="number">3192</span>
+    hw_caps                : bfebfbff:<span class="number">20100800</span>:<span class="number">00000000</span>:<span class="number">00000900</span>:<span class="number">0400</span>e3bd:<span class="number">00000000</span>:<span class="number">00000001</span>:<span class="number">00000000</span>
+    virt_caps              : hvm
+    total_memory           : <span class="number">8091</span>
+    free_memory            : <span class="number">127</span>
+    sharing_freed_memory   : <span class="number">0</span>
+    sharing_used_memory    : <span class="number">0</span>
+    outstanding_claims     : <span class="number">0</span>
+    free_cpus              : <span class="number">0</span>
+    xen_major              : <span class="number">4</span>
+    xen_minor              : <span class="number">6</span>
+    xen_extra              : -unstable
+    xen_version            : <span class="number">4</span>.<span class="number">6</span>-unstable
+    xen_caps               : xen-<span class="number">3</span>.<span class="number">0</span>-x86_64 xen-<span class="number">3</span>.<span class="number">0</span>-x86_32p hvm-<span class="number">3</span>.<span class="number">0</span>-x86_32 hvm-<span class="number">3</span>.<span class="number">0</span>-x86_32p hvm-<span class="number">3</span>.<span class="number">0</span>-x86_64
+    xen_scheduler          : credit
+    xen_pagesize           : <span class="number">4096</span>
+    platform_params        : virt_start=<span class="number">0xffff800000000000</span>
+    xen_changeset          : <span class="type">Fri</span> <span class="type">Jun</span> <span class="number">26</span> <span class="number">18</span>:<span class="number">24</span>:<span class="number">22</span> <span class="number">2015</span> +<span class="number">0100</span> git:c40317f
+    xen_commandline        :
+    cc_compiler            : gcc (<span class="type">GCC</span>) <span class="number">4</span>.<span class="number">8</span>.<span class="number">3</span> <span class="number">20140911</span> (<span class="type">Red</span> <span class="type">Hat</span> <span class="number">4</span>.<span class="number">8</span>.<span class="number">3</span>-<span class="number">9</span>)
+    cc_compile_by          : root
+    cc_compile_domain      :
+    cc_compile_date        : <span class="type">Thu</span> <span class="type">Jul</span> <span class="number">16</span> <span class="number">13</span>:<span class="number">03</span>:<span class="number">35</span> <span class="type">CST</span> <span class="number">2015</span>
+    xend_config_format     : <span class="number">4</span>
+</code></pre><p>记得启动 xencommons，以前旧版本的 xend 已经被 xencommons 替代了：</p>
+<pre><code>/etc/init.d/xencommons start
+
+<span class="comment">#开机启动xencommons</span>
+/sbin/chkconfig <span class="comment">--add xencommons</span>
+/sbin/chkconfig <span class="comment">--add xendomains</span>
+/sbin/chkconfig xendomains <span class="function_start"><span class="keyword">on</span></span>
+/sbin/chkconfig xencommons <span class="function_start"><span class="keyword">on</span></span>
+
+
+xl <span class="type">list</span>
+    Name                                        ID   Mem VCPUs    State    Time(s)
+    Domain-<span class="number">0</span>                                     <span class="number">0</span>  <span class="number">7870</span>     <span class="number">2</span>     r<span class="comment">-----     213.0</span>
+</code></pre><p>Xen 从 4.1 版本开始引入了新版工具集 xl/libxl，并在后续的版本中逐步替代旧的 xm/xend，在 4.5 版本中已经完全删除了 xm/xend.</p>
+<p><strong>每次启动菜单有很多选项，进去把除当前版本以外的删除掉</strong></p>
+<pre><code><span class="comment"># !!! 保留vmlinuz-3.18.18、initramfs-3.18.18.img</span>
+cd /boot/
+rm -fr 
+vmlinuz-<span class="keyword">*</span>
+initramfs-<span class="keyword">*</span>.img        
+
+<span class="comment">#重新生成菜单</span>
+grub2-mkconfig -o /etc/grub2.cfg
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<p>截止目前为止Xen4CentOS只有Centos6版本可以用，所以Centos7只能编译源码的方式安装。</p>
+<h4 id="安装需要的软件包">安装需要的软件包</h4>
+<pre><code>yum update
+yum groupinstall <span class="string">"Development Tools"</span>
+yum install -y gcc gcc-c++ git patch texinfo python-devel acpica-tools libuuid-devel ncurses-devel glib2 glib2-devel libaio-devel openssl-devel yajl-devel glibc-devel glibc-devel.i686 pixman-devel bc
+rpm -ivh  <span class="symbol">http:</span>/<span class="regexp">/mirror.centos.org/centos</span><span class="regexp">/6/os</span><span class="regexp">/x86_64/</span><span class="constant">Packages</span>/dev86-<span class="number">0</span>.<span class="number">16.17</span>-<span class="number">15.1</span>.el6.x86_64.rpm
+</code></pre><h4 id="安装_Xen">安装 Xen</h4>
+<pre><code>git clone gi<span class="variable">t:</span>//xenbits.xen.org/xen.git
+<span class="keyword">cd</span> xen/
+./configure
+<span class="keyword">make</span> dist
+<span class="keyword">make</span> install
+</code></pre>]]>
+    
+    </summary>
+    
+      <category term="linux" scheme="http://www.chenbaocheng.com/categories/linux/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[CentOS 7 安装配置iptables]]></title>
@@ -2228,34 +2438,6 @@ yum -y install yum-priorities
     </summary>
     
       <category term="docker" scheme="http://www.chenbaocheng.com/categories/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Linux开机获取IP发送到指定邮箱]]></title>
-    <link href="http://www.chenbaocheng.com/2015/04/30/Linux%E5%BC%80%E6%9C%BA%E8%8E%B7%E5%8F%96IP%E5%8F%91%E9%80%81%E5%88%B0%E6%8C%87%E5%AE%9A%E9%82%AE%E7%AE%B1/"/>
-    <id>http://www.chenbaocheng.com/2015/04/30/Linux开机获取IP发送到指定邮箱/</id>
-    <published>2015-04-30T05:20:19.000Z</published>
-    <updated>2015-07-09T07:14:03.000Z</updated>
-    <content type="html"><![CDATA[<p>之所以有这样的需求，是因为平日主力是用自己的笔记本，公司给配的台式机（主机、显示器）扔工位下面，装了 Centos 玩儿，公司是DHCP 分配IP，每次重启开机都得到台式机登录一下，才能获取最新IP，有点小麻烦，重启后给自己邮箱发个邮件，这样省事儿，看看邮件里的IP，远程 SSH 登录就可以了~</p>
-<p>我的台式机系统是 CENTOS，邮箱是163的，安装配置如下:</p>
-<p>1、安装mailx</p>
-<p>yum install mailx<br><a id="more"></a><br>2、修改配置文件</p>
-<p>vim  /etc/mail.rc</p>
-<p>添加如下内容：<br>set from=xxxxxx@163.com smtp=smtp.163.com smtp-auth-user={username} smtp-auth-password={password} smtp-auth=login</p>
-<p>3、配置开机发邮件</p>
-<p>vim /etc/rc.local</p>
-<p>ifconfig | mail -s “重启开机邮件 - 最新 IP” xxxx@xxxx.com</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>之所以有这样的需求，是因为平日主力是用自己的笔记本，公司给配的台式机（主机、显示器）扔工位下面，装了 Centos 玩儿，公司是DHCP 分配IP，每次重启开机都得到台式机登录一下，才能获取最新IP，有点小麻烦，重启后给自己邮箱发个邮件，这样省事儿，看看邮件里的IP，远程 SSH 登录就可以了~</p>
-<p>我的台式机系统是 CENTOS，邮箱是163的，安装配置如下:</p>
-<p>1、安装mailx</p>
-<p>yum install mailx<br>]]>
-    
-    </summary>
-    
-      <category term="Linux" scheme="http://www.chenbaocheng.com/categories/Linux/"/>
     
   </entry>
   
