@@ -345,6 +345,31 @@ initramfs-<span class="keyword">*</span>.img
 
 <span class="comment">#重新生成菜单</span>
 grub2-mkconfig -o /etc/grub2.cfg
+</code></pre><hr>
+<h4 id="创建虚拟机">创建虚拟机</h4>
+<p><strong>创建映像</strong></p>
+<pre><code><span class="comment">#创建一个 20G 的镜像文件</span>
+<span class="comment"># 你希望在文件增长时才配置数据块，可以用迟缓的方式来配置</span>
+dd <span class="variable">if=</span>/dev/zero <span class="variable">of=</span>/ROOT/xen/web_1.img <span class="variable">oflag=</span>direct <span class="variable">bs=</span><span class="number">1</span>M <span class="variable">seek=</span><span class="number">20479</span> <span class="variable">count=</span><span class="number">1</span>
+<span class="comment"># 如果你想立即配置所有数据块，你亦可以这样做：</span>
+dd <span class="variable">if=</span>/dev/zero <span class="variable">of=</span>/ROOT/xen/web_1.img <span class="variable">oflag=</span>direct <span class="variable">bs=</span><span class="number">1</span>M <span class="variable">count=</span><span class="number">20480</span>
+</code></pre><p><strong>Xen配置文件</strong></p>
+<pre><code><span class="preprocessor">#可以到这里选一个配置文件</span>
+https:<span class="comment">//github.com/frederickding/xenserver-kickstart</span>
+</code></pre><hr>
+<p>关闭虚拟机：</p>
+<pre><code><span class="regexp">/usr/</span>sbin<span class="regexp">/xl shutdown vm01</span>
+</code></pre><p>给虚拟机镜像文件（.img）追加 4GB 空间：</p>
+<pre><code>dd <span class="keyword">if</span>=<span class="regexp">/dev/zero</span> bs=<span class="number">1024</span>k count=<span class="number">4096</span> <span class="input">&gt;&gt; /vm/vm01.img</span>
+</code></pre><p>扫描检查镜像文件：</p>
+<pre><code><span class="regexp">/sbin/</span>e2fsck -f <span class="regexp">/vm/</span>vm01.img
+</code></pre><p>这个时候只是增加了镜像文件（硬盘）的大小，这个镜像文件不是普通的文件，里面包含可 mount/umount 的 loop 文件系统，所以需要调整文件系统大小，不然的话进入虚拟机后 df 会发现硬盘大小没变：</p>
+<pre><code><span class="regexp">/sbin/</span>resize2fs <span class="regexp">/vm/</span>vm01.img
+</code></pre><p>重新启动 Xen 虚拟机：</p>
+<pre><code>/usr/sbin/<span class="keyword">xm</span> create vm01
+</code></pre><p>进入虚拟机后查看硬盘大小：</p>
+<pre><code>/usr/sbin/<span class="keyword">xm</span> console vm01
+df -<span class="keyword">h</span>
 </code></pre>
       
     </div>
@@ -353,6 +378,15 @@ grub2-mkconfig -o /etc/grub2.cfg
   
     
 <nav id="article-nav">
+  
+    <a href="/2015/07/21/部署Maven项目到运行在Docker里的Tomcat/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          用Maven插件部署Java项目到Docker里的Tomcat
+        
+      </div>
+    </a>
   
   
     <a href="/2015/07/15/Centos-7-安装配置iptables/" id="article-nav-older" class="article-nav-link-wrap">

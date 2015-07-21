@@ -116,6 +116,78 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-部署Maven项目到运行在Docker里的Tomcat" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/21/部署Maven项目到运行在Docker里的Tomcat/" class="article-date">
+  	<time datetime="2015-07-21T06:32:50.000Z" itemprop="datePublished">7月 21 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/21/部署Maven项目到运行在Docker里的Tomcat/">用Maven插件部署Java项目到Docker里的Tomcat</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>查找tomcat镜像</p>
+<pre><code>docker <span class="built_in">search</span> tomcat
+</code></pre><p>新建tomcat-users.xml</p>
+<pre><code>vim tomcat-users.xml
+
+<span class="tag">&lt;<span class="title">tomcat-users</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">role</span> <span class="attribute">rolename</span>=<span class="value">"admin-gui"</span>/&gt;</span>
+  <span class="tag">&lt;<span class="title">role</span> <span class="attribute">rolename</span>=<span class="value">"admin-script"</span>/&gt;</span>
+  <span class="tag">&lt;<span class="title">role</span> <span class="attribute">rolename</span>=<span class="value">"manager-gui"</span>/&gt;</span>
+  <span class="tag">&lt;<span class="title">role</span> <span class="attribute">rolename</span>=<span class="value">"manager-script"</span>/&gt;</span>
+  <span class="tag">&lt;<span class="title">role</span> <span class="attribute">rolename</span>=<span class="value">"manager-jmx"</span>/&gt;</span>
+  <span class="tag">&lt;<span class="title">role</span> <span class="attribute">rolename</span>=<span class="value">"manager-status"</span>/&gt;</span>
+  <span class="tag">&lt;<span class="title">user</span> <span class="attribute">username</span>=<span class="value">"tomcat"</span> <span class="attribute">password</span>=<span class="value">"tomcat"</span> <span class="attribute">roles</span>=<span class="value">"manager-gui,manager-script,manager-jmx,manager-status,admin-script,admin-gui"</span>/&gt;</span>
+<span class="tag">&lt;/<span class="title">tomcat-users</span>&gt;</span>
+</code></pre>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/java/">java</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/07/21/部署Maven项目到运行在Docker里的Tomcat/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-在CentOS-7-x上源码安装Xen-4-5" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">

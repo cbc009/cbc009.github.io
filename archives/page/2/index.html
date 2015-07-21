@@ -116,6 +116,68 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Java 8元空间(Metaspace)" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/06/30/Java 8元空间(Metaspace)/" class="article-date">
+  	<time datetime="2015-06-30T07:30:29.000Z" itemprop="datePublished">6月 30 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/06/30/Java 8元空间(Metaspace)/">Java 8元空间(Metaspace)</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="元空间（Metaspace）：">元空间（Metaspace）：</h4>
+<p>相信许多Java开发者都见过“java.lang.OutOfMemoryError: PermGen space”问题，这通常是类加载器相关的内存泄漏以及新类加载器的创建导致的，一般出现于代码热部署时。相对于正式产品，该问题在开发机上出现的频率更高，通常“问题”是默认值太低了, 常用的解决方法是将其设置为256MB或更高。</p>
+<p>PermGen space的全称是Permanent Generation space,是指JVM永久保存区域，这一部分用于存放Class和Meta的信息,Class在被 Load的时候被放入PermGen space区域，它和和存放Instance的Heap区域不同,所以如果你的APP会LOAD很多CLASS的话,就很可能出现PermGen space错误。这种错误常见在web服务器对JSP进行pre compile的时候。JVM 种类有很多(如Oralce-Sun Hotspot, Oralce JRockit, IBM J9, Taobao JVM）。Oracle-Sun Hotspot才有PermGen space，JRockit以及J9没有这个区域。</p>
+<p>随着JAVA8时代的来临,新增一种使用本地内存来存储类元数据信息称之为元空间(Metaspace)，JVM永久区被元空间(Metaspace)替换(JEP 122), 与Oracle JRockit 和IBM JVM’s很相似。JVM参数 -XX:PermSize 和 -XX:MaxPermSize被XX:MetaSpaceSize 和 -XX:MaxMetaspaceSize代替，如果使用了-XX:PermSize 和 -XX:MaxPermSize启动时会发出警告。。 这意味着不会再有java.lang.OutOfMemoryError: PermGen问题，也不再需要你进行调优及监控内存空间的使用。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/java/">java</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/06/30/Java 8元空间(Metaspace)/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-JVM内存管理与垃圾回收" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -756,72 +818,9 @@ yum -y install yum-priorities
 
 
   
-    <article id="post-Docker学习-一-Docker基础" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/04/30/Docker学习-一-Docker基础/" class="article-date">
-  	<time datetime="2015-04-30T07:28:12.000Z" itemprop="datePublished">4月 30 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/30/Docker学习-一-Docker基础/">Docker学习(一) Docker基础</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="使用_Docker_的目的">使用 Docker 的目的</h4>
-<p><strong>交付和部署更快速</strong>，一次创建，随处运行，创建容器的全过程可见，对所有人都是透明的；</p>
-<p><strong>虚拟化更高效</strong>，少了一层虚拟化当然更高效，接近于物理机的性能；我的理解是 Docker 对物理资源做了隔离，所以更轻量。</p>
-<p><strong>迁移和扩展更轻松</strong>，可以从私有仓库，共有仓库拉取image, 用过 maven 的同学应该会有类似的体验；</p>
-<h4 id="常用概念">常用概念</h4>
-<p><strong>image,镜像</strong>，用户可以通过相关命令轻松创建一个image，也可以通过命令轻松仓库里下载一个 image。image 是只读的、静止的。我们通过命令可以启动一个image，从而创建一个 Docker 容器。<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/docker/">docker</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/04/30/Docker学习-一-Docker基础/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/archives/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/page/3/">3</a><a class="page-number" href="/archives/page/4/">4</a><a class="extend next" rel="next" href="/archives/page/3/">Next &raquo;</a>
     </nav>
   
 </div>

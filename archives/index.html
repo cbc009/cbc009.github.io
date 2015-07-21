@@ -116,6 +116,78 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-部署Maven项目到运行在Docker里的Tomcat" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/21/部署Maven项目到运行在Docker里的Tomcat/" class="article-date">
+  	<time datetime="2015-07-21T06:32:50.000Z" itemprop="datePublished">7月 21 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/21/部署Maven项目到运行在Docker里的Tomcat/">用Maven插件部署Java项目到Docker里的Tomcat</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>查找tomcat镜像</p>
+<pre><code>docker <span class="built_in">search</span> tomcat
+</code></pre><p>新建tomcat-users.xml</p>
+<pre><code>vim tomcat-users.xml
+
+<span class="tag">&lt;<span class="title">tomcat-users</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">role</span> <span class="attribute">rolename</span>=<span class="value">"admin-gui"</span>/&gt;</span>
+  <span class="tag">&lt;<span class="title">role</span> <span class="attribute">rolename</span>=<span class="value">"admin-script"</span>/&gt;</span>
+  <span class="tag">&lt;<span class="title">role</span> <span class="attribute">rolename</span>=<span class="value">"manager-gui"</span>/&gt;</span>
+  <span class="tag">&lt;<span class="title">role</span> <span class="attribute">rolename</span>=<span class="value">"manager-script"</span>/&gt;</span>
+  <span class="tag">&lt;<span class="title">role</span> <span class="attribute">rolename</span>=<span class="value">"manager-jmx"</span>/&gt;</span>
+  <span class="tag">&lt;<span class="title">role</span> <span class="attribute">rolename</span>=<span class="value">"manager-status"</span>/&gt;</span>
+  <span class="tag">&lt;<span class="title">user</span> <span class="attribute">username</span>=<span class="value">"tomcat"</span> <span class="attribute">password</span>=<span class="value">"tomcat"</span> <span class="attribute">roles</span>=<span class="value">"manager-gui,manager-script,manager-jmx,manager-status,admin-script,admin-gui"</span>/&gt;</span>
+<span class="tag">&lt;/<span class="title">tomcat-users</span>&gt;</span>
+</code></pre>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/java/">java</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/07/21/部署Maven项目到运行在Docker里的Tomcat/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-在CentOS-7-x上源码安装Xen-4-5" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -711,71 +783,9 @@ cd zookeeper-<span class="number">3.4</span>.<span class="number">6</span>
 
 
   
-    <article id="post-Java 8元空间(Metaspace)" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/06/30/Java 8元空间(Metaspace)/" class="article-date">
-  	<time datetime="2015-06-30T07:30:29.000Z" itemprop="datePublished">6月 30 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/30/Java 8元空间(Metaspace)/">Java 8元空间(Metaspace)</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="元空间（Metaspace）：">元空间（Metaspace）：</h4>
-<p>相信许多Java开发者都见过“java.lang.OutOfMemoryError: PermGen space”问题，这通常是类加载器相关的内存泄漏以及新类加载器的创建导致的，一般出现于代码热部署时。相对于正式产品，该问题在开发机上出现的频率更高，通常“问题”是默认值太低了, 常用的解决方法是将其设置为256MB或更高。</p>
-<p>PermGen space的全称是Permanent Generation space,是指JVM永久保存区域，这一部分用于存放Class和Meta的信息,Class在被 Load的时候被放入PermGen space区域，它和和存放Instance的Heap区域不同,所以如果你的APP会LOAD很多CLASS的话,就很可能出现PermGen space错误。这种错误常见在web服务器对JSP进行pre compile的时候。JVM 种类有很多(如Oralce-Sun Hotspot, Oralce JRockit, IBM J9, Taobao JVM）。Oracle-Sun Hotspot才有PermGen space，JRockit以及J9没有这个区域。</p>
-<p>随着JAVA8时代的来临,新增一种使用本地内存来存储类元数据信息称之为元空间(Metaspace)，JVM永久区被元空间(Metaspace)替换(JEP 122), 与Oracle JRockit 和IBM JVM’s很相似。JVM参数 -XX:PermSize 和 -XX:MaxPermSize被XX:MetaSpaceSize 和 -XX:MaxMetaspaceSize代替，如果使用了-XX:PermSize 和 -XX:MaxPermSize启动时会发出警告。。 这意味着不会再有java.lang.OutOfMemoryError: PermGen问题，也不再需要你进行调优及监控内存空间的使用。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/java/">java</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/06/30/Java 8元空间(Metaspace)/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="page-number" href="/archives/page/4/">4</a><a class="extend next" rel="next" href="/archives/page/2/">Next &raquo;</a>
     </nav>
   
 </div>
