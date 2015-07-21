@@ -133,7 +133,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/21/部署Maven项目到运行在Docker里的Tomcat/">用Maven插件部署Java项目到Docker里的Tomcat</a>
+      <a class="article-title" href="/2015/07/21/部署Maven项目到运行在Docker里的Tomcat/">部署Java项目到Docker容器</a>
     </h1>
   
 
@@ -142,7 +142,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>查找tomcat镜像</p>
+        <p><strong>如需使用另一个容器里的mysql，需要参数 —link mysql1:mysql，其中mysql1是mysql容器的名称</strong></p>
+<h4 id="方法一:_用maven插件部署">方法一: 用maven插件部署</h4>
+<p>查找tomcat镜像</p>
 <pre><code>docker <span class="built_in">search</span> tomcat
 </code></pre><p>新建tomcat-users.xml</p>
 <pre><code>vim tomcat-users.xml

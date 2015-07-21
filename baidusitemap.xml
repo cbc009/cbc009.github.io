@@ -4,13 +4,15 @@
     
   <url>
     <loc>http://www.chenbaocheng.com/2015/07/21/%E9%83%A8%E7%BD%B2Maven%E9%A1%B9%E7%9B%AE%E5%88%B0%E8%BF%90%E8%A1%8C%E5%9C%A8Docker%E9%87%8C%E7%9A%84Tomcat/</loc>
-    <lastmod>2015-07-21T06:44:59.000Z</lastmod>
+    <lastmod>2015-07-21T08:59:42.000Z</lastmod>
     <data>
         <display>
-        <title>用Maven插件部署Java项目到Docker里的Tomcat</title>
+        <title>部署Java项目到Docker容器</title>
         <pubTime>2015-07-21T06:32:50.000Z</pubTime>
         
-         <content><![CDATA[<p>查找tomcat镜像</p>
+         <content><![CDATA[<p><strong>如需使用另一个容器里的mysql，需要参数 —link mysql1:mysql，其中mysql1是mysql容器的名称</strong></p>
+<h4 id="方法一:_用maven插件部署">方法一: 用maven插件部署</h4>
+<p>查找tomcat镜像</p>
 <pre><code>docker <span class="built_in">search</span> tomcat
 </code></pre><p>新建tomcat-users.xml</p>
 <pre><code>vim tomcat-users.xml
@@ -35,7 +37,7 @@ ADD tomcat-users.xml /usr/local/tomcat/<span class="keyword">conf</span>/
 </code></pre><p>构建新的镜像</p>
 <pre><code>docker build -t tomcat8-java8-cbc:demo .
 </code></pre><p>创建容器</p>
-<pre><code>docker <span class="command">run</span> -<span class="keyword">it</span> <span class="comment">--rm -p 8090:8080 tomcat8-java8:demo</span>
+<pre><code><span class="tag">docker</span> <span class="tag">run</span> <span class="tag">-it</span> <span class="tag">--rm</span> <span class="tag">-p</span> 8090<span class="pseudo">:8080</span> <span class="tag">--link</span> <span class="tag">mysql1</span><span class="pseudo">:mysql</span> <span class="tag">tomcat8-java8</span><span class="pseudo">:demo</span>
 </code></pre><p>修改pom文件</p>
 <pre><code>vim pom.xml
 
@@ -62,6 +64,13 @@ ADD tomcat-users.xml /usr/local/tomcat/<span class="keyword">conf</span>/
 </code></pre><p>执行部署</p>
 <pre><code><span class="tag">mvn</span> <span class="tag">tomcat7</span><span class="pseudo">:deploy</span>
 </code></pre><p>如果使用 Intellij Idea 直接在右侧Plugins里双击deploy就可以了。</p>
+<p>这种方法缺点是每次重启容器后需要重新deploy。</p>
+<h4 id="方法二：向容器volume里复制war包">方法二：向容器volume里复制war包</h4>
+<p><strong>启动容器</strong></p>
+<pre><code>docker run -it --rm -p <span class="number">8091</span>:<span class="number">8080</span> --link mysql1:mysql -v <span class="regexp">/ROOT/</span>www<span class="regexp">/www.ibm.com:/</span>usr<span class="regexp">/local/</span>tomcat<span class="regexp">/webapps tomcat:8-jre8</span>
+</code></pre><p><strong>复制war包</strong></p>
+<pre><code>scp <span class="constant">ROOT</span>.war root@宿主机<span class="constant">IP</span><span class="symbol">:/ROOT/www/www</span>.demo.com/
+</code></pre><p>缺点需要手动发包，优点是重启容器后，不需要重新deploy</p>
 ]]></content>
          
          
