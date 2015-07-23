@@ -3,6 +3,185 @@
 
     
   <url>
+    <loc>http://www.chenbaocheng.com/2015/07/23/awk%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2015-07-23T08:13:02.000Z</lastmod>
+    <data>
+        <display>
+        <title>awk学习笔记</title>
+        <pubTime>2015-07-23T06:31:42.000Z</pubTime>
+        
+         <content><![CDATA[<p>AWK 是一种用于处理文本的编程语言工具,在很多方面类似于 shell 编程语言。</p>
+<h4 id="AWK有两种运行方式">AWK有两种运行方式</h4>
+<p><strong>命令行直接直行</strong></p>
+<pre><code>$ <span class="function_or_atom">echo</span> <span class="string">"\n\n"</span> | <span class="function_or_atom">awk</span> <span class="string">'{print("Hello World!");}'</span>
+
+  <span class="variable">Hello</span> <span class="variable">World</span><span class="exclamation_mark">!</span>
+  <span class="variable">Hello</span> <span class="variable">World</span><span class="exclamation_mark">!</span>
+  <span class="variable">Hello</span> <span class="variable">World</span><span class="exclamation_mark">!</span>
+</code></pre><p><strong>直行文件方式</strong></p>
+<pre><code><span class="variable">$ </span>cat hello.txt
+  hello
+  hello
+  hello
+
+<span class="variable">$ </span>cat hello.awk 
+  {
+      print(<span class="string">"Hello World!"</span>);
+  }
+
+<span class="variable">$ </span>awk -f hello.awk hello.txt
+  <span class="constant">Hello</span> <span class="constant">World</span>!
+  <span class="constant">Hello</span> <span class="constant">World</span>!
+  <span class="constant">Hello</span> <span class="constant">World</span>!
+</code></pre><a id="more"></a>
+
+<h4 id="AWK程序结构">AWK程序结构</h4>
+<pre><code>BEGIN{
+    <span class="built_in">print</span>(<span class="string">"程序预处理部分，只在开始文件扫描前执行一次"</span>);
+}
+{
+    <span class="built_in">print</span>(<span class="string">"程序主体部分，执行次数取决于目标处理文件的行数，每一行被扫描到时都会触发一次执行"</span>); 
+}
+<span class="keyword">END</span>{
+    <span class="built_in">print</span>(<span class="string">"所有文件扫描完成后的触发执行一次，通常用作收尾的统计处理"</span>);
+}<span class="preprocessor">
+
+#以上3个部分都不是必须的，只要有其中一部分就可以正常直行。</span>
+</code></pre><h4 id="处理单元、域">处理单元、域</h4>
+<p>默认awk是用\n来划分处理单元，用空格将处理单元划分为多个域。一个处理单元相当于数据库里的一条记录，一个域相当于一个字段。awk用$0,$1,$2….$n来表示域，其中$0为当前处理单元，$1表示第一个域,以此类推,$n表示第N个域。</p>
+<pre><code>$ <span class="function_or_atom">cat</span> <span class="function_or_atom">hello</span>.<span class="function_or_atom">txt</span>
+  <span class="variable">Hello</span> <span class="variable">World</span><span class="exclamation_mark">!</span>
+  <span class="variable">Hello</span> <span class="variable">World</span><span class="exclamation_mark">!</span>
+  <span class="variable">Hello</span> <span class="variable">World</span><span class="exclamation_mark">!</span>
+
+$ <span class="function_or_atom">cat</span> <span class="function_or_atom">hello</span>.<span class="function_or_atom">awk</span>
+  {
+    <span class="function_or_atom">print</span>($<span class="number">0</span>, <span class="string">"\t|"</span>,$<span class="number">1</span>, <span class="string">"|\t"</span>,$<span class="number">2</span>)
+  }
+
+$ <span class="function_or_atom">awk</span> -<span class="function_or_atom">f</span> <span class="function_or_atom">hello</span>.<span class="function_or_atom">awk</span> <span class="function_or_atom">hello</span>.<span class="function_or_atom">txt</span>
+  <span class="variable">Hello</span> <span class="variable">World</span><span class="exclamation_mark">!</span>     | <span class="variable">Hello</span> |     <span class="variable">World</span><span class="exclamation_mark">!</span>
+  <span class="variable">Hello</span> <span class="variable">World</span><span class="exclamation_mark">!</span>     | <span class="variable">Hello</span> |     <span class="variable">World</span><span class="exclamation_mark">!</span>
+  <span class="variable">Hello</span> <span class="variable">World</span><span class="exclamation_mark">!</span>     | <span class="variable">Hello</span> |     <span class="variable">World</span><span class="exclamation_mark">!</span>
+</code></pre><h4 id="变量">变量</h4>
+<ul>
+<li>awk不是强类型语言，变量无需声明，且可以随时改变赋值的类型</li>
+<li>awk里的变量都是全局的，所以使用变量时需要注意</li>
+<li>变量可以在程序中赋值，也可以通过命令调用时对变量赋值</li>
+</ul>
+<pre><code>$ cat hello.awk
+  BEGIN{
+  <span class="keyword">print</span>(<span class="keyword">say</span>);
+  }
+  {
+  ++i;
+  <span class="keyword">print</span>(i);
+  }
+  END{
+  <span class="keyword">print</span>(<span class="string">"end"</span>);
+  }
+
+$ cat hello.awk|awk -v i=<span class="number">100</span> -v <span class="keyword">say</span>=<span class="string">"hello"</span> -f hello.awk
+  hello
+  <span class="number">101</span>
+  <span class="number">102</span>
+  <span class="number">103</span>
+  <span class="number">104</span>
+  <span class="number">105</span>
+  <span class="number">106</span>
+  <span class="number">107</span>
+  <span class="number">108</span>
+  <span class="number">109</span>
+  <span class="number">110</span>
+  end
+</code></pre><h4 id="系统变量">系统变量</h4>
+<ul>
+<li>NF 当前记录的域数量</li>
+<li>NR 已处理的记录数量</li>
+<li>FS 在程序中动态改变域分隔符</li>
+</ul>
+<h4 id="数组">数组</h4>
+<pre><code><span class="comment">#定义数组</span>
+array[<span class="number">1</span>]=<span class="number">1</span>;
+array[<span class="string">'a'</span>]=<span class="string">"a"</span>;
+
+<span class="comment">#通过split创建数组</span>
+
+<span class="comment"># split(content, array, separator)</span>
+
+$ echo <span class="string">""</span>|awk <span class="string">'BEGIN{s="1,2,3"}{split(s, array, ",");print(array[2])}'</span>
+  <span class="number">2</span>
+
+<span class="comment">#遍历数组</span>
+<span class="keyword">for</span>(key <span class="keyword">in</span> array) {
+<span class="keyword">...</span>
+}
+
+<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;length(array);i++) {
+<span class="keyword">...</span>
+}
+
+<span class="comment">#删除数组</span>
+delete array[<span class="number">1</span>]
+</code></pre><h4 id="流程控制">流程控制</h4>
+<pre><code><span class="comment">#判断</span>
+<span class="keyword">if</span> (condation) {
+<span class="keyword">...</span>
+} <span class="keyword">else</span> <span class="keyword">if</span> (condation) {
+<span class="keyword">...</span>
+} <span class="keyword">else</span> {
+<span class="keyword">...</span>
+}
+
+<span class="comment">#循环</span>
+<span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;<span class="number">100</span>;i++) {
+<span class="keyword">...</span>
+}
+
+<span class="comment">#遍历</span>
+<span class="keyword">for</span> (i <span class="keyword">in</span> list) {
+<span class="keyword">...</span>
+}
+
+<span class="comment">#循环</span>
+<span class="keyword">while</span>(condation){
+<span class="keyword">...</span>
+}
+
+<span class="comment">#分支判断</span>
+<span class="keyword">switch</span>(condation) {
+case condation1:
+<span class="keyword">break</span>;
+<span class="keyword">...</span>
+case condationn:
+<span class="keyword">break</span>;
+default:
+<span class="keyword">...</span>
+}
+</code></pre><h4 id="自定义函数">自定义函数</h4>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">funName</span><span class="params">(p1,p2...)</span> </span>{
+}
+
+参数为局部变量，函数内的其他变量会自动声明为全局变量
+</code></pre><h4 id="控制语句">控制语句</h4>
+<pre><code><span class="keyword">continue</span> 进入下一循环
+<span class="keyword">break</span> 跳出循环
+<span class="keyword">next</span> 跳过当前记录的处理，处理下一记录
+<span class="keyword">return</span> 函数返回
+<span class="keyword">exit</span> 退出程序
+</code></pre>]]></content>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.chenbaocheng.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.chenbaocheng.com/2015/07/21/%E9%83%A8%E7%BD%B2Maven%E9%A1%B9%E7%9B%AE%E5%88%B0%E8%BF%90%E8%A1%8C%E5%9C%A8Docker%E9%87%8C%E7%9A%84Tomcat/</loc>
     <lastmod>2015-07-21T08:59:42.000Z</lastmod>
     <data>

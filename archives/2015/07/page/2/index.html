@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   
-  <title>CHENBAOCHENG.COM</title>
+  <title>Archives: 2015/7 | CHENBAOCHENG.COM</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description">
 <meta property="og:type" content="website">
 <meta property="og:title" content="CHENBAOCHENG.COM">
-<meta property="og:url" content="http://www.chenbaocheng.com/page/4/">
+<meta property="og:url" content="http://www.chenbaocheng.com/archives/2015/07/page/2/">
 <meta property="og:site_name" content="CHENBAOCHENG.COM">
 <meta property="og:description">
 <meta name="twitter:card" content="summary">
@@ -116,11 +116,11 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-Go语言学习-配置开发环境-IntelliJ-IDEA-14-For-Mac-OS-10-10" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-JVM G1垃圾回收器" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/01/23/Go语言学习-配置开发环境-IntelliJ-IDEA-14-For-Mac-OS-10-10/" class="article-date">
-  	<time datetime="2015-01-23T05:11:31.000Z" itemprop="datePublished">1月 23 2015</time>
+      <a href="/2015/07/02/JVM G1垃圾回收器/" class="article-date">
+  	<time datetime="2015-07-02T02:35:59.000Z" itemprop="datePublished">7月 2 2015</time>
 </a>
     </div>
   
@@ -133,7 +133,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/01/23/Go语言学习-配置开发环境-IntelliJ-IDEA-14-For-Mac-OS-10-10/">Go语言学习 - 配置开发环境(IntelliJ IDEA 14 For Mac OS 10.10)</a>
+      <a class="article-title" href="/2015/07/02/JVM G1垃圾回收器/">JVM G1垃圾回收器</a>
     </h1>
   
 
@@ -142,20 +142,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>1、安装 Go-Lang</strong></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ brew install go</div><div class="line">$ go version</div></pre></td></tr></table></figure>
+        <p>回顾一下主流的(HotSpot JVM)JAVA垃圾回收器，堆被内存分解为三个区域，具体分为：新生代、老年代、持久代。</p>
+<p><strong>Java 7 HotSpotVM</strong></p>
+<img src="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/java7-jvm-space.png">
 
-<p><br><strong>2、配置环境变量</strong></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ vim ~/.zshrc</div><div class="line"><span class="keyword">export</span> GOROOT=/usr/local/opt/go/libexec</div><div class="line"><span class="keyword">export</span> GOPATH=<span class="variable">$HOME</span>/.go</div></pre></td></tr></table></figure>
+<p><strong>Java 8 HotSpotVM</strong></p>
+<img src="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/java8-jvm-space.png">
 
-<p><br><strong>3、Intellij IDEA 安装 go-lang-idea-plugin</strong></p>
-<ul>
-<li>IntelliJ IDEA -&gt; Preferences -&gt; Plugins -&gt; Browse Repositories</li>
-<li>搜索golang，点击 “Install plugin”</li>
-<li>安装完重启</li>
-</ul>
-<p><strong>go-lang-idea-plugin会提示配置GOROOT,GOPATH。。。搜了各种资料，需要这样配置一下：</strong></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">vim .zshrc</div><div class="line">launchctl setenv GOROOT /usr/local/opt/go/libexec</div><div class="line">launchctl setenv GOBIN /usr/local/opt/go/libexec/bin</div><div class="line">launchctl setenv GOPATH /ROOT/www/go</div></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -164,67 +158,13 @@
       
       
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/golang/">golang</a>
+	<a class="article-category-link" href="/categories/java/">java</a>
 	</div>
 
 
       
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-用Hexo写博客 --- Hexo的配置与使用" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/01/09/用Hexo写博客 --- Hexo的配置与使用/" class="article-date">
-  	<time datetime="2015-01-09T07:20:45.000Z" itemprop="datePublished">1月 9 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/01/09/用Hexo写博客 --- Hexo的配置与使用/">用Hexo写博客 --- Hexo的配置与使用</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本站由 SourceForge 迁移到 GitHub.</p>
-<p>之前是在 SourceForge 提供的空间搭了一个 Wordpress, 访问很慢。</p>
-<pre><code>Hexo is <span class="operator">a</span> fast, simple &amp; powerful blog framework powered <span class="keyword">by</span> Node.js.
-</code></pre><p><br>Hexo 基于 Node.js 开发的一个轻量级的 Blog 框架，使用自然没有 Wordpress 那么方便，好在也是生成 HTML，访问会快些。</p>
-<p><strong>搭建本站过程看的一些资料整理一下，逐步操作如下：</strong><br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
         <p class="article-more-link">
-          <a  href="/2015/01/09/用Hexo写博客 --- Hexo的配置与使用/#more">more >></a>
+          <a  href="/2015/07/02/JVM G1垃圾回收器/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -243,7 +183,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+      <a class="extend prev" rel="prev" href="/archives/2015/07/">&laquo; Prev</a><a class="page-number" href="/archives/2015/07/">1</a><span class="page-number current">2</span>
     </nav>
   
 </div>
@@ -270,9 +210,9 @@
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: true,
+		isHome: false,
 		isPost: false,
-		isArchive: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false

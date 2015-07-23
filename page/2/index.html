@@ -116,6 +116,71 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-JVM G1垃圾回收器" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/02/JVM G1垃圾回收器/" class="article-date">
+  	<time datetime="2015-07-02T02:35:59.000Z" itemprop="datePublished">7月 2 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/02/JVM G1垃圾回收器/">JVM G1垃圾回收器</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>回顾一下主流的(HotSpot JVM)JAVA垃圾回收器，堆被内存分解为三个区域，具体分为：新生代、老年代、持久代。</p>
+<p><strong>Java 7 HotSpotVM</strong></p>
+<img src="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/java7-jvm-space.png">
+
+<p><strong>Java 8 HotSpotVM</strong></p>
+<img src="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/java8-jvm-space.png">
+
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/java/">java</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/07/02/JVM G1垃圾回收器/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-Java 8元空间(Metaspace)" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -733,75 +798,6 @@ centos              latest              fd44297e2ddb        <span class="number"
       
         <p class="article-more-link">
           <a  href="/2015/04/30/Docker学习-三-Docker镜像和容器的常用操作/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Docker学习-二-安装与配置" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/04/30/Docker学习-二-安装与配置/" class="article-date">
-  	<time datetime="2015-04-30T07:50:46.000Z" itemprop="datePublished">4月 30 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/30/Docker学习-二-安装与配置/">Docker学习(二) 安装与配置</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="Docker_的安装与配置">Docker 的安装与配置</h4>
-<p>Docker 支持 CentOS 6 及后续版本。</p>
-<h4 id="CentOS_6_下安装Docker服务">CentOS 6 下安装Docker服务</h4>
-<pre><code><span class="preprocessor">#禁用SELINUX</span>
-vim /etc/selinux/config
-SELINUX=disabled
-
-<span class="preprocessor">#配置Fedora EPEL 源</span>
-rpm -ivh http:<span class="comment">//dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm</span>
-rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-<span class="number">6</span>
-yum -y install yum-priorities
-</code></pre><p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/docker/">docker</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/04/30/Docker学习-二-安装与配置/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>

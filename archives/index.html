@@ -116,6 +116,87 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-awk学习笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/23/awk学习笔记/" class="article-date">
+  	<time datetime="2015-07-23T06:31:42.000Z" itemprop="datePublished">7月 23 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/23/awk学习笔记/">awk学习笔记</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>AWK 是一种用于处理文本的编程语言工具,在很多方面类似于 shell 编程语言。</p>
+<h4 id="AWK有两种运行方式">AWK有两种运行方式</h4>
+<p><strong>命令行直接直行</strong></p>
+<pre><code>$ <span class="function_or_atom">echo</span> <span class="string">"\n\n"</span> | <span class="function_or_atom">awk</span> <span class="string">'{print("Hello World!");}'</span>
+
+  <span class="variable">Hello</span> <span class="variable">World</span><span class="exclamation_mark">!</span>
+  <span class="variable">Hello</span> <span class="variable">World</span><span class="exclamation_mark">!</span>
+  <span class="variable">Hello</span> <span class="variable">World</span><span class="exclamation_mark">!</span>
+</code></pre><p><strong>直行文件方式</strong></p>
+<pre><code><span class="variable">$ </span>cat hello.txt
+  hello
+  hello
+  hello
+
+<span class="variable">$ </span>cat hello.awk 
+  {
+      print(<span class="string">"Hello World!"</span>);
+  }
+
+<span class="variable">$ </span>awk -f hello.awk hello.txt
+  <span class="constant">Hello</span> <span class="constant">World</span>!
+  <span class="constant">Hello</span> <span class="constant">World</span>!
+  <span class="constant">Hello</span> <span class="constant">World</span>!
+</code></pre>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/linux/">linux</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/07/23/awk学习笔记/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-部署Maven项目到运行在Docker里的Tomcat" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -704,71 +785,6 @@ cd zookeeper-<span class="number">3.4</span>.<span class="number">6</span>
       
         <p class="article-more-link">
           <a  href="/2015/07/03/ZooKeeper配置与使用/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-JVM G1垃圾回收器" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/02/JVM G1垃圾回收器/" class="article-date">
-  	<time datetime="2015-07-02T02:35:59.000Z" itemprop="datePublished">7月 2 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/02/JVM G1垃圾回收器/">JVM G1垃圾回收器</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>回顾一下主流的(HotSpot JVM)JAVA垃圾回收器，堆被内存分解为三个区域，具体分为：新生代、老年代、持久代。</p>
-<p><strong>Java 7 HotSpotVM</strong></p>
-<img src="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/java7-jvm-space.png">
-
-<p><strong>Java 8 HotSpotVM</strong></p>
-<img src="https://raw.githubusercontent.com/cbc009/cbc009.github.io/master/images/java8-jvm-space.png">
-
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/java/">java</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/07/02/JVM G1垃圾回收器/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
