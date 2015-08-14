@@ -230,7 +230,7 @@ $">
 }<span class="preprocessor">
 
 #以上3个部分都不是必须的，只要有其中一部分就可以正常直行。</span>
-</code></pre><h4 id="处理单元、域">处理单元、域</h4>
+</code></pre><h4 id="处理单元(记录)、域(字段)">处理单元(记录)、域(字段)</h4>
 <p>默认awk是用\n来划分处理单元，用空格将处理单元划分为多个域。一个处理单元相当于数据库里的一条记录，一个域相当于一个字段。awk用$0,$1,$2….$n来表示域，其中$0为当前处理单元，$1表示第一个域,以此类推,$n表示第N个域。</p>
 <pre><code>$ <span class="function_or_atom">cat</span> <span class="function_or_atom">hello</span>.<span class="function_or_atom">txt</span>
   <span class="variable">Hello</span> <span class="variable">World</span><span class="exclamation_mark">!</span>
@@ -282,6 +282,13 @@ $ cat hello.awk|awk -v i=<span class="number">100</span> -v <span class="keyword
 <li>NF 当前记录的域数量</li>
 <li>NR 已处理的记录数量</li>
 <li>FS 在程序中动态改变域分隔符</li>
+<li>FNR 当前记录数，与NR不同的是，这个值会是各个文件自己的行号</li>
+<li>RS 输入的记录分隔符，默认是换行符</li>
+<li>OFS 输出字段分隔符，默认是空格</li>
+<li>ORS 输出的记录分隔符，默认是换行符</li>
+<li>FILENAME 当前输入文件名</li>
+<li>$0 当前处理单元</li>
+<li>$1~$n    当前处理单元的第n个字段，字段间由FS分隔</li>
 </ul>
 <h4 id="数组">数组</h4>
 <pre><code><span class="comment">#定义数组</span>
@@ -306,7 +313,36 @@ $ echo <span class="string">""</span>|awk <span class="string">'BEGIN{s="1,2,3"}
 
 <span class="comment">#删除数组</span>
 delete array[<span class="number">1</span>]
-</code></pre><h4 id="流程控制">流程控制</h4>
+</code></pre><h4 id="运算符">运算符</h4>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>操作符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>赋值语句</td>
+<td>=<br>+=<br>-=<br>*=<br>/=<br>%=<br>^=<br>**=</td>
+</tr>
+<tr>
+<td>逻辑或</td>
+<td>\</td>
+<td>\</td>
+<td></td>
+</tr>
+<tr>
+<td>逻辑与</td>
+<td>&amp;&amp;</td>
+</tr>
+<tr>
+<td>匹配</td>
+<td>~<br>~!</td>
+</tr>
+</tbody>
+</table>
+<h4 id="流程控制">流程控制</h4>
 <pre><code><span class="comment">#判断</span>
 <span class="keyword">if</span> (condation) {
 <span class="keyword">...</span>
@@ -360,6 +396,15 @@ default:
   
     
 <nav id="article-nav">
+  
+    <a href="/2015/08/14/Java应用CPU占用高故障排查/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Java应用CPU占用高故障排查
+        
+      </div>
+    </a>
   
   
     <a href="/2015/07/21/部署Maven项目到运行在Docker里的Tomcat/" id="article-nav-older" class="article-nav-link-wrap">

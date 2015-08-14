@@ -116,6 +116,70 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Java应用CPU占用高故障排查" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/14/Java应用CPU占用高故障排查/" class="article-date">
+  	<time datetime="2015-08-14T08:11:27.000Z" itemprop="datePublished">8月 14 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/14/Java应用CPU占用高故障排查/">Java应用CPU占用高故障排查</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>查找 CPU 占用高的进程ID</strong></p>
+<pre><code><span class="keyword">ps</span> aux
+</code></pre><p><strong>获取 CPU 占用高的线程 ID</strong></p>
+<pre><code><span class="input"><span class="prompt">ps -mp &lt;pid&gt;</span> -o <span class="constant">THREAD</span>,tid,time</span>
+</code></pre><p><strong>转换线程 ID 为16进制</strong></p>
+<pre><code><span class="keyword">printf</span> <span class="string">"<span class="variable">%x</span>\n"</span> &lt;tid&gt;
+</code></pre><p><strong>输出线程栈信息</strong></p>
+<pre><code><span class="input"><span class="prompt">jstack &lt;pid&gt;</span> |grep &lt;十六进制tid&gt; -<span class="constant">A</span> <span class="number">100</span></span>
+</code></pre><p>如果栈信息比较长可以设置输出的行数大点^_^</p>
+<p>拿到栈信息后，就可以根据输出内容定位错误了。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/java/">java</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-部署Maven项目到运行在Docker里的Tomcat" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -729,76 +793,6 @@ cd zookeeper-<span class="number">3.4</span>.<span class="number">6</span>
 	</div>
 
 
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-MacOS环境使用wireshark抓包" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/05/07/MacOS环境使用wireshark抓包/" class="article-date">
-  	<time datetime="2015-05-07T04:17:31.000Z" itemprop="datePublished">5月 7 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/07/MacOS环境使用wireshark抓包/">MacOS环境使用wireshark抓包</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h5 id="安装">安装</h5>
-<pre><code>brew <span class="operator"><span class="keyword">install</span> wireshark —<span class="keyword">with</span>-qt5</span>
-</code></pre><h5 id="启动应用">启动应用</h5>
-<pre><code><span class="comment">#如果不是管理员身份启动，则获取不到网卡信息。</span>
-<span class="built_in">sudo</span> wireshark-qt
-</code></pre><h5 id="IP过滤">IP过滤</h5>
-<pre><code><span class="comment">#来源IP</span>
-ip.<span class="variable">src =</span>= 
-<span class="comment">#目标IP</span>
-ip.<span class="variable">dst =</span>=
-<span class="comment">#例如过滤来源192.168.1.10的请求</span>
-ip.<span class="variable">src=</span>=<span class="number">192.168</span>.<span class="number">1.10</span>
-</code></pre><p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/java/">java</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/05/07/MacOS环境使用wireshark抓包/#more">more >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>

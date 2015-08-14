@@ -116,6 +116,77 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Docker学习-三-Docker镜像和容器的常用操作" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/04/30/Docker学习-三-Docker镜像和容器的常用操作/" class="article-date">
+  	<time datetime="2015-04-30T08:06:29.000Z" itemprop="datePublished">4月 30 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/04/30/Docker学习-三-Docker镜像和容器的常用操作/">Docker学习(三) Docker镜像和容器的常用操作</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="列出镜像">列出镜像</h5>
+<pre><code>cbc ~ # docker images
+REPOSITORY         <span class="constant"> TAG </span>               <span class="constant"> IMAGE </span>ID           <span class="constant"> CREATED </span>           <span class="constant"> VIRTUAL </span>SIZE
+centos              <span class="number">7</span>                   fd44297e2ddb        <span class="number">8</span> days ago          <span class="number">229.6</span> MB
+centos              centos7             fd44297e2ddb        <span class="number">8</span> days ago          <span class="number">229.6</span> MB
+centos              latest              fd44297e2ddb        <span class="number">8</span> days ago          <span class="number">229.6</span> MB
+&lt;none&gt;              &lt;none&gt;              ae0c2d0bdc10        <span class="number">5</span> months ago        <span class="number">224</span> MB
+
+<span class="preprocessor">#REPOSITORY 镜像来源仓库</span>
+<span class="preprocessor">#TAG 镜像标记</span>
+<span class="preprocessor">#IMAGE ID 镜像唯一 ID</span>
+<span class="preprocessor">#CREATED 镜像创建时间</span>
+<span class="preprocessor">#VIRTUAL SIZE 镜像大小</span>
+</code></pre>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/docker/">docker</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/04/30/Docker学习-三-Docker镜像和容器的常用操作/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-Docker学习-二-安装与配置" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -703,69 +774,6 @@ traceroute nis.nsf.net
         <p class="article-more-link">
           <a  href="/2015/02/22/50道Java线程面试题/#more">more >></a>
         </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-删除文件夹下的所有-svn目录" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/02/22/删除文件夹下的所有-svn目录/" class="article-date">
-  	<time datetime="2015-02-22T13:25:11.000Z" itemprop="datePublished">2月 22 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/02/22/删除文件夹下的所有-svn目录/">MAC OS批量删除文件－删除文件夹下的所有.svn目录</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find . -name <span class="string">".svn"</span> | xargs rm -fr</div></pre></td></tr></table></figure>
-
-<p><br>或者</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find . -type d -name <span class="string">".svn"</span> | xargs rm -rf</div></pre></td></tr></table></figure>
-
-<p>xargs它的作用是将参数列表转换成小块分段传递给其他命令，以避免参数列表过长的问题</p>
-<p>或者</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find . -name <span class="string">".svn"</span> -exec rm -fr <span class="string">'{}'</span> +</div></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/os/">os</a>
-	</div>
-
-
       
       <div class="clearfix"></div>
     </div>
